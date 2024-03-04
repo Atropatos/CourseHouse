@@ -74,7 +74,8 @@ Rozwiązanie quizu (zwykły)
           
 Ukończenie wszystkich lekcji odblokowuje certyfikat zdania kursu (zwykły)
 
-            
+### COURSE HOUSE
+
 ### Funkcjonalności 
 1. Logowanie i rejestracja - użytkownika ma możliwość zalogowania na swoje konto użytkownika i założenia konta zwykłego lub business
 2. Ocena kursów - widoczna średnia pod każdym kursem, zalogowany użytkownik który zakupił dany kurs może dodać jego ocenę
