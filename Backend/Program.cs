@@ -1,3 +1,4 @@
+//this is test comment to see if git ignore works
 using CourseHouse.Data;
 using Microsoft.EntityFrameworkCore;
 
