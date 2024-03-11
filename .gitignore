@@ -2,3 +2,4 @@
 .DS_Store
 /Backend/appsettings.json
 /Backend/Program.cs
+/Backend/CoursesHouse.csproj
