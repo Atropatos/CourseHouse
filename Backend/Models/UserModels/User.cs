@@ -29,7 +29,5 @@ namespace CourseHouse.Models
         [ForeignKey("Role")]
         [Required(ErrorMessage = "Role is required.")]
         public int RoleId { get; set; }
-        public Role Role { get; set; } = new Role { RoleId = 1, RoleName = "User" };
-
     }
 }

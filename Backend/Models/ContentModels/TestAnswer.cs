@@ -19,7 +19,6 @@ namespace CourseHouse.Models
 
         [ForeignKey("ViewTest")]
         public int ViewTestId { get; set; }
-        public ViewTest ViewTest { get; set; }
 
     }
 }

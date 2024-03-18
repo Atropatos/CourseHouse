@@ -12,15 +12,12 @@ namespace CourseHouse.Models
 
         [ForeignKey("Course")]
         public int CourseId { get; set; }
-        public Course Course { get; set; }
 
         [ForeignKey("User")]
         public int UserId { get; set; }
-        public User User { get; set; }
 
         [ForeignKey("CreditCard")]
         public int CreditCardId { get; set; }
-        public CreditCard CreditCard { get; set; }
 
         [DataType(DataType.DateTime)]
         public DateTime PurchasedOn { get; set; } = DateTime.Now;

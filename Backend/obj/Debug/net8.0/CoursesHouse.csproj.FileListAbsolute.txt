@@ -252,3 +252,4 @@
 /Users/emanuel/Desktop/webAPI/CourseHouse/Backend/obj/Debug/net8.0/CoursesHouse.pdb
 /Users/emanuel/Desktop/webAPI/CourseHouse/Backend/obj/Debug/net8.0/CoursesHouse.genruntimeconfig.cache
 /Users/emanuel/Desktop/webAPI/CourseHouse/Backend/obj/Debug/net8.0/ref/CoursesHouse.dll
+/Users/emanuel/Desktop/webAPI/CourseHouse/Backend/obj/Debug/net8.0/CoursesHouse.sourcelink.json

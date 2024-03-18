@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CoursesHouse.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240311090122_Init")]
-    partial class Init
+    [Migration("20240318143826_Init1")]
+    partial class Init1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -105,8 +105,6 @@ namespace CoursesHouse.Migrations
 
                     b.HasIndex("CourseId");
 
-                    b.HasIndex("UserId");
-
                     b.ToTable("CourseComments");
                 });
 
@@ -126,10 +124,6 @@ namespace CoursesHouse.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("CourseGradeId");
-
-                    b.HasIndex("CourseId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("CourseGrades");
                 });
@@ -256,12 +250,6 @@ namespace CoursesHouse.Migrations
 
                     b.HasKey("PurchaseId");
 
-                    b.HasIndex("CourseId");
-
-                    b.HasIndex("CreditCardId");
-
-                    b.HasIndex("UserId");
-
                     b.ToTable("Purchases");
                 });
 
@@ -278,6 +266,23 @@ namespace CoursesHouse.Migrations
                     b.HasKey("RoleId");
 
                     b.ToTable("Roles");
+
+                    b.HasData(
+                        new
+                        {
+                            RoleId = 1,
+                            RoleName = "User"
+                        },
+                        new
+                        {
+                            RoleId = 2,
+                            RoleName = "Admin"
+                        },
+                        new
+                        {
+                            RoleId = 3,
+                            RoleName = "Moderator"
+                        });
                 });
 
             modelBuilder.Entity("CourseHouse.Models.TestAnswer", b =>
@@ -333,9 +338,89 @@ namespace CoursesHouse.Migrations
 
                     b.HasIndex("CourseId");
 
-                    b.HasIndex("RoleId");
-
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = 1,
+                            Email = "emanuel@admin.com",
+                            LastName = "Admin",
+                            Name = "Emanuel",
+                            RoleId = 2
+                        },
+                        new
+                        {
+                            UserId = 2,
+                            Email = "dawid@admin.com",
+                            LastName = "Admin",
+                            Name = "Dawid",
+                            RoleId = 2
+                        },
+                        new
+                        {
+                            UserId = 3,
+                            Email = "adam@nowak.com",
+                            LastName = "Nowak",
+                            Name = "Adam",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            UserId = 4,
+                            Email = "anna@kowalska.com",
+                            LastName = "Kowalska",
+                            Name = "Anna",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            UserId = 5,
+                            Email = "jan@kowalczyk.com",
+                            LastName = "Kowalczyk",
+                            Name = "Jan",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            UserId = 6,
+                            Email = "katarzyna@wisniewska.com",
+                            LastName = "Wiśniewska",
+                            Name = "Katarzyna",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            UserId = 7,
+                            Email = "magdalena@lewandowska.com",
+                            LastName = "Lewandowska",
+                            Name = "Magdalena",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            UserId = 8,
+                            Email = "tomasz@wojcik.com",
+                            LastName = "Wójcik",
+                            Name = "Tomasz",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            UserId = 9,
+                            Email = "agnieszka@kaminska.com",
+                            LastName = "Kamińska",
+                            Name = "Agnieszka",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            UserId = 10,
+                            Email = "marcin@kowalewski.com",
+                            LastName = "Kowalewski",
+                            Name = "Marcin",
+                            RoleId = 1
+                        });
                 });
 
             modelBuilder.Entity("CourseHouse.Models.Video", b =>
@@ -344,7 +429,7 @@ namespace CoursesHouse.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("Author")
+                    b.Property<int>("AuthorId")
                         .HasColumnType("int");
 
                     b.Property<string>("ContentUrl")
@@ -359,8 +444,6 @@ namespace CoursesHouse.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("VideoId");
-
-                    b.HasIndex("Author");
 
                     b.HasIndex("CourseViewViewId");
 
@@ -425,51 +508,20 @@ namespace CoursesHouse.Migrations
 
             modelBuilder.Entity("CourseHouse.Models.CourseComment", b =>
                 {
-                    b.HasOne("CourseHouse.Models.Course", "Course")
+                    b.HasOne("CourseHouse.Models.Course", null)
                         .WithMany("Comments")
                         .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("CourseHouse.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Course");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("CourseHouse.Models.CourseGrade", b =>
-                {
-                    b.HasOne("CourseHouse.Models.Course", "Course")
-                        .WithMany()
-                        .HasForeignKey("CourseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CourseHouse.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Course");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("CourseHouse.Models.CourseView", b =>
                 {
-                    b.HasOne("CourseHouse.Models.Course", "Course")
+                    b.HasOne("CourseHouse.Models.Course", null)
                         .WithMany("CourseViews")
                         .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Course");
                 });
 
             modelBuilder.Entity("CourseHouse.Models.Picture", b =>
@@ -491,42 +543,13 @@ namespace CoursesHouse.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("CourseHouse.Models.Purchase", b =>
-                {
-                    b.HasOne("CourseHouse.Models.Course", "Course")
-                        .WithMany()
-                        .HasForeignKey("CourseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CourseHouse.Models.CreditCard", "CreditCard")
-                        .WithMany()
-                        .HasForeignKey("CreditCardId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CourseHouse.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Course");
-
-                    b.Navigation("CreditCard");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("CourseHouse.Models.TestAnswer", b =>
                 {
-                    b.HasOne("CourseHouse.Models.ViewTest", "ViewTest")
+                    b.HasOne("CourseHouse.Models.ViewTest", null)
                         .WithMany("TestAnswers")
                         .HasForeignKey("ViewTestId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("ViewTest");
                 });
 
             modelBuilder.Entity("CourseHouse.Models.User", b =>
@@ -534,24 +557,10 @@ namespace CoursesHouse.Migrations
                     b.HasOne("CourseHouse.Models.Course", null)
                         .WithMany("EnrolledUsers")
                         .HasForeignKey("CourseId");
-
-                    b.HasOne("CourseHouse.Models.Role", "Role")
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Role");
                 });
 
             modelBuilder.Entity("CourseHouse.Models.Video", b =>
                 {
-                    b.HasOne("CourseHouse.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("Author")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("CourseHouse.Models.CourseView", null)
                         .WithMany("Videos")
                         .HasForeignKey("CourseViewViewId");
@@ -559,19 +568,15 @@ namespace CoursesHouse.Migrations
                     b.HasOne("CourseHouse.Models.ViewTest", null)
                         .WithMany("Videos")
                         .HasForeignKey("ViewTestTestId");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("CourseHouse.Models.ViewTest", b =>
                 {
-                    b.HasOne("CourseHouse.Models.Course", "Course")
+                    b.HasOne("CourseHouse.Models.Course", null)
                         .WithMany("ViewsTests")
                         .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Course");
                 });
 
             modelBuilder.Entity("CourseHouse.Models.Course", b =>
