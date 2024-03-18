@@ -39,7 +39,7 @@ namespace CourseHouse.Controllers
         {
             var roleExists = _context.role!.Any(r => r.RoleId == newUser.RoleId);
             if (!roleExists)
-                return BadRequest("Provided role doesnt not exits!");
+                return BadRequest("Provided role does not exits!");
 
             await _context.user!.AddAsync(newUser);
             await _context.SaveChangesAsync();
