@@ -5,7 +5,7 @@ namespace CourseHouse.Models
 {
     [Table("Courses")]
     public class Course
-    {
+    {   
         [Key]
         public int CourseId { get; set; }
 
