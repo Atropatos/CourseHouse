@@ -380,3 +380,8 @@ C:\studia\emekDotNet\Backend\obj\Debug\net8.0\refint\CoursesHouse.dll
 C:\studia\emekDotNet\Backend\obj\Debug\net8.0\CoursesHouse.pdb
 C:\studia\emekDotNet\Backend\obj\Debug\net8.0\CoursesHouse.genruntimeconfig.cache
 C:\studia\emekDotNet\Backend\obj\Debug\net8.0\ref\CoursesHouse.dll
+C:\studia\emekDotNet\Backend\obj\Debug\net8.0\CoursesHouse.RazorAssemblyInfo.cache
+C:\studia\emekDotNet\Backend\obj\Debug\net8.0\CoursesHouse.RazorAssemblyInfo.cs
+C:\studia\emekDotNet\Backend\bin\Debug\net8.0\CoursesHouse.staticwebassets.runtime.json
+C:\studia\emekDotNet\Backend\obj\Debug\net8.0\scopedcss\Pages\Shared\_Layout.cshtml.rz.scp.css
+C:\studia\emekDotNet\Backend\obj\Debug\net8.0\scopedcss\projectbundle\CoursesHouse.bundle.scp.css

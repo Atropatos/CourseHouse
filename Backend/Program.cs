@@ -10,6 +10,14 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddRazorPages(options =>
+{
+	//..
+}).AddRazorPagesOptions(options =>
+{
+	options.Conventions.AddPageRoute("/Index", "");
+});
+
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
@@ -28,12 +36,19 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
+	app.UseExceptionHandler("/Error");
+	// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+	
+	app.UseSwagger();
     app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();
+app.UseStaticFiles();
 
+app.UseRouting();
+
+app.UseAuthorization();
 app.MapControllers();
-
+app.MapRazorPages();
 app.Run();
