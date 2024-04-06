@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CourseHouse.Data;
 using CourseHouse.Models;
+using CoursesHouse.Interfaces;
 
 
 namespace CourseHouse.Controllers
@@ -11,15 +12,17 @@ namespace CourseHouse.Controllers
     public class UserController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
-        public UserController(ApplicationDbContext context)
+        private readonly IUserRepository _userRepo;
+        public UserController(ApplicationDbContext context, IUserRepository userRepo)
         {
             _context = context;
+            _userRepo = userRepo;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAllUsers()
         {
-            var users = await _context.user?.ToListAsync()!;
+            var users = await _userRepo.GetAllAsync();
 
             return Ok(users);
         }
@@ -28,7 +31,7 @@ namespace CourseHouse.Controllers
         public async Task<IActionResult> GetUserById([FromRoute] int id)
         {
 
-            var user = await _context.user!.FindAsync(id);
+            var user = await _userRepo.GetByIdAsync(id);
             if (user == null)
                 return NotFound();
             return Ok(user);
@@ -41,8 +44,7 @@ namespace CourseHouse.Controllers
             if (!roleExists)
                 return BadRequest("Provided role does not exits!");
 
-            await _context.user!.AddAsync(newUser);
-            await _context.SaveChangesAsync();
+            await _userRepo.CreateAsync(newUser);
 
             return CreatedAtAction(nameof(GetUserById), new { Id = newUser.UserId }, newUser);
         }
@@ -52,16 +54,11 @@ namespace CourseHouse.Controllers
         public async Task<IActionResult> UpdateUser([FromRoute] int id, [FromBody] User updatedUser)
         {
 
-            var user = await _context.user!.FirstOrDefaultAsync(x => x.UserId == id);
+            var user = await _userRepo.UpdateAsync(id,updatedUser);
             if (user == null)
                 return NotFound(updatedUser.UserId);
 
-            user.Name = updatedUser.Name;
-            user.LastName = updatedUser.LastName;
-            user.Email = updatedUser.Email;
-            user.RoleId = updatedUser.RoleId;
-
-            await _context.SaveChangesAsync();
+           
             return Ok(user);
         }
 
@@ -81,3 +78,5 @@ namespace CourseHouse.Controllers
         }
     }
 }
+
+

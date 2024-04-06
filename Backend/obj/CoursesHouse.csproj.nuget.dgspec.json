@@ -1,25 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "/Users/emanuel/Desktop/webAPI/CourseHouse/Backend/CoursesHouse.csproj": {}
+    "C:\\studia\\emekDotNet\\Backend\\CoursesHouse.csproj": {}
   },
   "projects": {
-    "/Users/emanuel/Desktop/webAPI/CourseHouse/Backend/CoursesHouse.csproj": {
+    "C:\\studia\\emekDotNet\\Backend\\CoursesHouse.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/emanuel/Desktop/webAPI/CourseHouse/Backend/CoursesHouse.csproj",
+        "projectUniqueName": "C:\\studia\\emekDotNet\\Backend\\CoursesHouse.csproj",
         "projectName": "CoursesHouse",
-        "projectPath": "/Users/emanuel/Desktop/webAPI/CourseHouse/Backend/CoursesHouse.csproj",
-        "packagesPath": "/Users/emanuel/.nuget/packages/",
-        "outputPath": "/Users/emanuel/Desktop/webAPI/CourseHouse/Backend/obj/",
+        "projectPath": "C:\\studia\\emekDotNet\\Backend\\CoursesHouse.csproj",
+        "packagesPath": "C:\\Users\\Dawid\\.nuget\\packages\\",
+        "outputPath": "C:\\studia\\emekDotNet\\Backend\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/emanuel/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\Dawid\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -32,11 +34,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -103,7 +100,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.201/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
