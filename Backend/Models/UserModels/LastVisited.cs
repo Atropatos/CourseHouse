@@ -1,6 +1,5 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using CourseHouse.Models;
 
 namespace CourseHouse.Models
 {
@@ -12,8 +11,8 @@ namespace CourseHouse.Models
 
         [ForeignKey("User")]
         public string UserId { get; set; }
+        public User User { get; set; }
 
-        [ForeignKey("Course")]
         public List<int> LastVisitedCourses { get; set; } = new List<int>();
 
         [DataType(DataType.DateTime)]

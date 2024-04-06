@@ -26,5 +26,10 @@ namespace CourseHouse.Models
         [Required(ErrorMessage = "The name of the holder is required")]
         [Display(Name = "Name of the holder.")]
         public string HolderName { get; set; } = string.Empty;
+
+        [ForeignKey("User")]
+        [Required]
+        public int UserId { get; set; }
+        public User User { get; set; }
     }
 }

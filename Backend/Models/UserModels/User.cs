@@ -29,5 +29,10 @@ namespace CourseHouse.Models
         [ForeignKey("Role")]
         [Required(ErrorMessage = "Role is required.")]
         public int RoleId { get; set; }
+        public Role Role { get; set; }
+
+        [Required]
+        [MinLength(5, ErrorMessage = "Password must be at least 5 characters long!")]
+        public string Password { get; set; } = string.Empty;
     }
 }

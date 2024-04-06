@@ -12,7 +12,20 @@ namespace CourseHouse.Models
 
         [Required]
         [ForeignKey("Author")]
-        public int AuthorId { get; set; }
+        public int UserId { get; set; }
+        public User Author { get; set; }
+
+        [Required]
+        [ForeignKey("Course")]
+        public int CourseId { get; set; }
+        public Course Course { get; set; }
+
+        public int Order { get; set; }
+
+        [Required]
+        [ForeignKey("CourseView")]
+        public int CourseViewId { get; set; }
+        public CourseView CourseView { get; set; }
 
         [Required]
         [Url(ErrorMessage = "Incorrect URL format.")]
