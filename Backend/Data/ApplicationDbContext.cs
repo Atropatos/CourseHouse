@@ -22,7 +22,6 @@ namespace CourseHouse.Data
         public DbSet<CreditCard>? creditCard { get; set; }
 
         public DbSet<CourseView>? courseView { get; set; }
-        public DbSet<ViewTest>? viewTest { get; set; }
         public DbSet<Content>? content { get; set; }
         public DbSet<Picture>? picture { get; set; }
         public DbSet<Video>? video { get; set; }
@@ -58,7 +57,8 @@ namespace CourseHouse.Data
                     Name = "Emanuel",
                     LastName = "Admin",
                     Email = "emanuel@admin.com",
-                    RoleId = 2
+                    RoleId = 2,
+                    Password = "zaq1@WSXcde3$RFV"
                 },
                 new User
                 {
@@ -66,7 +66,8 @@ namespace CourseHouse.Data
                     Name = "Dawid",
                     LastName = "Admin",
                     Email = "dawid@admin.com",
-                    RoleId = 2
+                    RoleId = 2,
+                    Password = "zaq1@WSXcde3$RFV"
                 },
                 new User
                 {
@@ -74,7 +75,8 @@ namespace CourseHouse.Data
                     Name = "Adam",
                     LastName = "Nowak",
                     Email = "adam@nowak.com",
-                    RoleId = 1
+                    RoleId = 1,
+                    Password = "zaq1@WSXcde3$RFV"
                 },
                 new User
                 {
@@ -82,7 +84,8 @@ namespace CourseHouse.Data
                     Name = "Anna",
                     LastName = "Kowalska",
                     Email = "anna@kowalska.com",
-                    RoleId = 1
+                    RoleId = 1,
+                    Password = "zaq1@WSXcde3$RFV"
                 },
                 new User
                 {
@@ -90,7 +93,8 @@ namespace CourseHouse.Data
                     Name = "Jan",
                     LastName = "Kowalczyk",
                     Email = "jan@kowalczyk.com",
-                    RoleId = 1
+                    RoleId = 1,
+                    Password = "zaq1@WSXcde3$RFV"
                 },
                 new User
                 {
@@ -98,7 +102,8 @@ namespace CourseHouse.Data
                     Name = "Katarzyna",
                     LastName = "Wiśniewska",
                     Email = "katarzyna@wisniewska.com",
-                    RoleId = 1
+                    RoleId = 1,
+                    Password = "zaq1@WSXcde3$RFV"
                 },
                 new User
                 {
@@ -106,7 +111,8 @@ namespace CourseHouse.Data
                     Name = "Magdalena",
                     LastName = "Lewandowska",
                     Email = "magdalena@lewandowska.com",
-                    RoleId = 1
+                    RoleId = 1,
+                    Password = "zaq1@WSXcde3$RFV"
                 },
                 new User
                 {
@@ -114,7 +120,8 @@ namespace CourseHouse.Data
                     Name = "Tomasz",
                     LastName = "Wójcik",
                     Email = "tomasz@wojcik.com",
-                    RoleId = 1
+                    RoleId = 1,
+                    Password = "zaq1@WSXcde3$RFV"
                 },
                 new User
                 {
@@ -122,7 +129,8 @@ namespace CourseHouse.Data
                     Name = "Agnieszka",
                     LastName = "Kamińska",
                     Email = "agnieszka@kaminska.com",
-                    RoleId = 1
+                    RoleId = 1,
+                    Password = "zaq1@WSXcde3$RFV"
                 },
                 new User
                 {
@@ -130,7 +138,8 @@ namespace CourseHouse.Data
                     Name = "Marcin",
                     LastName = "Kowalewski",
                     Email = "marcin@kowalewski.com",
-                    RoleId = 1
+                    RoleId = 1,
+                    Password = "zaq1@WSXcde3$RFV"
                 }
             );
         }
