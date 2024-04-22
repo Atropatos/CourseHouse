@@ -15,7 +15,7 @@ namespace CourseHouse.Models
         public Course Course { get; set; }
 
         [ForeignKey("User")]
-        public int UserId { get; set; }
+        public string id { get; set; }
         public User User { get; set; }
 
         [ForeignKey("CreditCard")]

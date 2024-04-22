@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CoursesHouse.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240406185808_Init01")]
-    partial class Init01
+    [Migration("20240410123821_migration3")]
+    partial class migration3
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -41,8 +41,9 @@ namespace CoursesHouse.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                    b.Property<string>("id")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("ContentId");
 
@@ -50,7 +51,7 @@ namespace CoursesHouse.Migrations
 
                     b.HasIndex("CourseViewId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("id");
 
                     b.ToTable("Contents");
                 });
@@ -71,14 +72,9 @@ namespace CoursesHouse.Migrations
                     b.Property<int?>("PurchaseId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("CourseId");
 
                     b.HasIndex("PurchaseId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Courses");
                 });
@@ -97,14 +93,15 @@ namespace CoursesHouse.Migrations
                     b.Property<int>("CourseId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                    b.Property<string>("id")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("CourseCommentId");
 
                     b.HasIndex("CourseId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("id");
 
                     b.ToTable("CourseComments");
                 });
@@ -115,20 +112,24 @@ namespace CoursesHouse.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<string>("AuthorId")
+                        .HasColumnType("varchar(255)");
+
                     b.Property<int>("CourseId")
                         .HasColumnType("int");
 
                     b.Property<decimal>("Grade")
                         .HasColumnType("decimal(2,2)");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                    b.Property<string>("id")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.HasKey("CourseGradeId");
 
-                    b.HasIndex("CourseId");
+                    b.HasIndex("AuthorId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("CourseId");
 
                     b.ToTable("CourseGrades");
                 });
@@ -170,12 +171,13 @@ namespace CoursesHouse.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                    b.Property<string>("id")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("CreditCardId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("id");
 
                     b.ToTable("CreditCards");
                 });
@@ -193,12 +195,13 @@ namespace CoursesHouse.Migrations
                     b.Property<DateTime>("LastVisitedTime")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                    b.Property<string>("id")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("LastVisitedId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("id");
 
                     b.ToTable("LastVisited");
                 });
@@ -223,8 +226,9 @@ namespace CoursesHouse.Migrations
                     b.Property<int>("Order")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                    b.Property<string>("id")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("PictureId");
 
@@ -232,7 +236,7 @@ namespace CoursesHouse.Migrations
 
                     b.HasIndex("CourseViewId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("id");
 
                     b.ToTable("Pictures");
                 });
@@ -255,8 +259,9 @@ namespace CoursesHouse.Migrations
                     b.Property<decimal>("TotalSpend")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                    b.Property<string>("id")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("PurchaseId");
 
@@ -264,7 +269,7 @@ namespace CoursesHouse.Migrations
 
                     b.HasIndex("CreditCardId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("id");
 
                     b.ToTable("Purchases");
                 });
@@ -282,23 +287,6 @@ namespace CoursesHouse.Migrations
                     b.HasKey("RoleId");
 
                     b.ToTable("Roles");
-
-                    b.HasData(
-                        new
-                        {
-                            RoleId = 1,
-                            RoleName = "User"
-                        },
-                        new
-                        {
-                            RoleId = 2,
-                            RoleName = "Admin"
-                        },
-                        new
-                        {
-                            RoleId = 3,
-                            RoleName = "Moderator"
-                        });
                 });
 
             modelBuilder.Entity("CourseHouse.Models.TestAnswer", b =>
@@ -320,11 +308,12 @@ namespace CoursesHouse.Migrations
                     b.Property<int>("Order")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
                     b.Property<bool>("correct")
                         .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("id")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("TestAnswerId");
 
@@ -332,140 +321,78 @@ namespace CoursesHouse.Migrations
 
                     b.HasIndex("CourseViewId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("id");
 
                     b.ToTable("TestAnswers");
                 });
 
             modelBuilder.Entity("CourseHouse.Models.User", b =>
                 {
-                    b.Property<int>("UserId")
-                        .ValueGeneratedOnAdd()
+                    b.Property<string>("Id")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("longtext");
 
                     b.Property<int?>("CourseId")
                         .HasColumnType("int");
 
                     b.Property<string>("Email")
-                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("varchar(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("varchar(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("varchar(256)");
+
+                    b.Property<string>("PasswordHash")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("varchar(20)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("varchar(20)");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
+                    b.Property<string>("PhoneNumber")
                         .HasColumnType("longtext");
 
-                    b.Property<int>("RoleId")
-                        .HasColumnType("int");
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("tinyint(1)");
 
-                    b.HasKey("UserId");
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("longtext");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("varchar(256)");
+
+                    b.HasKey("Id");
 
                     b.HasIndex("CourseId");
 
-                    b.HasIndex("RoleId");
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
 
-                    b.ToTable("Users");
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex");
 
-                    b.HasData(
-                        new
-                        {
-                            UserId = 1,
-                            Email = "emanuel@admin.com",
-                            LastName = "Admin",
-                            Name = "Emanuel",
-                            Password = "zaq1@WSXcde3$RFV",
-                            RoleId = 2
-                        },
-                        new
-                        {
-                            UserId = 2,
-                            Email = "dawid@admin.com",
-                            LastName = "Admin",
-                            Name = "Dawid",
-                            Password = "zaq1@WSXcde3$RFV",
-                            RoleId = 2
-                        },
-                        new
-                        {
-                            UserId = 3,
-                            Email = "adam@nowak.com",
-                            LastName = "Nowak",
-                            Name = "Adam",
-                            Password = "zaq1@WSXcde3$RFV",
-                            RoleId = 1
-                        },
-                        new
-                        {
-                            UserId = 4,
-                            Email = "anna@kowalska.com",
-                            LastName = "Kowalska",
-                            Name = "Anna",
-                            Password = "zaq1@WSXcde3$RFV",
-                            RoleId = 1
-                        },
-                        new
-                        {
-                            UserId = 5,
-                            Email = "jan@kowalczyk.com",
-                            LastName = "Kowalczyk",
-                            Name = "Jan",
-                            Password = "zaq1@WSXcde3$RFV",
-                            RoleId = 1
-                        },
-                        new
-                        {
-                            UserId = 6,
-                            Email = "katarzyna@wisniewska.com",
-                            LastName = "Wiśniewska",
-                            Name = "Katarzyna",
-                            Password = "zaq1@WSXcde3$RFV",
-                            RoleId = 1
-                        },
-                        new
-                        {
-                            UserId = 7,
-                            Email = "magdalena@lewandowska.com",
-                            LastName = "Lewandowska",
-                            Name = "Magdalena",
-                            Password = "zaq1@WSXcde3$RFV",
-                            RoleId = 1
-                        },
-                        new
-                        {
-                            UserId = 8,
-                            Email = "tomasz@wojcik.com",
-                            LastName = "Wójcik",
-                            Name = "Tomasz",
-                            Password = "zaq1@WSXcde3$RFV",
-                            RoleId = 1
-                        },
-                        new
-                        {
-                            UserId = 9,
-                            Email = "agnieszka@kaminska.com",
-                            LastName = "Kamińska",
-                            Name = "Agnieszka",
-                            Password = "zaq1@WSXcde3$RFV",
-                            RoleId = 1
-                        },
-                        new
-                        {
-                            UserId = 10,
-                            Email = "marcin@kowalewski.com",
-                            LastName = "Kowalewski",
-                            Name = "Marcin",
-                            Password = "zaq1@WSXcde3$RFV",
-                            RoleId = 1
-                        });
+                    b.ToTable("AspNetUsers", (string)null);
                 });
 
             modelBuilder.Entity("CourseHouse.Models.Video", b =>
@@ -488,8 +415,9 @@ namespace CoursesHouse.Migrations
                     b.Property<int>("Order")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                    b.Property<string>("id")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("VideoId");
 
@@ -497,9 +425,151 @@ namespace CoursesHouse.Migrations
 
                     b.HasIndex("CourseViewId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("id");
 
                     b.ToTable("Videos");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(256)
+                        .HasColumnType("varchar(256)");
+
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256)
+                        .HasColumnType("varchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasDatabaseName("RoleNameIndex");
+
+                    b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "3f280511-5d5d-437f-bff5-50875ee89543",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = "3176e466-1499-414f-88af-409bae33fe17",
+                            Name = "User",
+                            NormalizedName = "USER"
+                        });
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("RoleId")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetRoleClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("ProviderKey")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("ProviderDisplayName")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
+                    b.HasKey("LoginProvider", "ProviderKey");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserLogins", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("RoleId")
+                        .HasColumnType("varchar(255)");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetUserRoles", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("UserId", "LoginProvider", "Name");
+
+                    b.ToTable("AspNetUserTokens", (string)null);
                 });
 
             modelBuilder.Entity("CourseHouse.Models.Content", b =>
@@ -518,7 +588,7 @@ namespace CoursesHouse.Migrations
 
                     b.HasOne("CourseHouse.Models.User", "Author")
                         .WithMany()
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -534,14 +604,6 @@ namespace CoursesHouse.Migrations
                     b.HasOne("CourseHouse.Models.Purchase", null)
                         .WithMany("PurachasedCourses")
                         .HasForeignKey("PurchaseId");
-
-                    b.HasOne("CourseHouse.Models.User", "Author")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Author");
                 });
 
             modelBuilder.Entity("CourseHouse.Models.CourseComment", b =>
@@ -554,7 +616,7 @@ namespace CoursesHouse.Migrations
 
                     b.HasOne("CourseHouse.Models.User", "Author")
                         .WithMany()
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -565,15 +627,13 @@ namespace CoursesHouse.Migrations
 
             modelBuilder.Entity("CourseHouse.Models.CourseGrade", b =>
                 {
+                    b.HasOne("CourseHouse.Models.User", "Author")
+                        .WithMany()
+                        .HasForeignKey("AuthorId");
+
                     b.HasOne("CourseHouse.Models.Course", "Course")
                         .WithMany("Grades")
                         .HasForeignKey("CourseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CourseHouse.Models.User", "Author")
-                        .WithMany()
-                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -597,7 +657,7 @@ namespace CoursesHouse.Migrations
                 {
                     b.HasOne("CourseHouse.Models.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -608,7 +668,7 @@ namespace CoursesHouse.Migrations
                 {
                     b.HasOne("CourseHouse.Models.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -631,7 +691,7 @@ namespace CoursesHouse.Migrations
 
                     b.HasOne("CourseHouse.Models.User", "Author")
                         .WithMany()
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -658,7 +718,7 @@ namespace CoursesHouse.Migrations
 
                     b.HasOne("CourseHouse.Models.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -685,7 +745,7 @@ namespace CoursesHouse.Migrations
 
                     b.HasOne("CourseHouse.Models.User", "Author")
                         .WithMany()
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -701,14 +761,6 @@ namespace CoursesHouse.Migrations
                     b.HasOne("CourseHouse.Models.Course", null)
                         .WithMany("EnrolledUsers")
                         .HasForeignKey("CourseId");
-
-                    b.HasOne("CourseHouse.Models.Role", "Role")
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Role");
                 });
 
             modelBuilder.Entity("CourseHouse.Models.Video", b =>
@@ -727,7 +779,7 @@ namespace CoursesHouse.Migrations
 
                     b.HasOne("CourseHouse.Models.User", "Author")
                         .WithMany()
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -736,6 +788,57 @@ namespace CoursesHouse.Migrations
                     b.Navigation("Course");
 
                     b.Navigation("CourseView");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.HasOne("CourseHouse.Models.User", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.HasOne("CourseHouse.Models.User", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CourseHouse.Models.User", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.HasOne("CourseHouse.Models.User", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("CourseHouse.Models.Course", b =>

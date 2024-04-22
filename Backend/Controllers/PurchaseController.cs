@@ -1,16 +1,16 @@
-using Microsoft.AspNetCore.Mvc;
+/*using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CourseHouse.Data;
 using CourseHouse.Models;
 
-/*
+*//*
 DO ZROBIENIA
 dodac wszytkie purchase danego uzytkownika
 dodawanie nowego zakupu
 wczytanie danego zakupu wraz z szeczgolami
 
 
-*/
+*//*
 
 namespace CourseHouse.Controllers
 {
@@ -89,3 +89,4 @@ namespace CourseHouse.Controllers
         }
     }
 }
+*/

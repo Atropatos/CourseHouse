@@ -1,4 +1,4 @@
-﻿using CourseHouse.Data;
+﻿/*using CourseHouse.Data;
 using CourseHouse.Models;
 using CoursesHouse.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -65,3 +65,4 @@ namespace CoursesHouse.Repository
         }
     }
 }
+*/

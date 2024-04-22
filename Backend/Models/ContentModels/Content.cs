@@ -12,7 +12,7 @@ namespace CourseHouse.Models
 
         [Required]
         [ForeignKey("Author")]
-        public int UserId { get; set; }
+        public string id { get; set; }
         public User Author { get; set; }
 
         [Required]

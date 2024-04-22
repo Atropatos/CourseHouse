@@ -9,10 +9,10 @@ namespace CourseHouse.Models
         [Key]
         public int CourseId { get; set; }
 
-        [ForeignKey("Author")]
+       /* [ForeignKey("Author")]
         [Required(ErrorMessage = "Author is required.")]
-        public int UserId { get; set; }
-        public User Author { get; set; }
+        public string id { get; set; }
+        public User Author { get; set; }*/
 
         [Required(ErrorMessage = "Course name is required.")]
         public string CourseName { get; set; } = string.Empty;

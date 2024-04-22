@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CoursesHouse.Repository
 {
-    public class CourseRepository : ICourseRepository
+    public class CourseRepository :ICourseRepository
     {
         private readonly ApplicationDbContext _context;
         public CourseRepository(ApplicationDbContext context)

@@ -1,6 +1,7 @@
 ﻿using CourseHouse.Data;
 using CourseHouse.Models;
 using CoursesHouse.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,6 +21,7 @@ namespace CoursesHouse.Controllers
             _context = context;
         }
         [HttpGet]
+  
         public async Task<IActionResult> GetAll()
         {
             var courses = await _courseRepo.GetAllAsync();

@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
+/*using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CourseHouse.Data;
 using CourseHouse.Models;
@@ -52,3 +52,4 @@ namespace CourseHouse.Controllers
         }
     }
 }
+*/

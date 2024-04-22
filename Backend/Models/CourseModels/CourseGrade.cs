@@ -15,7 +15,7 @@ namespace CourseHouse.Models
         public Course Course { get; set; }
 
         [ForeignKey("User")]
-        public int UserId { get; set; }
+        public string id { get; set; }
         public User Author { get; set; }
 
         [Column(TypeName = "decimal(2,2)")]

@@ -10,7 +10,7 @@ namespace CourseHouse.Models
         public int LastVisitedId { get; set; }
 
         [ForeignKey("User")]
-        public int UserId { get; set; }
+        public string id { get; set; }
         public User User { get; set; }
 
         public List<int> LastVisitedCourses { get; set; } = new List<int>();

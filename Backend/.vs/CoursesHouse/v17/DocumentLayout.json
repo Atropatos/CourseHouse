@@ -1,0 +1,485 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\studia\\najnowszawersjadotnet2\\Projekt-dotnet\\Backend\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{4623C776-2062-43D8-802D-0B8838BF7BA9}|CoursesHouse.csproj|c:\\studia\\najnowszawersjadotnet2\\projekt-dotnet\\backend\\controllers\\coursecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4623C776-2062-43D8-802D-0B8838BF7BA9}|CoursesHouse.csproj|solutionrelative:controllers\\coursecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4623C776-2062-43D8-802D-0B8838BF7BA9}|CoursesHouse.csproj|c:\\studia\\najnowszawersjadotnet2\\projekt-dotnet\\backend\\repository\\courserepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4623C776-2062-43D8-802D-0B8838BF7BA9}|CoursesHouse.csproj|solutionrelative:repository\\courserepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4623C776-2062-43D8-802D-0B8838BF7BA9}|CoursesHouse.csproj|c:\\studia\\najnowszawersjadotnet2\\projekt-dotnet\\backend\\interfaces\\icourserepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4623C776-2062-43D8-802D-0B8838BF7BA9}|CoursesHouse.csproj|solutionrelative:interfaces\\icourserepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4623C776-2062-43D8-802D-0B8838BF7BA9}|CoursesHouse.csproj|c:\\studia\\najnowszawersjadotnet2\\projekt-dotnet\\backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4623C776-2062-43D8-802D-0B8838BF7BA9}|CoursesHouse.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4623C776-2062-43D8-802D-0B8838BF7BA9}|CoursesHouse.csproj|c:\\studia\\najnowszawersjadotnet2\\projekt-dotnet\\backend\\interfaces\\iuserrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4623C776-2062-43D8-802D-0B8838BF7BA9}|CoursesHouse.csproj|solutionrelative:interfaces\\iuserrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4623C776-2062-43D8-802D-0B8838BF7BA9}|CoursesHouse.csproj|c:\\studia\\najnowszawersjadotnet2\\projekt-dotnet\\backend\\interfaces\\itokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4623C776-2062-43D8-802D-0B8838BF7BA9}|CoursesHouse.csproj|solutionrelative:interfaces\\itokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4623C776-2062-43D8-802D-0B8838BF7BA9}|CoursesHouse.csproj|c:\\studia\\najnowszawersjadotnet2\\projekt-dotnet\\backend\\repository\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4623C776-2062-43D8-802D-0B8838BF7BA9}|CoursesHouse.csproj|solutionrelative:repository\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4623C776-2062-43D8-802D-0B8838BF7BA9}|CoursesHouse.csproj|c:\\studia\\najnowszawersjadotnet2\\projekt-dotnet\\backend\\controllers\\purchasecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4623C776-2062-43D8-802D-0B8838BF7BA9}|CoursesHouse.csproj|solutionrelative:controllers\\purchasecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4623C776-2062-43D8-802D-0B8838BF7BA9}|CoursesHouse.csproj|c:\\studia\\najnowszawersjadotnet2\\projekt-dotnet\\backend\\controllers\\contentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4623C776-2062-43D8-802D-0B8838BF7BA9}|CoursesHouse.csproj|solutionrelative:controllers\\contentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4623C776-2062-43D8-802D-0B8838BF7BA9}|CoursesHouse.csproj|c:\\studia\\najnowszawersjadotnet2\\projekt-dotnet\\backend\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4623C776-2062-43D8-802D-0B8838BF7BA9}|CoursesHouse.csproj|solutionrelative:controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4623C776-2062-43D8-802D-0B8838BF7BA9}|CoursesHouse.csproj|c:\\studia\\najnowszawersjadotnet2\\projekt-dotnet\\backend\\dtos\\account\\registerdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4623C776-2062-43D8-802D-0B8838BF7BA9}|CoursesHouse.csproj|solutionrelative:dtos\\account\\registerdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4623C776-2062-43D8-802D-0B8838BF7BA9}|CoursesHouse.csproj|c:\\studia\\najnowszawersjadotnet2\\projekt-dotnet\\backend\\dtos\\account\\newuserdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4623C776-2062-43D8-802D-0B8838BF7BA9}|CoursesHouse.csproj|solutionrelative:dtos\\account\\newuserdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4623C776-2062-43D8-802D-0B8838BF7BA9}|CoursesHouse.csproj|c:\\studia\\najnowszawersjadotnet2\\projekt-dotnet\\backend\\dtos\\account\\logindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4623C776-2062-43D8-802D-0B8838BF7BA9}|CoursesHouse.csproj|solutionrelative:dtos\\account\\logindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4623C776-2062-43D8-802D-0B8838BF7BA9}|CoursesHouse.csproj|c:\\studia\\najnowszawersjadotnet2\\projekt-dotnet\\backend\\controllers\\rolecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4623C776-2062-43D8-802D-0B8838BF7BA9}|CoursesHouse.csproj|solutionrelative:controllers\\rolecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4623C776-2062-43D8-802D-0B8838BF7BA9}|CoursesHouse.csproj|c:\\studia\\najnowszawersjadotnet2\\projekt-dotnet\\backend\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4623C776-2062-43D8-802D-0B8838BF7BA9}|CoursesHouse.csproj|solutionrelative:controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4623C776-2062-43D8-802D-0B8838BF7BA9}|CoursesHouse.csproj|c:\\studia\\najnowszawersjadotnet2\\projekt-dotnet\\backend\\models\\coursemodels\\course.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4623C776-2062-43D8-802D-0B8838BF7BA9}|CoursesHouse.csproj|solutionrelative:models\\coursemodels\\course.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4623C776-2062-43D8-802D-0B8838BF7BA9}|CoursesHouse.csproj|c:\\studia\\najnowszawersjadotnet2\\projekt-dotnet\\backend\\models\\contentmodels\\content.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4623C776-2062-43D8-802D-0B8838BF7BA9}|CoursesHouse.csproj|solutionrelative:models\\contentmodels\\content.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4623C776-2062-43D8-802D-0B8838BF7BA9}|CoursesHouse.csproj|c:\\studia\\najnowszawersjadotnet2\\projekt-dotnet\\backend\\models\\contentmodels\\video.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4623C776-2062-43D8-802D-0B8838BF7BA9}|CoursesHouse.csproj|solutionrelative:models\\contentmodels\\video.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4623C776-2062-43D8-802D-0B8838BF7BA9}|CoursesHouse.csproj|c:\\studia\\najnowszawersjadotnet2\\projekt-dotnet\\backend\\models\\contentmodels\\picture.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4623C776-2062-43D8-802D-0B8838BF7BA9}|CoursesHouse.csproj|solutionrelative:models\\contentmodels\\picture.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4623C776-2062-43D8-802D-0B8838BF7BA9}|CoursesHouse.csproj|c:\\studia\\najnowszawersjadotnet2\\projekt-dotnet\\backend\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4623C776-2062-43D8-802D-0B8838BF7BA9}|CoursesHouse.csproj|solutionrelative:data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4623C776-2062-43D8-802D-0B8838BF7BA9}|CoursesHouse.csproj|c:\\studia\\najnowszawersjadotnet2\\projekt-dotnet\\backend\\models\\usermodels\\creditcard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4623C776-2062-43D8-802D-0B8838BF7BA9}|CoursesHouse.csproj|solutionrelative:models\\usermodels\\creditcard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4623C776-2062-43D8-802D-0B8838BF7BA9}|CoursesHouse.csproj|c:\\studia\\najnowszawersjadotnet2\\projekt-dotnet\\backend\\models\\usermodels\\lastvisited.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4623C776-2062-43D8-802D-0B8838BF7BA9}|CoursesHouse.csproj|solutionrelative:models\\usermodels\\lastvisited.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4623C776-2062-43D8-802D-0B8838BF7BA9}|CoursesHouse.csproj|c:\\studia\\najnowszawersjadotnet2\\projekt-dotnet\\backend\\models\\usermodels\\purchase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4623C776-2062-43D8-802D-0B8838BF7BA9}|CoursesHouse.csproj|solutionrelative:models\\usermodels\\purchase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4623C776-2062-43D8-802D-0B8838BF7BA9}|CoursesHouse.csproj|c:\\studia\\najnowszawersjadotnet2\\projekt-dotnet\\backend\\models\\usermodels\\role.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4623C776-2062-43D8-802D-0B8838BF7BA9}|CoursesHouse.csproj|solutionrelative:models\\usermodels\\role.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4623C776-2062-43D8-802D-0B8838BF7BA9}|CoursesHouse.csproj|c:\\studia\\najnowszawersjadotnet2\\projekt-dotnet\\backend\\models\\usermodels\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4623C776-2062-43D8-802D-0B8838BF7BA9}|CoursesHouse.csproj|solutionrelative:models\\usermodels\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4623C776-2062-43D8-802D-0B8838BF7BA9}|CoursesHouse.csproj|c:\\studia\\najnowszawersjadotnet2\\projekt-dotnet\\backend\\models\\coursemodels\\coursecomment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4623C776-2062-43D8-802D-0B8838BF7BA9}|CoursesHouse.csproj|solutionrelative:models\\coursemodels\\coursecomment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4623C776-2062-43D8-802D-0B8838BF7BA9}|CoursesHouse.csproj|c:\\studia\\najnowszawersjadotnet2\\projekt-dotnet\\backend\\models\\contentmodels\\testanswer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4623C776-2062-43D8-802D-0B8838BF7BA9}|CoursesHouse.csproj|solutionrelative:models\\contentmodels\\testanswer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 116,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CourseController.cs",
+              "DocumentMoniker": "C:\\studia\\najnowszawersjadotnet2\\Projekt-dotnet\\Backend\\Controllers\\CourseController.cs",
+              "RelativeDocumentMoniker": "Controllers\\CourseController.cs",
+              "ToolTip": "C:\\studia\\najnowszawersjadotnet2\\Projekt-dotnet\\Backend\\Controllers\\CourseController.cs",
+              "RelativeToolTip": "Controllers\\CourseController.cs",
+              "ViewState": "AQIAACIAAAAAAAAAAAAAADcAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-10T11:15:16.274Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 116,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "CourseRepository.cs",
+              "DocumentMoniker": "C:\\studia\\najnowszawersjadotnet2\\Projekt-dotnet\\Backend\\Repository\\CourseRepository.cs",
+              "RelativeDocumentMoniker": "Repository\\CourseRepository.cs",
+              "ToolTip": "C:\\studia\\najnowszawersjadotnet2\\Projekt-dotnet\\Backend\\Repository\\CourseRepository.cs",
+              "RelativeToolTip": "Repository\\CourseRepository.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAiwAcAAAA0AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-09T13:52:01.849Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ICourseRepository.cs",
+              "DocumentMoniker": "C:\\studia\\najnowszawersjadotnet2\\Projekt-dotnet\\Backend\\Interfaces\\ICourseRepository.cs",
+              "RelativeDocumentMoniker": "Interfaces\\ICourseRepository.cs",
+              "ToolTip": "C:\\studia\\najnowszawersjadotnet2\\Projekt-dotnet\\Backend\\Interfaces\\ICourseRepository.cs",
+              "RelativeToolTip": "Interfaces\\ICourseRepository.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAzAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-22T14:28:13.469Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\studia\\najnowszawersjadotnet2\\Projekt-dotnet\\Backend\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\studia\\najnowszawersjadotnet2\\Projekt-dotnet\\Backend\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AQIAAEUAAAAAAAAAAAAAAGAAAAArAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-10T11:09:50.042Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "IUserRepository.cs",
+              "DocumentMoniker": "C:\\studia\\najnowszawersjadotnet2\\Projekt-dotnet\\Backend\\Interfaces\\IUserRepository.cs",
+              "RelativeDocumentMoniker": "Interfaces\\IUserRepository.cs",
+              "ToolTip": "C:\\studia\\najnowszawersjadotnet2\\Projekt-dotnet\\Backend\\Interfaces\\IUserRepository.cs",
+              "RelativeToolTip": "Interfaces\\IUserRepository.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-22T14:28:20.499Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ITokenService.cs",
+              "DocumentMoniker": "C:\\studia\\najnowszawersjadotnet2\\Projekt-dotnet\\Backend\\Interfaces\\ITokenService.cs",
+              "RelativeDocumentMoniker": "Interfaces\\ITokenService.cs",
+              "ToolTip": "C:\\studia\\najnowszawersjadotnet2\\Projekt-dotnet\\Backend\\Interfaces\\ITokenService.cs",
+              "RelativeToolTip": "Interfaces\\ITokenService.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-22T14:28:17.826Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "UserRepository.cs",
+              "DocumentMoniker": "C:\\studia\\najnowszawersjadotnet2\\Projekt-dotnet\\Backend\\Repository\\UserRepository.cs",
+              "RelativeDocumentMoniker": "Repository\\UserRepository.cs",
+              "ToolTip": "C:\\studia\\najnowszawersjadotnet2\\Projekt-dotnet\\Backend\\Repository\\UserRepository.cs",
+              "RelativeToolTip": "Repository\\UserRepository.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACQAAAATAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-22T15:15:34.746Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "PurchaseController.cs",
+              "DocumentMoniker": "C:\\studia\\najnowszawersjadotnet2\\Projekt-dotnet\\Backend\\Controllers\\PurchaseController.cs",
+              "RelativeDocumentMoniker": "Controllers\\PurchaseController.cs",
+              "ToolTip": "C:\\studia\\najnowszawersjadotnet2\\Projekt-dotnet\\Backend\\Controllers\\PurchaseController.cs",
+              "RelativeToolTip": "Controllers\\PurchaseController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-10T12:51:50.74Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "ContentController.cs",
+              "DocumentMoniker": "C:\\studia\\najnowszawersjadotnet2\\Projekt-dotnet\\Backend\\Controllers\\ContentController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ContentController.cs",
+              "ToolTip": "C:\\studia\\najnowszawersjadotnet2\\Projekt-dotnet\\Backend\\Controllers\\ContentController.cs",
+              "RelativeToolTip": "Controllers\\ContentController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-22T10:36:17.141Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "AccountController.cs",
+              "DocumentMoniker": "C:\\studia\\najnowszawersjadotnet2\\Projekt-dotnet\\Backend\\Controllers\\AccountController.cs",
+              "RelativeDocumentMoniker": "Controllers\\AccountController.cs",
+              "ToolTip": "C:\\studia\\najnowszawersjadotnet2\\Projekt-dotnet\\Backend\\Controllers\\AccountController.cs",
+              "RelativeToolTip": "Controllers\\AccountController.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAABkAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-10T10:47:34.679Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "RegisterDto.cs",
+              "DocumentMoniker": "C:\\studia\\najnowszawersjadotnet2\\Projekt-dotnet\\Backend\\Dtos\\Account\\RegisterDto.cs",
+              "RelativeDocumentMoniker": "Dtos\\Account\\RegisterDto.cs",
+              "ToolTip": "C:\\studia\\najnowszawersjadotnet2\\Projekt-dotnet\\Backend\\Dtos\\Account\\RegisterDto.cs",
+              "RelativeToolTip": "Dtos\\Account\\RegisterDto.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-22T14:25:55.029Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "LoginDto.cs",
+              "DocumentMoniker": "C:\\studia\\najnowszawersjadotnet2\\Projekt-dotnet\\Backend\\Dtos\\Account\\LoginDto.cs",
+              "RelativeDocumentMoniker": "Dtos\\Account\\LoginDto.cs",
+              "ToolTip": "C:\\studia\\najnowszawersjadotnet2\\Projekt-dotnet\\Backend\\Dtos\\Account\\LoginDto.cs",
+              "RelativeToolTip": "Dtos\\Account\\LoginDto.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-10T10:49:42.824Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "NewUserDto.cs",
+              "DocumentMoniker": "C:\\studia\\najnowszawersjadotnet2\\Projekt-dotnet\\Backend\\Dtos\\Account\\NewUserDto.cs",
+              "RelativeDocumentMoniker": "Dtos\\Account\\NewUserDto.cs",
+              "ToolTip": "C:\\studia\\najnowszawersjadotnet2\\Projekt-dotnet\\Backend\\Dtos\\Account\\NewUserDto.cs",
+              "RelativeToolTip": "Dtos\\Account\\NewUserDto.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-10T12:33:34.074Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "RoleController.cs",
+              "DocumentMoniker": "C:\\studia\\najnowszawersjadotnet2\\Projekt-dotnet\\Backend\\Controllers\\RoleController.cs",
+              "RelativeDocumentMoniker": "Controllers\\RoleController.cs",
+              "ToolTip": "C:\\studia\\najnowszawersjadotnet2\\Projekt-dotnet\\Backend\\Controllers\\RoleController.cs",
+              "RelativeToolTip": "Controllers\\RoleController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-22T14:15:21.719Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "UserController.cs",
+              "DocumentMoniker": "C:\\studia\\najnowszawersjadotnet2\\Projekt-dotnet\\Backend\\Controllers\\UserController.cs",
+              "RelativeDocumentMoniker": "Controllers\\UserController.cs",
+              "ToolTip": "C:\\studia\\najnowszawersjadotnet2\\Projekt-dotnet\\Backend\\Controllers\\UserController.cs",
+              "RelativeToolTip": "Controllers\\UserController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-22T14:15:10.179Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "Content.cs",
+              "DocumentMoniker": "C:\\studia\\najnowszawersjadotnet2\\Projekt-dotnet\\Backend\\Models\\ContentModels\\Content.cs",
+              "RelativeDocumentMoniker": "Models\\ContentModels\\Content.cs",
+              "ToolTip": "C:\\studia\\najnowszawersjadotnet2\\Projekt-dotnet\\Backend\\Models\\ContentModels\\Content.cs",
+              "RelativeToolTip": "Models\\ContentModels\\Content.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAAeAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-10T11:12:11.626Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "Course.cs",
+              "DocumentMoniker": "C:\\studia\\najnowszawersjadotnet2\\Projekt-dotnet\\Backend\\Models\\CourseModels\\Course.cs",
+              "RelativeDocumentMoniker": "Models\\CourseModels\\Course.cs",
+              "ToolTip": "C:\\studia\\najnowszawersjadotnet2\\Projekt-dotnet\\Backend\\Models\\CourseModels\\Course.cs",
+              "RelativeToolTip": "Models\\CourseModels\\Course.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABwAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-10T11:12:04.178Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "Picture.cs",
+              "DocumentMoniker": "C:\\studia\\najnowszawersjadotnet2\\Projekt-dotnet\\Backend\\Models\\ContentModels\\Picture.cs",
+              "RelativeDocumentMoniker": "Models\\ContentModels\\Picture.cs",
+              "ToolTip": "C:\\studia\\najnowszawersjadotnet2\\Projekt-dotnet\\Backend\\Models\\ContentModels\\Picture.cs",
+              "RelativeToolTip": "Models\\ContentModels\\Picture.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-10T11:12:15.968Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "Video.cs",
+              "DocumentMoniker": "C:\\studia\\najnowszawersjadotnet2\\Projekt-dotnet\\Backend\\Models\\ContentModels\\Video.cs",
+              "RelativeDocumentMoniker": "Models\\ContentModels\\Video.cs",
+              "ToolTip": "C:\\studia\\najnowszawersjadotnet2\\Projekt-dotnet\\Backend\\Models\\ContentModels\\Video.cs",
+              "RelativeToolTip": "Models\\ContentModels\\Video.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-10T11:12:23.481Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "ApplicationDbContext.cs",
+              "DocumentMoniker": "C:\\studia\\najnowszawersjadotnet2\\Projekt-dotnet\\Backend\\Data\\ApplicationDbContext.cs",
+              "RelativeDocumentMoniker": "Data\\ApplicationDbContext.cs",
+              "ToolTip": "C:\\studia\\najnowszawersjadotnet2\\Projekt-dotnet\\Backend\\Data\\ApplicationDbContext.cs",
+              "RelativeToolTip": "Data\\ApplicationDbContext.cs",
+              "ViewState": "AQIAABMAAAAAAAAAAAA8wCwAAAARAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-10T11:11:47.09Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "LastVisited.cs",
+              "DocumentMoniker": "C:\\studia\\najnowszawersjadotnet2\\Projekt-dotnet\\Backend\\Models\\UserModels\\LastVisited.cs",
+              "RelativeDocumentMoniker": "Models\\UserModels\\LastVisited.cs",
+              "ToolTip": "C:\\studia\\najnowszawersjadotnet2\\Projekt-dotnet\\Backend\\Models\\UserModels\\LastVisited.cs",
+              "RelativeToolTip": "Models\\UserModels\\LastVisited.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABUAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-10T11:12:33.76Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "Purchase.cs",
+              "DocumentMoniker": "C:\\studia\\najnowszawersjadotnet2\\Projekt-dotnet\\Backend\\Models\\UserModels\\Purchase.cs",
+              "RelativeDocumentMoniker": "Models\\UserModels\\Purchase.cs",
+              "ToolTip": "C:\\studia\\najnowszawersjadotnet2\\Projekt-dotnet\\Backend\\Models\\UserModels\\Purchase.cs",
+              "RelativeToolTip": "Models\\UserModels\\Purchase.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-10T11:12:40.539Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "Role.cs",
+              "DocumentMoniker": "C:\\studia\\najnowszawersjadotnet2\\Projekt-dotnet\\Backend\\Models\\UserModels\\Role.cs",
+              "RelativeDocumentMoniker": "Models\\UserModels\\Role.cs",
+              "ToolTip": "C:\\studia\\najnowszawersjadotnet2\\Projekt-dotnet\\Backend\\Models\\UserModels\\Role.cs",
+              "RelativeToolTip": "Models\\UserModels\\Role.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-10T11:12:48.091Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "User.cs",
+              "DocumentMoniker": "C:\\studia\\najnowszawersjadotnet2\\Projekt-dotnet\\Backend\\Models\\UserModels\\User.cs",
+              "RelativeDocumentMoniker": "Models\\UserModels\\User.cs",
+              "ToolTip": "C:\\studia\\najnowszawersjadotnet2\\Projekt-dotnet\\Backend\\Models\\UserModels\\User.cs",
+              "RelativeToolTip": "Models\\UserModels\\User.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-10T11:13:50.534Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "CourseComment.cs",
+              "DocumentMoniker": "C:\\studia\\najnowszawersjadotnet2\\Projekt-dotnet\\Backend\\Models\\CourseModels\\CourseComment.cs",
+              "RelativeDocumentMoniker": "Models\\CourseModels\\CourseComment.cs",
+              "ToolTip": "C:\\studia\\najnowszawersjadotnet2\\Projekt-dotnet\\Backend\\Models\\CourseModels\\CourseComment.cs",
+              "RelativeToolTip": "Models\\CourseModels\\CourseComment.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-10T11:12:30.662Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "CreditCard.cs",
+              "DocumentMoniker": "C:\\studia\\najnowszawersjadotnet2\\Projekt-dotnet\\Backend\\Models\\UserModels\\CreditCard.cs",
+              "RelativeDocumentMoniker": "Models\\UserModels\\CreditCard.cs",
+              "ToolTip": "C:\\studia\\najnowszawersjadotnet2\\Projekt-dotnet\\Backend\\Models\\UserModels\\CreditCard.cs",
+              "RelativeToolTip": "Models\\UserModels\\CreditCard.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-10T11:11:59.883Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "TestAnswer.cs",
+              "DocumentMoniker": "C:\\studia\\najnowszawersjadotnet2\\Projekt-dotnet\\Backend\\Models\\ContentModels\\TestAnswer.cs",
+              "RelativeDocumentMoniker": "Models\\ContentModels\\TestAnswer.cs",
+              "ToolTip": "C:\\studia\\najnowszawersjadotnet2\\Projekt-dotnet\\Backend\\Models\\ContentModels\\TestAnswer.cs",
+              "RelativeToolTip": "Models\\ContentModels\\TestAnswer.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAYAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-09T13:53:47.427Z"
+            }
+          ]
+        },
+        {
+          "DockedWidth": 180,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

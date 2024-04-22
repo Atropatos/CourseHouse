@@ -15,7 +15,7 @@ namespace CourseHouse.Models
         public Course Course { get; set; }
 
         [ForeignKey("Author")]
-        public int UserId { get; set; }
+        public string id { get; set; }
         public User Author { get; set; }
 
         [StringLength(450, MinimumLength = 1, ErrorMessage = "Comment must be between 1 and 450 characters.")]

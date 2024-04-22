@@ -29,7 +29,7 @@ namespace CourseHouse.Models
 
         [ForeignKey("User")]
         [Required]
-        public int UserId { get; set; }
+        public string id { get; set; }
         public User User { get; set; }
     }
 }
