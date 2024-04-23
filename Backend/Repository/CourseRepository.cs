@@ -13,10 +13,55 @@ namespace CoursesHouse.Repository
             _context = context;
             
         }
-        public Task<List<Course>> GetAllAsync()
+
+        public async Task<Course> CreateAsync(Course course)
+        {
+            await _context.course.AddAsync(course);
+            await _context.SaveChangesAsync();
+            return course;
+        }
+
+        public async Task<Course> DeleteAsync(int id)
+        {
+            var course = await _context.course.FirstOrDefaultAsync(x => x.CourseId == id);
+
+
+            if (course == null)
+            {
+                return null;
+            }
+            _context.course.Remove(course);
+            await _context.SaveChangesAsync();
+
+            return course;
+        }
+
+        public async Task<List<Course>> GetAllAsync()
         {
 
-            return _context.course?.ToListAsync();
+            return await _context.course?.ToListAsync();
+        }
+
+        public async Task<Course> GetByIdAsync(int id)
+        {
+            return await _context.course.FirstOrDefaultAsync(x => x.CourseId == id);
+        }
+
+        public async Task<Course> UpdateAsync(int id, Course updatedCourse)
+        {
+             var existingCourse = await _context.course!.FirstOrDefaultAsync(x => x.CourseId == id);
+
+            if (existingCourse==null)
+            {
+                return null;
+            }
+
+            existingCourse.CourseName = updatedCourse.CourseName;
+            existingCourse.CoursePrice = updatedCourse.CoursePrice;
+
+            await _context.SaveChangesAsync();
+            return existingCourse;
+            
         }
     }
 }

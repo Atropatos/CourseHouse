@@ -32,7 +32,7 @@ namespace CoursesHouse.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById([FromRoute] int id)
         {
-            var course = await _context.course.FindAsync(id);
+            var course = await _courseRepo.GetByIdAsync(id);
             if(course == null)
             {
                 return NotFound();
@@ -43,8 +43,7 @@ namespace CoursesHouse.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] Course course)
         {
-            await _context.course.AddAsync(course);
-            await _context.SaveChangesAsync();
+            await _courseRepo.CreateAsync(course);
 
             return CreatedAtAction(nameof(Create), new { Id = course.CourseId }, course);
         }
@@ -54,12 +53,12 @@ namespace CoursesHouse.Controllers
 
         public async Task<IActionResult> Update([FromRoute] int id, [FromBody] Course updatedCourse)
         {
-            var course = await _context.course!.FirstOrDefaultAsync(x => x.CourseId == id);
+            var course = await _courseRepo.UpdateAsync(id, updatedCourse);
 
-            course.CourseName = updatedCourse.CourseName;
-            course.CoursePrice = updatedCourse.CoursePrice;
-
-            await _context.SaveChangesAsync();
+            if (course == null)
+            {
+                return null;
+            }
             return Ok(course);
         }
 
@@ -67,17 +66,14 @@ namespace CoursesHouse.Controllers
         [Route("{id}")]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
-            var course = await _context.course.FirstOrDefaultAsync(x => x.CourseId == id);
 
-             if( course == null) 
+            var course = await _courseRepo.DeleteAsync(id);
+
+            if(course == null)
             {
-                return NotFound();
+                return NotFound("Course does not exist");
             }
-            _context.course.Remove(course);
-
-            await _context.SaveChangesAsync();
-
-            return NoContent();
+            return Ok(course);
         }
     }
 
