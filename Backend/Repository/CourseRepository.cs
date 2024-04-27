@@ -39,12 +39,12 @@ namespace CoursesHouse.Repository
         public async Task<List<Course>> GetAllAsync()
         {
 
-            return await _context.course?.ToListAsync();
+            return await _context.course?.Include(a => a.User).ToListAsync();
         }
 
         public async Task<Course> GetByIdAsync(int id)
         {
-            return await _context.course.FirstOrDefaultAsync(x => x.CourseId == id);
+            return await _context.course.Include(a => a.User).FirstOrDefaultAsync(x => x.CourseId == id);
         }
 
         public async Task<Course> UpdateAsync(int id, Course updatedCourse)
