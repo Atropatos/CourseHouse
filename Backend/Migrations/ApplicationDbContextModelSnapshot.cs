@@ -69,9 +69,15 @@ namespace CoursesHouse.Migrations
                     b.Property<int?>("PurchaseId")
                         .HasColumnType("int");
 
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
                     b.HasKey("CourseId");
 
                     b.HasIndex("PurchaseId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Courses");
                 });
@@ -455,13 +461,13 @@ namespace CoursesHouse.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "3f280511-5d5d-437f-bff5-50875ee89543",
+                            Id = "072a1534-73fc-49e8-a6b3-ad2eec4b9ef1",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "3176e466-1499-414f-88af-409bae33fe17",
+                            Id = "c100218b-9c20-4ede-83dd-1f31d431b3fe",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -601,6 +607,14 @@ namespace CoursesHouse.Migrations
                     b.HasOne("CourseHouse.Models.Purchase", null)
                         .WithMany("PurachasedCourses")
                         .HasForeignKey("PurchaseId");
+
+                    b.HasOne("CourseHouse.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("CourseHouse.Models.CourseComment", b =>
