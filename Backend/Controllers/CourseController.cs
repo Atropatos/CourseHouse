@@ -1,4 +1,9 @@
-﻿using api.Extensions;
+﻿using System.Data.Common;
+using System.Linq;
+using api.Extensions;
+using Backend.Interfaces;
+using Backend.Models.CourseModels;
+using Backend.Repository;
 using CourseHouse.Data;
 using CourseHouse.Models;
 using CoursesHouse.Dtos.Course;
@@ -19,15 +24,17 @@ namespace CoursesHouse.Controllers
         private readonly ApplicationDbContext _context;
         private readonly ICourseRepository _courseRepo;
         private readonly UserManager<User> _userManager;
+        private readonly ICourseCategoryRepository _courseCategoryRepo;
 
-        public CourseController(ApplicationDbContext context, ICourseRepository courseRepository, UserManager<User> userManager)
+        public CourseController(ApplicationDbContext context, ICourseRepository courseRepository, UserManager<User> userManager, ICourseCategoryRepository courseCategoryRepo)
         {
             _courseRepo = courseRepository;
             _context = context;
             _userManager = userManager;
+            _courseCategoryRepo = courseCategoryRepo;
         }
         [HttpGet]
-  
+
         public async Task<IActionResult> GetAll()
         {
             if (!ModelState.IsValid)
@@ -51,52 +58,84 @@ namespace CoursesHouse.Controllers
             }
 
             var course = await _courseRepo.GetByIdAsync(id);
-            if(course == null)
+            if (course == null)
             {
                 return NotFound();
             }
-            return Ok(course);
+            var courseDto = course.ToCourseDto();
+            return Ok(courseDto);
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Create([FromBody] CreateCourseDto courseDto)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState); 
-            }
-
-            var username = User.GetUsername();
-            var user = await _userManager.FindByNameAsync(username);
-
-            var course = courseDto.ToCourseFromCreate();
-            course.UserId = user.Id;
-
-            await _courseRepo.CreateAsync(course);
-
-            return CreatedAtAction(nameof(Create), new { Id = course.CourseId }, course);
-        }
-
-        [HttpPut]
-        [Route("{id}")]
-
-        public async Task<IActionResult> Update([FromRoute] int id, [FromBody] Course updatedCourse)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var course = await _courseRepo.UpdateAsync(id, updatedCourse);
+            var username = User.GetUsername();
+            var user = await _userManager.FindByNameAsync(username);
+            var course = courseDto.ToCourseFromCreate();
+            if (course == null)
+            {
+                return BadRequest("Stock does not exist!");
+            }
+
+            course.UserId = user.Id;
+            await _courseRepo.CreateAsync(course);
+
+            var categories = await _courseCategoryRepo.GetCourseCategoriesByIds(courseDto.CategoryIds);
+            var courseCategoryMappings = categories.Select(cat => new CourseCategoryMapping
+            {
+                CourseId = course.CourseId,
+                CategoryId = cat.CategoryId
+            }).ToList();
+
+            await _context.CourseCategoryMappings.AddRangeAsync(courseCategoryMappings);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(Create), new { Id = course.CourseId }, course);
+        }
+
+        [HttpPut]
+        [Authorize]
+        [Route("{id}")]
+
+        public async Task<IActionResult> Update([FromRoute] int id, CreateCourseDto updatedCourse)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var course = await _courseRepo.GetByIdAsync(id);
 
             if (course == null)
             {
-                return null;
+                return NotFound("Course does not exist");
             }
-            return Ok(course);
+
+            course = await _courseRepo.UpdateAsync(id, course);
+
+            // Update course categories
+            var categories = await _courseCategoryRepo.GetCourseCategoriesByIds(updatedCourse.CategoryIds);
+            var existingMappings = await _context.CourseCategoryMappings.Where(mapping => mapping.CourseId == id).ToListAsync();
+            _context.CourseCategoryMappings.RemoveRange(existingMappings);
+            var newMappings = categories.Select(cat => new CourseCategoryMapping
+            {
+                CourseId = id,
+                CategoryId = cat.CategoryId
+            }).ToList();
+            await _context.CourseCategoryMappings.AddRangeAsync(newMappings);
+            await _context.SaveChangesAsync();
+
+            var courseDto = course.ToCourseDto();
+            return Ok(courseDto);
         }
 
         [HttpDelete]
+        [Authorize]
         [Route("{id}")]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
@@ -107,7 +146,7 @@ namespace CoursesHouse.Controllers
 
             var course = await _courseRepo.DeleteAsync(id);
 
-            if(course == null)
+            if (course == null)
             {
                 return NotFound("Course does not exist");
             }

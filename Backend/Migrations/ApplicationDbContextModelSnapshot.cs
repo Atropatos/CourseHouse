@@ -19,6 +19,172 @@ namespace CoursesHouse.Migrations
                 .HasAnnotation("ProductVersion", "8.0.2")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
+            modelBuilder.Entity("Backend.Models.CourseModels.CourseCategory", b =>
+                {
+                    b.Property<int>("CategoryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("CategoryName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("CategoryId");
+
+                    b.ToTable("CourseCategories");
+
+                    b.HasData(
+                        new
+                        {
+                            CategoryId = 1,
+                            CategoryName = "IT"
+                        },
+                        new
+                        {
+                            CategoryId = 2,
+                            CategoryName = "Math"
+                        },
+                        new
+                        {
+                            CategoryId = 3,
+                            CategoryName = "Physics"
+                        },
+                        new
+                        {
+                            CategoryId = 4,
+                            CategoryName = "Biology"
+                        },
+                        new
+                        {
+                            CategoryId = 5,
+                            CategoryName = "Chemistry"
+                        },
+                        new
+                        {
+                            CategoryId = 6,
+                            CategoryName = "History"
+                        },
+                        new
+                        {
+                            CategoryId = 7,
+                            CategoryName = "Geography"
+                        },
+                        new
+                        {
+                            CategoryId = 8,
+                            CategoryName = "Literature"
+                        },
+                        new
+                        {
+                            CategoryId = 9,
+                            CategoryName = "Music"
+                        },
+                        new
+                        {
+                            CategoryId = 10,
+                            CategoryName = "Art"
+                        },
+                        new
+                        {
+                            CategoryId = 11,
+                            CategoryName = "Sport"
+                        },
+                        new
+                        {
+                            CategoryId = 12,
+                            CategoryName = "Cooking"
+                        },
+                        new
+                        {
+                            CategoryId = 13,
+                            CategoryName = "Gardening"
+                        },
+                        new
+                        {
+                            CategoryId = 14,
+                            CategoryName = "Photography"
+                        },
+                        new
+                        {
+                            CategoryId = 15,
+                            CategoryName = "Fashion"
+                        },
+                        new
+                        {
+                            CategoryId = 16,
+                            CategoryName = "Health"
+                        },
+                        new
+                        {
+                            CategoryId = 17,
+                            CategoryName = "Psychology"
+                        },
+                        new
+                        {
+                            CategoryId = 18,
+                            CategoryName = "Business"
+                        },
+                        new
+                        {
+                            CategoryId = 19,
+                            CategoryName = "Marketing"
+                        },
+                        new
+                        {
+                            CategoryId = 20,
+                            CategoryName = "Economy"
+                        },
+                        new
+                        {
+                            CategoryId = 21,
+                            CategoryName = "Management"
+                        });
+                });
+
+            modelBuilder.Entity("Backend.Models.CourseModels.CourseCategoryMapping", b =>
+                {
+                    b.Property<int>("CourseId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CourseId", "CategoryId");
+
+                    b.HasIndex("CategoryId");
+
+                    b.ToTable("CourseCategoryMapping");
+                });
+
+            modelBuilder.Entity("Backend.Models.UserModels.UserTestAnswer", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("AnswerId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CourseId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsCorrect")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<int>("QuestionId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TestId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UserTestAnswers");
+                });
+
             modelBuilder.Entity("CourseHouse.Models.Content", b =>
                 {
                     b.Property<int>("ContentId")
@@ -58,6 +224,10 @@ namespace CoursesHouse.Migrations
                     b.Property<int>("CourseId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    b.Property<string>("CourseDescription")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<string>("CourseName")
                         .IsRequired()
@@ -461,13 +631,13 @@ namespace CoursesHouse.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "072a1534-73fc-49e8-a6b3-ad2eec4b9ef1",
+                            Id = "c1bf3c6e-d3a6-4415-823f-3e0707da2de8",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "c100218b-9c20-4ede-83dd-1f31d431b3fe",
+                            Id = "709bc6bd-3777-4958-bbd5-ec2ce5b3930b",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -573,6 +743,25 @@ namespace CoursesHouse.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("Backend.Models.CourseModels.CourseCategoryMapping", b =>
+                {
+                    b.HasOne("Backend.Models.CourseModels.CourseCategory", "CourseCategory")
+                        .WithMany("CourseCategoryMappings")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CourseHouse.Models.Course", "Course")
+                        .WithMany("CourseCategoryMappings")
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Course");
+
+                    b.Navigation("CourseCategory");
                 });
 
             modelBuilder.Entity("CourseHouse.Models.Content", b =>
@@ -852,9 +1041,16 @@ namespace CoursesHouse.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Backend.Models.CourseModels.CourseCategory", b =>
+                {
+                    b.Navigation("CourseCategoryMappings");
+                });
+
             modelBuilder.Entity("CourseHouse.Models.Course", b =>
                 {
                     b.Navigation("Comments");
+
+                    b.Navigation("CourseCategoryMappings");
 
                     b.Navigation("CourseViews");
 

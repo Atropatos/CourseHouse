@@ -16,17 +16,16 @@ namespace CoursesHouse.Controllers
         private readonly UserManager<User> _userManager;
         private readonly ITokenService _tokenService;
         private readonly SignInManager<User> _signInManager;
-        public AccountController(UserManager<User> userManager,ITokenService tokenService, SignInManager<User> signInManager )
+        public AccountController(UserManager<User> userManager, ITokenService tokenService, SignInManager<User> signInManager)
         {
             _userManager = userManager;
             _tokenService = tokenService;
             _signInManager = signInManager;
-            
         }
 
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login( LoginDto loginDto)
+        public async Task<IActionResult> Login(LoginDto loginDto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -49,7 +48,7 @@ namespace CoursesHouse.Controllers
                     Token = _tokenService.CreateToken(user)
                 }
             );
-            
+
         }
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterDto registerDto)
@@ -70,7 +69,7 @@ namespace CoursesHouse.Controllers
                 if (createdUser.Succeeded)
                 {
                     var roleResult = await _userManager.AddToRoleAsync(user, "User");
-                    if (roleResult.Succeeded) 
+                    if (roleResult.Succeeded)
                     {
                         return Ok(
                             new NewUserDto
@@ -89,7 +88,8 @@ namespace CoursesHouse.Controllers
                 {
                     return StatusCode(500, createdUser.Errors);
                 }
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 return StatusCode(500, e);
             }

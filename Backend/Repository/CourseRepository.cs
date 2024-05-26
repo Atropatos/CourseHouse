@@ -5,13 +5,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CoursesHouse.Repository
 {
-    public class CourseRepository :ICourseRepository
+    public class CourseRepository : ICourseRepository
     {
         private readonly ApplicationDbContext _context;
         public CourseRepository(ApplicationDbContext context)
         {
             _context = context;
-            
+
         }
 
         public async Task<Course> CreateAsync(Course course)
@@ -24,8 +24,6 @@ namespace CoursesHouse.Repository
         public async Task<Course> DeleteAsync(int id)
         {
             var course = await _context.course.FirstOrDefaultAsync(x => x.CourseId == id);
-
-
             if (course == null)
             {
                 return null;
@@ -38,30 +36,29 @@ namespace CoursesHouse.Repository
 
         public async Task<List<Course>> GetAllAsync()
         {
-
-            return await _context.course?.Include(a => a.User).ToListAsync();
+            return await _context.course?.Include(a => a.User).Include(a => a.CourseCategoryMappings).ThenInclude(a => a.CourseCategory).ToListAsync();
         }
 
         public async Task<Course> GetByIdAsync(int id)
         {
-            return await _context.course.Include(a => a.User).FirstOrDefaultAsync(x => x.CourseId == id);
+            return await _context.course.Include(a => a.User).Include(a => a.CourseCategoryMappings).ThenInclude(a => a.CourseCategory).FirstOrDefaultAsync(x => x.CourseId == id);
         }
 
         public async Task<Course> UpdateAsync(int id, Course updatedCourse)
         {
-             var existingCourse = await _context.course!.FirstOrDefaultAsync(x => x.CourseId == id);
+            var existingCourse = await _context.course!.FirstOrDefaultAsync(x => x.CourseId == id);
 
-            if (existingCourse==null)
+            if (existingCourse == null)
             {
                 return null;
             }
 
             existingCourse.CourseName = updatedCourse.CourseName;
             existingCourse.CoursePrice = updatedCourse.CoursePrice;
+            existingCourse.CourseDescription = updatedCourse.CourseDescription;
 
             await _context.SaveChangesAsync();
             return existingCourse;
-            
         }
     }
 }
