@@ -1,5 +1,5 @@
 ﻿using CourseHouse.Models;
-using CoursesHouse.Dtos.Content;
+using CoursesHouse.Dtos.Contents;
 
 namespace CoursesHouse.Mappers
 {
@@ -10,11 +10,10 @@ namespace CoursesHouse.Mappers
         {
             return new Content
             {
-               
+
                 Order = contentDto.Order,
                 CourseViewId = contentDto.CourseViewId,
                 Text = contentDto.Text,
-                CourseId = courseId
             };
         }
     }

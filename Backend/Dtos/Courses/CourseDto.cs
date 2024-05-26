@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using Backend.Models.CourseModels;
 
-namespace CoursesHouse.Dtos.Course
+namespace CoursesHouse.Dtos.Courses
 {
     public class CourseDto
     {

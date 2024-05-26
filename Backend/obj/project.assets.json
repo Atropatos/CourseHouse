@@ -4901,6 +4901,7 @@
       "Microsoft.EntityFrameworkCore.Relational >= 8.0.2",
       "Microsoft.EntityFrameworkCore.Tools >= 8.0.2",
       "Microsoft.Extensions.Identity.Core >= 8.0.0",
+      "Microsoft.Extensions.Logging >= 8.0.0",
       "MySql.Data >= 8.3.0",
       "MySql.EntityFrameworkCore >= 8.0.0",
       "Newtonsoft.Json >= 13.0.3",
@@ -4990,6 +4991,10 @@
             "version": "[8.0.2, )"
           },
           "Microsoft.Extensions.Identity.Core": {
+            "target": "Package",
+            "version": "[8.0.0, )"
+          },
+          "Microsoft.Extensions.Logging": {
             "target": "Package",
             "version": "[8.0.0, )"
           },

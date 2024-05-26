@@ -251,8 +251,6 @@ namespace CoursesHouse.Migrations
                 {
                     ContentId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    id = table.Column<string>(type: "varchar(255)", nullable: false),
-                    CourseId = table.Column<int>(type: "int", nullable: false),
                     Order = table.Column<int>(type: "int", nullable: false),
                     CourseViewId = table.Column<int>(type: "int", nullable: false),
                     Text = table.Column<string>(type: "longtext", nullable: false)
@@ -260,12 +258,6 @@ namespace CoursesHouse.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Contents", x => x.ContentId);
-                    table.ForeignKey(
-                        name: "FK_Contents_AspNetUsers_id",
-                        column: x => x.id,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySQL:Charset", "utf8mb4");
 
@@ -317,18 +309,18 @@ namespace CoursesHouse.Migrations
                     CourseGradeId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     CourseId = table.Column<int>(type: "int", nullable: false),
-                    id = table.Column<string>(type: "longtext", nullable: false),
-                    AuthorId = table.Column<string>(type: "varchar(255)", nullable: true),
+                    id = table.Column<string>(type: "varchar(255)", nullable: false),
                     Grade = table.Column<decimal>(type: "decimal(2,2)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_CourseGrades", x => x.CourseGradeId);
                     table.ForeignKey(
-                        name: "FK_CourseGrades_AspNetUsers_AuthorId",
-                        column: x => x.AuthorId,
+                        name: "FK_CourseGrades_AspNetUsers_id",
+                        column: x => x.id,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySQL:Charset", "utf8mb4");
 
@@ -418,8 +410,6 @@ namespace CoursesHouse.Migrations
                 {
                     PictureId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    id = table.Column<string>(type: "varchar(255)", nullable: false),
-                    CourseId = table.Column<int>(type: "int", nullable: false),
                     Order = table.Column<int>(type: "int", nullable: false),
                     CourseViewId = table.Column<int>(type: "int", nullable: false),
                     ContentUrl = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: false)
@@ -428,22 +418,10 @@ namespace CoursesHouse.Migrations
                 {
                     table.PrimaryKey("PK_Pictures", x => x.PictureId);
                     table.ForeignKey(
-                        name: "FK_Pictures_AspNetUsers_id",
-                        column: x => x.id,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
                         name: "FK_Pictures_CourseViews_CourseViewId",
                         column: x => x.CourseViewId,
                         principalTable: "CourseViews",
                         principalColumn: "ViewId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Pictures_Courses_CourseId",
-                        column: x => x.CourseId,
-                        principalTable: "Courses",
-                        principalColumn: "CourseId",
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySQL:Charset", "utf8mb4");
@@ -454,8 +432,6 @@ namespace CoursesHouse.Migrations
                 {
                     TestAnswerId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    id = table.Column<string>(type: "varchar(255)", nullable: false),
-                    CourseId = table.Column<int>(type: "int", nullable: false),
                     Order = table.Column<int>(type: "int", nullable: false),
                     CourseViewId = table.Column<int>(type: "int", nullable: false),
                     Content = table.Column<string>(type: "longtext", nullable: false),
@@ -465,22 +441,10 @@ namespace CoursesHouse.Migrations
                 {
                     table.PrimaryKey("PK_TestAnswers", x => x.TestAnswerId);
                     table.ForeignKey(
-                        name: "FK_TestAnswers_AspNetUsers_id",
-                        column: x => x.id,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
                         name: "FK_TestAnswers_CourseViews_CourseViewId",
                         column: x => x.CourseViewId,
                         principalTable: "CourseViews",
                         principalColumn: "ViewId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_TestAnswers_Courses_CourseId",
-                        column: x => x.CourseId,
-                        principalTable: "Courses",
-                        principalColumn: "CourseId",
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySQL:Charset", "utf8mb4");
@@ -491,8 +455,6 @@ namespace CoursesHouse.Migrations
                 {
                     VideoId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    id = table.Column<string>(type: "varchar(255)", nullable: false),
-                    CourseId = table.Column<int>(type: "int", nullable: false),
                     Order = table.Column<int>(type: "int", nullable: false),
                     CourseViewId = table.Column<int>(type: "int", nullable: false),
                     ContentUrl = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: false)
@@ -501,22 +463,10 @@ namespace CoursesHouse.Migrations
                 {
                     table.PrimaryKey("PK_Videos", x => x.VideoId);
                     table.ForeignKey(
-                        name: "FK_Videos_AspNetUsers_id",
-                        column: x => x.id,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
                         name: "FK_Videos_CourseViews_CourseViewId",
                         column: x => x.CourseViewId,
                         principalTable: "CourseViews",
                         principalColumn: "ViewId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Videos_Courses_CourseId",
-                        column: x => x.CourseId,
-                        principalTable: "Courses",
-                        principalColumn: "CourseId",
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySQL:Charset", "utf8mb4");
@@ -526,8 +476,8 @@ namespace CoursesHouse.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "709bc6bd-3777-4958-bbd5-ec2ce5b3930b", null, "User", "USER" },
-                    { "c1bf3c6e-d3a6-4415-823f-3e0707da2de8", null, "Admin", "ADMIN" }
+                    { "3e732144-35b5-4fe4-8ca8-410e8ecd37a7", null, "Admin", "ADMIN" },
+                    { "76f512e8-e92c-4fb6-ad49-913606c08033", null, "User", "USER" }
                 });
 
             migrationBuilder.InsertData(
@@ -601,19 +551,9 @@ namespace CoursesHouse.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Contents_CourseId",
-                table: "Contents",
-                column: "CourseId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Contents_CourseViewId",
                 table: "Contents",
                 column: "CourseViewId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Contents_id",
-                table: "Contents",
-                column: "id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_CourseCategoryMapping_CategoryId",
@@ -631,14 +571,14 @@ namespace CoursesHouse.Migrations
                 column: "id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CourseGrades_AuthorId",
-                table: "CourseGrades",
-                column: "AuthorId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_CourseGrades_CourseId",
                 table: "CourseGrades",
                 column: "CourseId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CourseGrades_id",
+                table: "CourseGrades",
+                column: "id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Courses_PurchaseId",
@@ -666,19 +606,9 @@ namespace CoursesHouse.Migrations
                 column: "id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Pictures_CourseId",
-                table: "Pictures",
-                column: "CourseId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Pictures_CourseViewId",
                 table: "Pictures",
                 column: "CourseViewId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Pictures_id",
-                table: "Pictures",
-                column: "id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Purchases_CourseId",
@@ -696,34 +626,14 @@ namespace CoursesHouse.Migrations
                 column: "id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TestAnswers_CourseId",
-                table: "TestAnswers",
-                column: "CourseId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_TestAnswers_CourseViewId",
                 table: "TestAnswers",
                 column: "CourseViewId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TestAnswers_id",
-                table: "TestAnswers",
-                column: "id");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Videos_CourseId",
-                table: "Videos",
-                column: "CourseId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Videos_CourseViewId",
                 table: "Videos",
                 column: "CourseViewId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Videos_id",
-                table: "Videos",
-                column: "id");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_AspNetUserClaims_AspNetUsers_UserId",
@@ -762,14 +672,6 @@ namespace CoursesHouse.Migrations
                 column: "CourseViewId",
                 principalTable: "CourseViews",
                 principalColumn: "ViewId",
-                onDelete: ReferentialAction.Cascade);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Contents_Courses_CourseId",
-                table: "Contents",
-                column: "CourseId",
-                principalTable: "Courses",
-                principalColumn: "CourseId",
                 onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(

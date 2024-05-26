@@ -11,6 +11,5 @@ namespace CoursesHouse.Interfaces
         Task<Course> DeleteAsync(int id);
         Task<Course> UpdateAsync(int id, Course updatedCourse);
         Task<Course> CreateAsync(Course course);
-
     }
 }

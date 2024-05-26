@@ -1,6 +1,6 @@
 ﻿
-using CoursesHouse.Dtos.CourseView;
 using CourseHouse.Models;
+using CoursesHouse.Dtos.CourseViews;
 namespace CoursesHouse.Mappers
 {
     public static class CourseViewMapper
@@ -11,11 +11,19 @@ namespace CoursesHouse.Mappers
             return new CourseViewDto
             {
                 ViewId = courseView.ViewId,
-               // CourseId = courseView.CourseId,
+                Course = courseView.Course,
                 Content = courseView.Content,
                 Pictures = courseView.Pictures,
                 Videos = courseView.Videos,
                 TestAnswers = courseView.TestAnswers
+            };
+        }
+
+        public static CourseView ToCourseFromCreate(this CreateCourseViewDto courseDto)
+        {
+            return new CourseView
+            {
+                CourseId = courseDto.CourseId,
             };
         }
     }

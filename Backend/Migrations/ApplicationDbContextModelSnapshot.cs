@@ -191,9 +191,6 @@ namespace CoursesHouse.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("CourseId")
-                        .HasColumnType("int");
-
                     b.Property<int>("CourseViewId")
                         .HasColumnType("int");
 
@@ -204,17 +201,9 @@ namespace CoursesHouse.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<string>("id")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
-
                     b.HasKey("ContentId");
 
-                    b.HasIndex("CourseId");
-
                     b.HasIndex("CourseViewId");
-
-                    b.HasIndex("id");
 
                     b.ToTable("Contents");
                 });
@@ -285,9 +274,6 @@ namespace CoursesHouse.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("AuthorId")
-                        .HasColumnType("varchar(255)");
-
                     b.Property<int>("CourseId")
                         .HasColumnType("int");
 
@@ -296,13 +282,13 @@ namespace CoursesHouse.Migrations
 
                     b.Property<string>("id")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("CourseGradeId");
 
-                    b.HasIndex("AuthorId");
-
                     b.HasIndex("CourseId");
+
+                    b.HasIndex("id");
 
                     b.ToTable("CourseGrades");
                 });
@@ -390,26 +376,15 @@ namespace CoursesHouse.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("varchar(255)");
 
-                    b.Property<int>("CourseId")
-                        .HasColumnType("int");
-
                     b.Property<int>("CourseViewId")
                         .HasColumnType("int");
 
                     b.Property<int>("Order")
                         .HasColumnType("int");
 
-                    b.Property<string>("id")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
-
                     b.HasKey("PictureId");
 
-                    b.HasIndex("CourseId");
-
                     b.HasIndex("CourseViewId");
-
-                    b.HasIndex("id");
 
                     b.ToTable("Pictures");
                 });
@@ -472,9 +447,6 @@ namespace CoursesHouse.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int>("CourseId")
-                        .HasColumnType("int");
-
                     b.Property<int>("CourseViewId")
                         .HasColumnType("int");
 
@@ -484,17 +456,9 @@ namespace CoursesHouse.Migrations
                     b.Property<bool>("correct")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<string>("id")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
-
                     b.HasKey("TestAnswerId");
 
-                    b.HasIndex("CourseId");
-
                     b.HasIndex("CourseViewId");
-
-                    b.HasIndex("id");
 
                     b.ToTable("TestAnswers");
                 });
@@ -579,26 +543,15 @@ namespace CoursesHouse.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("varchar(255)");
 
-                    b.Property<int>("CourseId")
-                        .HasColumnType("int");
-
                     b.Property<int>("CourseViewId")
                         .HasColumnType("int");
 
                     b.Property<int>("Order")
                         .HasColumnType("int");
 
-                    b.Property<string>("id")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
-
                     b.HasKey("VideoId");
 
-                    b.HasIndex("CourseId");
-
                     b.HasIndex("CourseViewId");
-
-                    b.HasIndex("id");
 
                     b.ToTable("Videos");
                 });
@@ -631,13 +584,13 @@ namespace CoursesHouse.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "c1bf3c6e-d3a6-4415-823f-3e0707da2de8",
+                            Id = "3e732144-35b5-4fe4-8ca8-410e8ecd37a7",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "709bc6bd-3777-4958-bbd5-ec2ce5b3930b",
+                            Id = "76f512e8-e92c-4fb6-ad49-913606c08033",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -766,27 +719,11 @@ namespace CoursesHouse.Migrations
 
             modelBuilder.Entity("CourseHouse.Models.Content", b =>
                 {
-                    b.HasOne("CourseHouse.Models.Course", "Course")
-                        .WithMany()
-                        .HasForeignKey("CourseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("CourseHouse.Models.CourseView", "CourseView")
                         .WithMany("Content")
                         .HasForeignKey("CourseViewId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("CourseHouse.Models.User", "Author")
-                        .WithMany()
-                        .HasForeignKey("id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Author");
-
-                    b.Navigation("Course");
 
                     b.Navigation("CourseView");
                 });
@@ -827,13 +764,15 @@ namespace CoursesHouse.Migrations
 
             modelBuilder.Entity("CourseHouse.Models.CourseGrade", b =>
                 {
-                    b.HasOne("CourseHouse.Models.User", "Author")
-                        .WithMany()
-                        .HasForeignKey("AuthorId");
-
                     b.HasOne("CourseHouse.Models.Course", "Course")
                         .WithMany("Grades")
                         .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CourseHouse.Models.User", "Author")
+                        .WithMany()
+                        .HasForeignKey("id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -877,27 +816,11 @@ namespace CoursesHouse.Migrations
 
             modelBuilder.Entity("CourseHouse.Models.Picture", b =>
                 {
-                    b.HasOne("CourseHouse.Models.Course", "Course")
-                        .WithMany()
-                        .HasForeignKey("CourseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("CourseHouse.Models.CourseView", "CourseView")
                         .WithMany("Pictures")
                         .HasForeignKey("CourseViewId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("CourseHouse.Models.User", "Author")
-                        .WithMany()
-                        .HasForeignKey("id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Author");
-
-                    b.Navigation("Course");
 
                     b.Navigation("CourseView");
                 });
@@ -931,27 +854,11 @@ namespace CoursesHouse.Migrations
 
             modelBuilder.Entity("CourseHouse.Models.TestAnswer", b =>
                 {
-                    b.HasOne("CourseHouse.Models.Course", "Course")
-                        .WithMany()
-                        .HasForeignKey("CourseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("CourseHouse.Models.CourseView", "CourseView")
                         .WithMany("TestAnswers")
                         .HasForeignKey("CourseViewId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("CourseHouse.Models.User", "Author")
-                        .WithMany()
-                        .HasForeignKey("id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Author");
-
-                    b.Navigation("Course");
 
                     b.Navigation("CourseView");
                 });
@@ -965,27 +872,11 @@ namespace CoursesHouse.Migrations
 
             modelBuilder.Entity("CourseHouse.Models.Video", b =>
                 {
-                    b.HasOne("CourseHouse.Models.Course", "Course")
-                        .WithMany()
-                        .HasForeignKey("CourseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("CourseHouse.Models.CourseView", "CourseView")
                         .WithMany("Videos")
                         .HasForeignKey("CourseViewId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("CourseHouse.Models.User", "Author")
-                        .WithMany()
-                        .HasForeignKey("id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Author");
-
-                    b.Navigation("Course");
 
                     b.Navigation("CourseView");
                 });

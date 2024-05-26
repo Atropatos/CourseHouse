@@ -13,7 +13,32 @@ namespace CoursesHouse.Repository
             _context = context;
 
         }
+        public async Task<List<Course>> GetAllAsync()
+        {
+            return await _context.course!
+            .Include(a => a.User)
+            .Include(a => a.CourseViews)
+            .Include(a => a.Comments)
+            .Include(a => a.EnrolledUsers)
+            .Include(a => a.Grades)
+            .Include(a => a.CourseCategoryMappings)
+            .ThenInclude(a => a.CourseCategory)
+            .ToListAsync();
+        }
 
+        public async Task<Course> GetByIdAsync(int id)
+        {
+            var course = await _context.course!
+            .Include(a => a.User)
+            .Include(a => a.CourseViews)
+            .Include(a => a.Comments)
+            .Include(a => a.EnrolledUsers)
+            .Include(a => a.Grades)
+            .Include(a => a.CourseCategoryMappings)
+            .ThenInclude(a => a.CourseCategory)
+            .FirstOrDefaultAsync(x => x.CourseId == id);
+            return course;
+        }
         public async Task<Course> CreateAsync(Course course)
         {
             await _context.course.AddAsync(course);
@@ -32,16 +57,6 @@ namespace CoursesHouse.Repository
             await _context.SaveChangesAsync();
 
             return course;
-        }
-
-        public async Task<List<Course>> GetAllAsync()
-        {
-            return await _context.course?.Include(a => a.User).Include(a => a.CourseCategoryMappings).ThenInclude(a => a.CourseCategory).ToListAsync();
-        }
-
-        public async Task<Course> GetByIdAsync(int id)
-        {
-            return await _context.course.Include(a => a.User).Include(a => a.CourseCategoryMappings).ThenInclude(a => a.CourseCategory).FirstOrDefaultAsync(x => x.CourseId == id);
         }
 
         public async Task<Course> UpdateAsync(int id, Course updatedCourse)

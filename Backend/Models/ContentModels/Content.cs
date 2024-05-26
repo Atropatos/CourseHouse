@@ -9,17 +9,6 @@ namespace CourseHouse.Models
     {
         [Key]
         public int ContentId { get; set; }
-
-        [Required]
-        [ForeignKey("Author")]
-        public string AuthorId { get; set; }
-        public User Author { get; set; }
-
-        [Required]
-        [ForeignKey("Course")]
-        public int CourseId { get; set; }
-        public Course Course { get; set; }
-
         public int Order { get; set; }
 
         [Required]

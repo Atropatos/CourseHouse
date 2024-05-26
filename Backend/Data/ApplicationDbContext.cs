@@ -50,6 +50,21 @@ namespace CourseHouse.Data
                 .WithMany(cc => cc.CourseCategoryMappings)
                 .HasForeignKey(ccm => ccm.CategoryId);
 
+            builder.Entity<Course>()
+                .HasMany(c => c.CourseViews)
+                .WithOne(cv => cv.Course)
+                .HasForeignKey(cv => cv.CourseId);
+
+            builder.Entity<Course>()
+                .HasMany(c => c.Grades)
+                .WithOne(cv => cv.Course)
+                .HasForeignKey(cv => cv.CourseId);
+
+            builder.Entity<Course>()
+                .HasMany(c => c.Comments)
+                .WithOne(cv => cv.Course)
+                .HasForeignKey(cv => cv.CourseId);
+
             List<IdentityRole> roles = new List<IdentityRole>
             {
                 new IdentityRole

@@ -1,6 +1,7 @@
 ﻿using Backend.Models.CourseModels;
 using CourseHouse.Models;
 using CoursesHouse.Dtos.Course;
+using CoursesHouse.Dtos.Courses;
 using CoursesHouse.Interfaces;
 
 namespace CoursesHouse.Mappers
@@ -21,10 +22,32 @@ namespace CoursesHouse.Mappers
                     CategoryId = mapping.CourseCategory.CategoryId,
                     CategoryName = mapping.CourseCategory.CategoryName
                 }).ToList(),
-                EnrolledUsers = courseModel.EnrolledUsers,
-                Comments = courseModel.Comments,
-                Grades = courseModel.Grades,
-                CourseViews = courseModel.CourseViews
+                EnrolledUsers = courseModel.EnrolledUsers.Select(user => new User
+                {
+                    Id = user.Id,
+                    UserName = user.UserName,
+                    Email = user.Email
+                }).ToList(),
+                Comments = courseModel.Comments.Select(comment => new CourseComment
+                {
+                    CourseCommentId = comment.CourseCommentId,
+                    CommentContent = comment.CommentContent,
+                    Author = comment.Author
+                }).ToList(),
+                Grades = courseModel.Grades.Select(grade => new CourseGrade
+                {
+                    CourseGradeId = grade.CourseGradeId,
+                    Grade = grade.Grade,
+                    Author = grade.Author
+                }).ToList(),
+                CourseViews = courseModel.CourseViews.Select(view => new CourseView
+                {
+                    ViewId = view.ViewId,
+                    Content = view.Content,
+                    Pictures = view.Pictures,
+                    Videos = view.Videos,
+                    TestAnswers = view.TestAnswers
+                }).ToList()
             };
         }
 

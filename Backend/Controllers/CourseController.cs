@@ -116,7 +116,7 @@ namespace CoursesHouse.Controllers
                 return NotFound("Course does not exist");
             }
 
-            course = await _courseRepo.UpdateAsync(id, course);
+            course = await _courseRepo.UpdateAsync(id, updatedCourse.ToCourseFromCreate());
 
             // Update course categories
             var categories = await _courseCategoryRepo.GetCourseCategoriesByIds(updatedCourse.CategoryIds);

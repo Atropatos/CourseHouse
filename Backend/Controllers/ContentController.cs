@@ -3,13 +3,13 @@ using CourseHouse.Models;
 using CoursesHouse.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using CoursesHouse.Mappers;
-using CoursesHouse.Dtos.Content;
+using CoursesHouse.Dtos.Contents;
 using Microsoft.AspNetCore.Identity;
 using api.Extensions;
 using Microsoft.EntityFrameworkCore;
 namespace CoursesHouse.Controllers
 {
-    
+
     [Route("api/content")]
     [ApiController]
     public class ContentController : ControllerBase
@@ -28,11 +28,11 @@ namespace CoursesHouse.Controllers
         }
 
 
-       [HttpGet]
+        [HttpGet]
 
-       public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
@@ -44,7 +44,7 @@ namespace CoursesHouse.Controllers
         [HttpPost]
         [Route("{courseId}")]
 
-        public async Task<IActionResult> Create([FromRoute] int courseId,[FromBody] CreateContentDto contentDto)
+        public async Task<IActionResult> Create([FromRoute] int courseId, [FromBody] CreateContentDto contentDto)
         {
             if (!ModelState.IsValid)
             {
@@ -61,7 +61,6 @@ namespace CoursesHouse.Controllers
             }
 
             var content = contentDto.ToContentFromCreate(courseId);
-            content.AuthorId = user.Id;
 
             await _contentRepo.CreateAsync(content);
 

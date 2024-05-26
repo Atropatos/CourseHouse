@@ -14,7 +14,7 @@ namespace CourseHouse.Models
         public int CourseId { get; set; }
         public Course Course { get; set; }
 
-        [ForeignKey("User")]
+        [ForeignKey("Author")]
         public string id { get; set; }
         public User Author { get; set; }
 
