@@ -26,7 +26,7 @@ namespace CoursesHouse.Service
                 new Claim(JwtRegisteredClaimNames.GivenName, user.UserName)
             };
 
-            var creds = new SigningCredentials(_key, SecurityAlgorithms.HmacSha256);
+            var creds = new SigningCredentials(_key, SecurityAlgorithms.HmacSha256Signature);
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
@@ -43,7 +43,5 @@ namespace CoursesHouse.Service
 
             return tokenHandler.WriteToken(token);
         }
-
-       
     }
 }

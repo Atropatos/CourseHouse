@@ -9,7 +9,7 @@ using MySql.EntityFrameworkCore.Metadata;
 namespace CoursesHouse.Migrations
 {
     /// <inheritdoc />
-    public partial class migration4 : Migration
+    public partial class Init01 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -33,6 +33,20 @@ namespace CoursesHouse.Migrations
                 .Annotation("MySQL:Charset", "utf8mb4");
 
             migrationBuilder.CreateTable(
+                name: "CourseCategories",
+                columns: table => new
+                {
+                    CategoryId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    CategoryName = table.Column<string>(type: "longtext", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CourseCategories", x => x.CategoryId);
+                })
+                .Annotation("MySQL:Charset", "utf8mb4");
+
+            migrationBuilder.CreateTable(
                 name: "Roles",
                 columns: table => new
                 {
@@ -43,6 +57,25 @@ namespace CoursesHouse.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Roles", x => x.RoleId);
+                })
+                .Annotation("MySQL:Charset", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "UserTestAnswers",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    CourseId = table.Column<int>(type: "int", nullable: false),
+                    TestId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    QuestionId = table.Column<int>(type: "int", nullable: false),
+                    AnswerId = table.Column<int>(type: "int", nullable: false),
+                    IsCorrect = table.Column<bool>(type: "tinyint(1)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserTestAnswers", x => x.Id);
                 })
                 .Annotation("MySQL:Charset", "utf8mb4");
 
@@ -237,6 +270,25 @@ namespace CoursesHouse.Migrations
                 .Annotation("MySQL:Charset", "utf8mb4");
 
             migrationBuilder.CreateTable(
+                name: "CourseCategoryMapping",
+                columns: table => new
+                {
+                    CourseId = table.Column<int>(type: "int", nullable: false),
+                    CategoryId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CourseCategoryMapping", x => new { x.CourseId, x.CategoryId });
+                    table.ForeignKey(
+                        name: "FK_CourseCategoryMapping_CourseCategories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "CourseCategories",
+                        principalColumn: "CategoryId",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySQL:Charset", "utf8mb4");
+
+            migrationBuilder.CreateTable(
                 name: "CourseComments",
                 columns: table => new
                 {
@@ -288,6 +340,7 @@ namespace CoursesHouse.Migrations
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     CourseName = table.Column<string>(type: "longtext", nullable: false),
                     CoursePrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    CourseDescription = table.Column<string>(type: "longtext", nullable: false),
                     UserId = table.Column<string>(type: "varchar(255)", nullable: false),
                     PurchaseId = table.Column<int>(type: "int", nullable: true)
                 },
@@ -473,8 +526,36 @@ namespace CoursesHouse.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "072a1534-73fc-49e8-a6b3-ad2eec4b9ef1", null, "Admin", "ADMIN" },
-                    { "c100218b-9c20-4ede-83dd-1f31d431b3fe", null, "User", "USER" }
+                    { "709bc6bd-3777-4958-bbd5-ec2ce5b3930b", null, "User", "USER" },
+                    { "c1bf3c6e-d3a6-4415-823f-3e0707da2de8", null, "Admin", "ADMIN" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "CourseCategories",
+                columns: new[] { "CategoryId", "CategoryName" },
+                values: new object[,]
+                {
+                    { 1, "IT" },
+                    { 2, "Math" },
+                    { 3, "Physics" },
+                    { 4, "Biology" },
+                    { 5, "Chemistry" },
+                    { 6, "History" },
+                    { 7, "Geography" },
+                    { 8, "Literature" },
+                    { 9, "Music" },
+                    { 10, "Art" },
+                    { 11, "Sport" },
+                    { 12, "Cooking" },
+                    { 13, "Gardening" },
+                    { 14, "Photography" },
+                    { 15, "Fashion" },
+                    { 16, "Health" },
+                    { 17, "Psychology" },
+                    { 18, "Business" },
+                    { 19, "Marketing" },
+                    { 20, "Economy" },
+                    { 21, "Management" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -533,6 +614,11 @@ namespace CoursesHouse.Migrations
                 name: "IX_Contents_id",
                 table: "Contents",
                 column: "id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CourseCategoryMapping_CategoryId",
+                table: "CourseCategoryMapping",
+                column: "CategoryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_CourseComments_CourseId",
@@ -687,6 +773,14 @@ namespace CoursesHouse.Migrations
                 onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
+                name: "FK_CourseCategoryMapping_Courses_CourseId",
+                table: "CourseCategoryMapping",
+                column: "CourseId",
+                principalTable: "Courses",
+                principalColumn: "CourseId",
+                onDelete: ReferentialAction.Cascade);
+
+            migrationBuilder.AddForeignKey(
                 name: "FK_CourseComments_Courses_CourseId",
                 table: "CourseComments",
                 column: "CourseId",
@@ -748,6 +842,9 @@ namespace CoursesHouse.Migrations
                 name: "Contents");
 
             migrationBuilder.DropTable(
+                name: "CourseCategoryMapping");
+
+            migrationBuilder.DropTable(
                 name: "CourseComments");
 
             migrationBuilder.DropTable(
@@ -766,10 +863,16 @@ namespace CoursesHouse.Migrations
                 name: "TestAnswers");
 
             migrationBuilder.DropTable(
+                name: "UserTestAnswers");
+
+            migrationBuilder.DropTable(
                 name: "Videos");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "CourseCategories");
 
             migrationBuilder.DropTable(
                 name: "CourseViews");

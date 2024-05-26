@@ -1,5 +1,7 @@
 //this is test comment to see if git ignore works
 //this is test comment to see if git ignore works
+using Backend.Interfaces;
+using Backend.Repository;
 using CourseHouse.Data;
 using CourseHouse.Models;
 using CoursesHouse.Interfaces;
@@ -20,6 +22,10 @@ builder.Services.AddControllers()
     });
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddControllers().AddNewtonsoftJson(options =>
+    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+);
 
 builder.Services.AddSwaggerGen(option =>
 {
@@ -50,10 +56,10 @@ builder.Services.AddSwaggerGen(option =>
 });
 builder.Services.AddRazorPages(options =>
 {
-	//..
+    //..
 }).AddRazorPagesOptions(options =>
 {
-	options.Conventions.AddPageRoute("/Index", "");
+    options.Conventions.AddPageRoute("/Index", "");
 });
 
 
@@ -97,8 +103,8 @@ builder.Services.AddAuthentication(options =>
 
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IContentRepository, ContentRepository>();
-
 builder.Services.AddScoped<ICourseRepository, CourseRepository>();
+builder.Services.AddScoped<ICourseCategoryRepository, CourseCategoryRepository>();
 //builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 builder.Services.AddScoped<ICourseViewRepository, CourseViewRepository>();
@@ -106,7 +112,8 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    app.UseDeveloperExceptionPage();
+    //app.UseDeveloperExceptionPage();
+    app.UseExceptionHandler("/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
 
     app.UseSwagger();
