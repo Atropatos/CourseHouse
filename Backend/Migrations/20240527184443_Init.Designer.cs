@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CoursesHouse.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240527132044_Init-01")]
-    partial class Init01
+    [Migration("20240527184443_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -168,20 +168,18 @@ namespace CoursesHouse.Migrations
                     b.Property<int>("AnswerId")
                         .HasColumnType("int");
 
+                    b.Property<int>("ContentTest")
+                        .HasColumnType("int");
+
                     b.Property<int>("CourseId")
                         .HasColumnType("int");
 
                     b.Property<bool>("IsCorrect")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<int>("QuestionId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TestId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
@@ -530,13 +528,13 @@ namespace CoursesHouse.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "6d35dcd9-5dc8-4fc3-8b64-0a4320dbf20d",
+                            Id = "0c39391d-ddb1-4c53-83f4-e0588a17cdf1",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "eeca333f-43ab-4d78-93d7-fbe8f068eaa2",
+                            Id = "7b4509fd-d716-4c13-bc8c-540d789ebbba",
                             Name = "User",
                             NormalizedName = "USER"
                         });

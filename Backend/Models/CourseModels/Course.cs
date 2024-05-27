@@ -28,10 +28,5 @@ namespace CourseHouse.Models
         public List<CourseComment> Comments { get; set; } = new List<CourseComment>();
         public List<CourseGrade> Grades { get; set; } = new List<CourseGrade>();
         public List<CourseView> CourseViews { get; set; } = new List<CourseView>();
-
-        internal object Select(Func<object, Course> value)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

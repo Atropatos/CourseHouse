@@ -9,7 +9,7 @@ using MySql.EntityFrameworkCore.Metadata;
 namespace CoursesHouse.Migrations
 {
     /// <inheritdoc />
-    public partial class Init01 : Migration
+    public partial class Init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -67,9 +67,8 @@ namespace CoursesHouse.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     CourseId = table.Column<int>(type: "int", nullable: false),
-                    TestId = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    QuestionId = table.Column<int>(type: "int", nullable: false),
+                    ContentTest = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<string>(type: "longtext", nullable: false),
                     AnswerId = table.Column<int>(type: "int", nullable: false),
                     IsCorrect = table.Column<bool>(type: "tinyint(1)", nullable: false)
                 },
@@ -414,8 +413,8 @@ namespace CoursesHouse.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "6d35dcd9-5dc8-4fc3-8b64-0a4320dbf20d", null, "Admin", "ADMIN" },
-                    { "eeca333f-43ab-4d78-93d7-fbe8f068eaa2", null, "User", "USER" }
+                    { "0c39391d-ddb1-4c53-83f4-e0588a17cdf1", null, "Admin", "ADMIN" },
+                    { "7b4509fd-d716-4c13-bc8c-540d789ebbba", null, "User", "USER" }
                 });
 
             migrationBuilder.InsertData(
