@@ -10,6 +10,7 @@ using System.Linq;
 using CourseHouse.Data;
 using CoursesHouse.Dtos.CourseViews;
 using Microsoft.AspNetCore.Authorization;
+using Backend.Dtos.CourseViews;
 
 namespace CoursesHouse.Controllers
 {
@@ -33,11 +34,6 @@ namespace CoursesHouse.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
             var courseViews = await _courseViewRepo.GetAllAsync();
             if (courseViews == null)
             {
@@ -50,10 +46,6 @@ namespace CoursesHouse.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
             var courseView = await _courseViewRepo.GetByIdAsync(id);
             if (courseView == null)
             {
@@ -71,9 +63,18 @@ namespace CoursesHouse.Controllers
             {
                 return BadRequest(ModelState);
             }
+            var course = await _courseRepo.GetByIdAsync(courseViewDto.CourseId);
+            if (course == null)
+            {
+                return NotFound("Course not found.");
+            }
+
+
+            var maxOrder = await _courseViewRepo.GetMaxCourseViewOrder(courseViewDto.CourseId);
             var courseView = courseViewDto.ToCourseFromCreate();
+            courseView.CourseViewOrder = maxOrder + 1;
             var createdCourseView = await _courseViewRepo.CreateAsync(courseView);
-            return CreatedAtAction(nameof(GetById), new { id = createdCourseView.ViewId }, createdCourseView);
+            return CreatedAtAction(nameof(GetById), new { id = createdCourseView.ViewId }, createdCourseView.ToCourseViewDto());
         }
 
         [HttpPut("{id}")]
@@ -99,16 +100,37 @@ namespace CoursesHouse.Controllers
         [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            await _courseViewRepo.ChangeOrderCourseViews(id);
             var deletedCourseView = await _courseViewRepo.DeleteAsync(id);
             if (deletedCourseView == null)
             {
                 return NotFound();
             }
             return Ok(deletedCourseView);
+        }
+        [HttpPut("swap-order")]
+        [Authorize]
+        public async Task<IActionResult> SwapOrder([FromBody] SwapCourseViewOrderDto swapOrderDto)
+        {
+            var courseView1 = await _courseViewRepo.GetByIdAsync(swapOrderDto.CourseViewId1);
+            var courseView2 = await _courseViewRepo.GetByIdAsync(swapOrderDto.CourseViewId2);
+
+            if (courseView1 == null || courseView2 == null)
+            {
+                return NotFound("One or both CourseViews not found.");
+            }
+            if (courseView1.CourseId != courseView2.CourseId)
+            {
+                return BadRequest("CourseViews are not from the same course.");
+            }
+
+            var tempOrder = courseView1.CourseViewOrder;
+            courseView1.CourseViewOrder = courseView2.CourseViewOrder;
+            courseView2.CourseViewOrder = tempOrder;
+
+            await _context.SaveChangesAsync();
+
+            return NoContent();
         }
     }
 }

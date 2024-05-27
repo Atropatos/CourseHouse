@@ -13,10 +13,9 @@ namespace CourseHouse.Models
         [ForeignKey("Course")]
         public int CourseId { get; set; }
         public Course Course { get; set; }
+        //new orders
+        public int CourseViewOrder { get; set; }
 
         public List<Content> Content { get; set; } = new List<Content>();
-        public List<Picture> Pictures { get; set; } = new List<Picture>();
-        public List<Video> Videos { get; set; } = new List<Video>();
-        public List<TestAnswer> TestAnswers { get; set; } = new List<TestAnswer>();
     }
 }

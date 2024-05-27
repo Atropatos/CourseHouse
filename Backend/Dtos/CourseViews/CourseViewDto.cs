@@ -1,4 +1,5 @@
-﻿using CourseHouse.Models;
+﻿using Backend.Dtos.Contents;
+using CourseHouse.Models;
 using CoursesHouse.Dtos.Courses;
 namespace CoursesHouse.Dtos.CourseViews
 {
@@ -6,11 +7,9 @@ namespace CoursesHouse.Dtos.CourseViews
     {
         public int ViewId { get; set; }
 
-        public CourseHouse.Models.Course Course { get; set; } = new CourseHouse.Models.Course();
+        public CourseDto CourseDto { get; set; } = new CourseDto();
+        public int CourseViewOrder { get; set; }
 
-        public List<CourseHouse.Models.Content> Content { get; set; } = new List<CourseHouse.Models.Content>();
-        public List<Picture> Pictures { get; set; } = new List<Picture>();
-        public List<Video> Videos { get; set; } = new List<Video>();
-        public List<TestAnswer> TestAnswers { get; set; } = new List<TestAnswer>();
+        public List<ContentDto> Content { get; set; } = new List<ContentDto>();
     }
 }
