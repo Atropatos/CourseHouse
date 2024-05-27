@@ -191,6 +191,16 @@ namespace CoursesHouse.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<int>("ContentType")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ContentUrl")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<bool>("Correct")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<int>("CourseViewId")
                         .HasColumnType("int");
 
@@ -198,6 +208,10 @@ namespace CoursesHouse.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("longtext");
 
@@ -302,6 +316,9 @@ namespace CoursesHouse.Migrations
                     b.Property<int>("CourseId")
                         .HasColumnType("int");
 
+                    b.Property<int>("CourseViewOrder")
+                        .HasColumnType("int");
+
                     b.HasKey("ViewId");
 
                     b.HasIndex("CourseId");
@@ -365,30 +382,6 @@ namespace CoursesHouse.Migrations
                     b.ToTable("LastVisited");
                 });
 
-            modelBuilder.Entity("CourseHouse.Models.Picture", b =>
-                {
-                    b.Property<int>("PictureId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("ContentUrl")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<int>("CourseViewId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Order")
-                        .HasColumnType("int");
-
-                    b.HasKey("PictureId");
-
-                    b.HasIndex("CourseViewId");
-
-                    b.ToTable("Pictures");
-                });
-
             modelBuilder.Entity("CourseHouse.Models.Purchase", b =>
                 {
                     b.Property<int>("PurchaseId")
@@ -435,32 +428,6 @@ namespace CoursesHouse.Migrations
                     b.HasKey("RoleId");
 
                     b.ToTable("Roles");
-                });
-
-            modelBuilder.Entity("CourseHouse.Models.TestAnswer", b =>
-                {
-                    b.Property<int>("TestAnswerId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<int>("CourseViewId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Order")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("correct")
-                        .HasColumnType("tinyint(1)");
-
-                    b.HasKey("TestAnswerId");
-
-                    b.HasIndex("CourseViewId");
-
-                    b.ToTable("TestAnswers");
                 });
 
             modelBuilder.Entity("CourseHouse.Models.User", b =>
@@ -532,30 +499,6 @@ namespace CoursesHouse.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("CourseHouse.Models.Video", b =>
-                {
-                    b.Property<int>("VideoId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("ContentUrl")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<int>("CourseViewId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Order")
-                        .HasColumnType("int");
-
-                    b.HasKey("VideoId");
-
-                    b.HasIndex("CourseViewId");
-
-                    b.ToTable("Videos");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -584,13 +527,13 @@ namespace CoursesHouse.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "3e732144-35b5-4fe4-8ca8-410e8ecd37a7",
+                            Id = "2baca54c-c50c-4cd9-a6ff-22f3f1c22268",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "76f512e8-e92c-4fb6-ad49-913606c08033",
+                            Id = "4182b6c3-f541-4f7c-ac1b-657bfcf633dc",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -814,17 +757,6 @@ namespace CoursesHouse.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("CourseHouse.Models.Picture", b =>
-                {
-                    b.HasOne("CourseHouse.Models.CourseView", "CourseView")
-                        .WithMany("Pictures")
-                        .HasForeignKey("CourseViewId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("CourseView");
-                });
-
             modelBuilder.Entity("CourseHouse.Models.Purchase", b =>
                 {
                     b.HasOne("CourseHouse.Models.Course", "Course")
@@ -852,33 +784,11 @@ namespace CoursesHouse.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("CourseHouse.Models.TestAnswer", b =>
-                {
-                    b.HasOne("CourseHouse.Models.CourseView", "CourseView")
-                        .WithMany("TestAnswers")
-                        .HasForeignKey("CourseViewId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("CourseView");
-                });
-
             modelBuilder.Entity("CourseHouse.Models.User", b =>
                 {
                     b.HasOne("CourseHouse.Models.Course", null)
                         .WithMany("EnrolledUsers")
                         .HasForeignKey("CourseId");
-                });
-
-            modelBuilder.Entity("CourseHouse.Models.Video", b =>
-                {
-                    b.HasOne("CourseHouse.Models.CourseView", "CourseView")
-                        .WithMany("Videos")
-                        .HasForeignKey("CourseViewId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("CourseView");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -953,12 +863,6 @@ namespace CoursesHouse.Migrations
             modelBuilder.Entity("CourseHouse.Models.CourseView", b =>
                 {
                     b.Navigation("Content");
-
-                    b.Navigation("Pictures");
-
-                    b.Navigation("TestAnswers");
-
-                    b.Navigation("Videos");
                 });
 
             modelBuilder.Entity("CourseHouse.Models.Purchase", b =>

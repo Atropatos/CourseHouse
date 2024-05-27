@@ -43,10 +43,9 @@ namespace CoursesHouse.Mappers
                 CourseViews = courseModel.CourseViews.Select(view => new CourseView
                 {
                     ViewId = view.ViewId,
+                    CourseViewOrder = view.CourseViewOrder,
+                    CourseId = view.CourseId,
                     Content = view.Content,
-                    Pictures = view.Pictures,
-                    Videos = view.Videos,
-                    TestAnswers = view.TestAnswers
                 }).ToList()
             };
         }

@@ -1,4 +1,5 @@
-﻿using CourseHouse.Data;
+﻿using System.Runtime.CompilerServices;
+using CourseHouse.Data;
 using CourseHouse.Models;
 
 namespace CoursesHouse.Interfaces
@@ -11,5 +12,7 @@ namespace CoursesHouse.Interfaces
         Task<CourseView> DeleteAsync(int id);
         Task<CourseView> UpdateAsync(int id, CourseView updatedCourseView);
         Task<CourseView> CreateAsync(CourseView courseView);
+        Task<int> GetMaxCourseViewOrder(int courseId);
+        Task ChangeOrderCourseViews(int courseViewId);
     }
 }

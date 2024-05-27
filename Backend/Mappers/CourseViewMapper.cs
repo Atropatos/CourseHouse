@@ -1,5 +1,6 @@
 ﻿
 using CourseHouse.Models;
+using CoursesHouse.Dtos.Courses;
 using CoursesHouse.Dtos.CourseViews;
 namespace CoursesHouse.Mappers
 {
@@ -11,11 +12,15 @@ namespace CoursesHouse.Mappers
             return new CourseViewDto
             {
                 ViewId = courseView.ViewId,
-                Course = courseView.Course,
+                Course = new Course
+                {
+                    CourseId = courseView.Course.CourseId,
+                    CourseName = courseView.Course.CourseName,
+                    CoursePrice = courseView.Course.CoursePrice,
+                    CourseDescription = courseView.Course.CourseDescription,
+                },
                 Content = courseView.Content,
-                Pictures = courseView.Pictures,
-                Videos = courseView.Videos,
-                TestAnswers = courseView.TestAnswers
+                CourseViewOrder = courseView.CourseViewOrder
             };
         }
 

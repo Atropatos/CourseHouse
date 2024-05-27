@@ -10,6 +10,7 @@ using System.Linq;
 using CourseHouse.Data;
 using CoursesHouse.Dtos.CourseViews;
 using Microsoft.AspNetCore.Authorization;
+using Backend.Dtos.CourseViews;
 
 namespace CoursesHouse.Controllers
 {
@@ -71,7 +72,9 @@ namespace CoursesHouse.Controllers
             {
                 return BadRequest(ModelState);
             }
+            var maxOrder = await _courseViewRepo.GetMaxCourseViewOrder(courseViewDto.CourseId);
             var courseView = courseViewDto.ToCourseFromCreate();
+            courseView.CourseViewOrder = maxOrder + 1;
             var createdCourseView = await _courseViewRepo.CreateAsync(courseView);
             return CreatedAtAction(nameof(GetById), new { id = createdCourseView.ViewId }, createdCourseView);
         }
@@ -103,12 +106,40 @@ namespace CoursesHouse.Controllers
             {
                 return BadRequest(ModelState);
             }
+            await _courseViewRepo.ChangeOrderCourseViews(id);
             var deletedCourseView = await _courseViewRepo.DeleteAsync(id);
             if (deletedCourseView == null)
             {
                 return NotFound();
             }
             return Ok(deletedCourseView);
+        }
+        [HttpPut("swap-order")]
+        [Authorize]
+        public async Task<IActionResult> SwapOrder([FromBody] SwapOrderDto swapOrderDto)
+        {
+            // Pobierz oba CourseView
+            var courseView1 = await _courseViewRepo.GetByIdAsync(swapOrderDto.CourseViewId1);
+            var courseView2 = await _courseViewRepo.GetByIdAsync(swapOrderDto.CourseViewId2);
+
+            if (courseView1 == null || courseView2 == null)
+            {
+                return NotFound("One or both CourseViews not found.");
+            }
+            if (courseView1.CourseId != courseView2.CourseId)
+            {
+                return BadRequest("CourseViews are not from the same course.");
+            }
+
+            // Zamień kolejność
+            var tempOrder = courseView1.CourseViewOrder;
+            courseView1.CourseViewOrder = courseView2.CourseViewOrder;
+            courseView2.CourseViewOrder = tempOrder;
+
+            // Zapisz zmiany
+            await _context.SaveChangesAsync();
+
+            return NoContent();
         }
     }
 }

@@ -7,10 +7,8 @@ namespace CoursesHouse.Dtos.CourseViews
         public int ViewId { get; set; }
 
         public CourseHouse.Models.Course Course { get; set; } = new CourseHouse.Models.Course();
+        public int CourseViewOrder { get; set; }
 
         public List<CourseHouse.Models.Content> Content { get; set; } = new List<CourseHouse.Models.Content>();
-        public List<Picture> Pictures { get; set; } = new List<Picture>();
-        public List<Video> Videos { get; set; } = new List<Video>();
-        public List<TestAnswer> TestAnswers { get; set; } = new List<TestAnswer>();
     }
 }
