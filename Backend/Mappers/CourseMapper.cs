@@ -2,6 +2,7 @@
 using CourseHouse.Models;
 using CoursesHouse.Dtos.Course;
 using CoursesHouse.Dtos.Courses;
+using CoursesHouse.Dtos.CourseViews;
 using CoursesHouse.Interfaces;
 
 namespace CoursesHouse.Mappers
@@ -45,7 +46,17 @@ namespace CoursesHouse.Mappers
                     ViewId = view.ViewId,
                     CourseViewOrder = view.CourseViewOrder,
                     CourseId = view.CourseId,
-                    Content = view.Content,
+                    Content = view.Content.Select(content => new Content
+                    {
+                        ContentId = content.ContentId,
+                        Order = content.Order,
+                        CourseViewId = content.CourseViewId,
+                        Title = content.Title,
+                        Text = content.Text,
+                        ContentUrl = content.ContentUrl,
+                        Correct = content.Correct,
+                        ContentType = content.ContentType
+                    }).ToList(),
                 }).ToList()
             };
         }

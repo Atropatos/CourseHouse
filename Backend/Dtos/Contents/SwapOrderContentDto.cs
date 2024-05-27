@@ -4,14 +4,14 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Backend.Dtos.CourseViews
+namespace Backend.Dtos.Contents
 {
-    public class SwapOrderDto
+    public class SwapOrderContentDto
     {
         [Required]
-        public int CourseViewId1 { get; set; }
+        public int ContentId1 { get; set; }
 
         [Required]
-        public int CourseViewId2 { get; set; }
+        public int ContentId2 { get; set; }
     }
 }

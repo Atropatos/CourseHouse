@@ -22,6 +22,7 @@ namespace CoursesHouse.Repository
         {
             var coursesViews = await _context.courseView!
                                             .Include(a => a.Course)
+                                            .ThenInclude(a => a.User)
                                             .Include(a => a.Content)
                                             .ToListAsync();
             return coursesViews;
@@ -30,6 +31,7 @@ namespace CoursesHouse.Repository
         public async Task<CourseView> GetByIdAsync(int id)
         {
             var courseView = await _context.courseView!.Include(a => a.Course)
+                                            .ThenInclude(a => a.User)
                                             .Include(a => a.Content)
                                             .FirstOrDefaultAsync(a => a.ViewId == id);
             return courseView;

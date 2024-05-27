@@ -65,6 +65,11 @@ namespace CourseHouse.Data
                 .WithOne(cv => cv.Course)
                 .HasForeignKey(cv => cv.CourseId);
 
+            builder.Entity<CourseView>()
+                    .HasMany(c => c.Content)
+                    .WithOne(cv => cv.CourseView)
+                    .HasForeignKey(cv => cv.CourseViewId);
+
 
             List<IdentityRole> roles = new List<IdentityRole>
             {

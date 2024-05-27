@@ -253,8 +253,8 @@ namespace CoursesHouse.Migrations
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     Order = table.Column<int>(type: "int", nullable: false),
                     CourseViewId = table.Column<int>(type: "int", nullable: false),
-                    Text = table.Column<string>(type: "longtext", nullable: false),
                     Title = table.Column<string>(type: "longtext", nullable: false),
+                    Text = table.Column<string>(type: "longtext", nullable: false),
                     ContentUrl = table.Column<string>(type: "longtext", nullable: false),
                     Correct = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     ContentType = table.Column<int>(type: "int", nullable: false)
@@ -414,8 +414,8 @@ namespace CoursesHouse.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "2baca54c-c50c-4cd9-a6ff-22f3f1c22268", null, "Admin", "ADMIN" },
-                    { "4182b6c3-f541-4f7c-ac1b-657bfcf633dc", null, "User", "USER" }
+                    { "6d35dcd9-5dc8-4fc3-8b64-0a4320dbf20d", null, "Admin", "ADMIN" },
+                    { "eeca333f-43ab-4d78-93d7-fbe8f068eaa2", null, "User", "USER" }
                 });
 
             migrationBuilder.InsertData(

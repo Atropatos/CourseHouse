@@ -96,7 +96,7 @@ namespace CoursesHouse.Controllers
             await _context.CourseCategoryMappings.AddRangeAsync(courseCategoryMappings);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(Create), new { Id = course.CourseId }, course);
+            return CreatedAtAction(nameof(Create), new { Id = course.CourseId }, course.ToCourseDto());
         }
 
         [HttpPut]
