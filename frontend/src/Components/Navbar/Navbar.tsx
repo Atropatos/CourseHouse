@@ -12,6 +12,7 @@ const Navbar = (props: Props) => {
     <nav className="relative container w-16 mx-auto p-6">
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-20">
+        
           <img src={logo} alt="" />
           <div className="hidden font-bold lg:flex">
             {/* <a href="" className="text-black hover:text-darkBlue ml-8">

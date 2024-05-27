@@ -1,5 +1,6 @@
 import React from 'react'
 import Card from '../Card/Card';
+import CourseList from '../Course/CourseList';
 
 interface Props  {}
 
@@ -12,4 +13,6 @@ const CardList: React.FC<Props> = (props: Props): JSX.Element => {
   </div>
 };
 
-export default CardList
+export default CardList;
+
+

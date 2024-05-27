@@ -11,6 +11,7 @@ import HomePage from './Pages/HomePage/HomePage';
 import SearchPage from './Pages/SearchPage/SearchPage';
 import { Outlet } from 'react-router';
 import Navbar from './Components/Navbar/Navbar';
+import CourseList from './Components/Course/CourseList';
 function App() {
 //   const [search,setSearch] = useState<string>();
 
@@ -39,6 +40,7 @@ return (
 </UserProvider> */}
 <UserProvider>
 <Navbar/>
+
 <Outlet/>
 <ToastContainer/>
 </UserProvider>
