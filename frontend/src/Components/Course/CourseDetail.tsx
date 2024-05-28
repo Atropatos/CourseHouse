@@ -1,10 +1,11 @@
 // src/components/CourseDetail.tsx
 import React, { useEffect, useState } from 'react';
 
-import { Course } from '../Models/Course/Course';
-import { CourseView } from '../Models/Course/CourseView';
-import { Content } from '../Models/Content/Content';
-import { getCourseById } from '../Services/courseService';
+import { Course } from '../../Models/Course';
+import { CourseView } from '../../Models/Course/CourseView';
+import { Content } from '../../Models/Content/Content';
+import { getCourseById } from '../../Services/courseService';
+import ContentDisplay from '../ContentDisplay';
 
 interface CourseDetailProps {
   courseId: number;
@@ -52,11 +53,8 @@ const CourseDetail: React.FC<CourseDetailProps> = ({ courseId }) => {
       {course.courseViews.map((view) => (
         <div key={view.viewId}>
           <h3>View {view.courseViewOrder}</h3>
-          {view.content.map((content) => (
-            <div key={content.contentId}>
-              <h4>{content.title}</h4>
-              <p>{content.text}</p>
-            </div>
+          {view.content.map((content: Content) => (
+            <ContentDisplay key={content.contentId} content={content} />
           ))}
         </div>
       ))}
