@@ -34,22 +34,42 @@ const CourseList: React.FC = () => {
     return <div>{error}</div>;
   }
 
+  const handleCourseClick = (courseId: number) => {
+    setSelectedCourseId(courseId);
+  };
+
+  const handleBackClick = () => {
+    setSelectedCourseId(null);
+  };
+
   return (
     <div>
-      <h1>Course List</h1>
-      <ul>
-        {courses.map((course) => (
-          <li key={course.courseId}>
-            <h2 onClick={() => setSelectedCourseId(course.courseId)}>{course.courseName}</h2>
-            <p>{course.courseDescription}</p>
-            <p>Price: ${course.coursePrice.toFixed(2)}</p>
-            <p>Categories: {course.courseCategories.map(category => category.categoryName).join(', ')}</p>
-            <p>-----------------------------------------</p>
-          </li>
-        ))}
-      </ul>
-
-      {selectedCourseId && <CourseDetail courseId={selectedCourseId} />}
+      {selectedCourseId === null ? (
+        <>
+          <h1>Course List</h1>
+          <ul>
+            {courses.map((course) => (
+              <li key={course.courseId}>
+                <h2 
+                  onClick={() => handleCourseClick(course.courseId)} 
+                  style = {{cursor: 'pointer'}}
+                  className="course-name"
+                >
+                  {course.courseName}
+                </h2>
+                <p>{course.courseDescription}</p>
+                <p>Price: ${course.coursePrice.toFixed(2)}</p>
+                <p>Categories: {course.courseCategories.map(category => category.categoryName).join(', ')}</p>
+              </li>
+            ))}
+          </ul>
+        </>
+      ) : (
+        <>
+          <button onClick={handleBackClick}>Back to Course List</button>
+          <CourseDetail courseId={selectedCourseId} />
+        </>
+      )}
     </div>
   );
 };
