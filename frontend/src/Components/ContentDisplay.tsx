@@ -12,8 +12,8 @@ const ContentDisplay: React.FC<ContentDisplayProps> = ({ content }) => {
     case ContentType.Text:
       return (
         <div>
-          <h4>{content.title}</h4>
-          <p>{content.text}</p>
+          <h4>tytuł contentu: {content.title}</h4>
+          <p>tekst contentu: {content.text}</p>
         </div>
       );
     case ContentType.Picture:

@@ -4,13 +4,15 @@ import React, { useEffect, useState } from 'react';
 import { getCourses } from '../../Services/courseService';
 import { Course } from '../../Models/Course';
 import CourseDetail from './CourseDetail';
+import { useNavigate } from 'react-router';
 
 const CourseList: React.FC = () => {
   const [courses, setCourses] = useState<Course[]>([]);
-  const [selectedCourseId, setSelectedCourseId] = useState<number | null>(null);
+ // const [selectedCourseId,setSelectedCourseId] = useState<number |null>(null);
+  // const [selectedCourseId, setSelectedCourseId] = useState<number | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchCourses = async () => {
       try {
@@ -34,19 +36,26 @@ const CourseList: React.FC = () => {
     return <div>{error}</div>;
   }
 
-  const handleCourseClick = (courseId: number) => {
-    setSelectedCourseId(courseId);
+  const handleCourseClick = (courseId:number) =>{
+    navigate(`/course/${courseId}`);
   };
 
-  const handleBackClick = () => {
-    setSelectedCourseId(null);
-  };
+
+
+
+  // const handleCourseClick = (courseId: number) => {
+  //   setSelectedCourseId(courseId);
+  // };
+
+  // const handleBackClick = () => {
+  //   setSelectedCourseId(null);
+  // };
 
   return (
     <div>
-      {selectedCourseId === null ? (
-        <>
-          <h1>Course List</h1>
+       
+          <h1>Lista z kursami:</h1>
+           <p>-------------------------</p>
           <ul>
             {courses.map((course) => (
               <li key={course.courseId}>
@@ -55,21 +64,17 @@ const CourseList: React.FC = () => {
                   style = {{cursor: 'pointer'}}
                   className="course-name"
                 >
-                  {course.courseName}
+                  Nazwa kursu: {course.courseName}
                 </h2>
-                <p>{course.courseDescription}</p>
-                <p>Price: ${course.coursePrice.toFixed(2)}</p>
-                <p>Categories: {course.courseCategories.map(category => category.categoryName).join(', ')}</p>
+                <p>Opis kursu: {course.courseDescription}</p>
+                <p>Cena: {course.coursePrice.toFixed(2)}PLN</p>
+                <p>Kategoria: {course.courseCategories.map(category => category.categoryName).join(', ')}</p>
+                <p>-------------------------</p>
               </li>
             ))}
           </ul>
-        </>
-      ) : (
-        <>
-          <button onClick={handleBackClick}>Back to Course List</button>
-          <CourseDetail courseId={selectedCourseId} />
-        </>
-      )}
+       
+      
     </div>
   );
 };

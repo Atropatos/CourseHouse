@@ -25,15 +25,26 @@ export const getCourseById = async (courseId: number): Promise<Course> => {
   }
 };
 
-
-export const addCourse = async (course: Course) => {
+export const createCourse = async (course: Omit<Course, 'courseId' | 'createdBy' | 'courseCategories' | 'enrolledUsers' | 'comments' | 'grades' | 'courseViews'> & { categoryIds: number[] }) => {
   try {
-    const response = await axios.post<Course>(api + 'course');
+    const response = await axios.post(`${api}course`, course, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
     return response.data;
   } catch (error) {
-    handleError(error);
+    throw error;
   }
 };
+// export const addCourse = async (course: Course) => {
+//   try {
+//     const response = await axios.post<Course>(api + 'course');
+//     return response.data;
+//   } catch (error) {
+//     handleError(error);
+//   }
+// };
 
 export const getCategories = async(): Promise<CourseCategory[]> => {
     try {
