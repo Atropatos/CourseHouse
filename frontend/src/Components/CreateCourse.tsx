@@ -3,13 +3,18 @@ import { useNavigate } from 'react-router-dom';
 import { createCourse, getCategories } from '../Services/courseService';
 
 import { CourseCategory } from '../Models/Course';
-
-const CreateCourse: React.FC = () => {
+interface MappedCategory {
+    label: string;
+    value: number;
+  }
+  
+  const CreateCourse: React.FC = () => {
     const [courseName, setCourseName] = useState('');
     const [coursePrice, setCoursePrice] = useState('');
     const [courseDescription, setCourseDescription] = useState('');
-    const [categories, setCategories] = useState<CourseCategory[]>([]);
+    const [categories, setCategories] = useState<MappedCategory[]>([]);
     const [selectedCategoryIds, setSelectedCategoryIds] = useState<number[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const navigate = useNavigate();
   
@@ -17,9 +22,20 @@ const CreateCourse: React.FC = () => {
       const fetchCategories = async () => {
         try {
           const data = await getCategories();
-          setCategories(data);
+          console.log('Fetched categories:', data);
+  
+          // Map the fetched categories to the format expected by the dropdown
+          const formattedCategories = data.map((category: any) => ({
+            label: category.courseCategoryName,
+            value: category.courseCategoryId,
+          }));
+  
+          console.log('Formatted categories:', formattedCategories);
+          setCategories(formattedCategories);
+          setIsLoading(false);
         } catch (err) {
           setError('Error fetching categories');
+          setIsLoading(false);
         }
       };
   
@@ -35,7 +51,7 @@ const CreateCourse: React.FC = () => {
           courseName,
           coursePrice: parseFloat(coursePrice),
           courseDescription,
-          categoryIds: [1,2],
+          categoryIds: selectedCategoryIds,
         };
   
         await createCourse(course);
@@ -45,13 +61,14 @@ const CreateCourse: React.FC = () => {
       }
     };
   
-    const handleCategoryChange = (categoryId: number) => {
-      setSelectedCategoryIds((prev) =>
-        prev.includes(categoryId)
-          ? prev.filter((id) => id !== categoryId)
-          : [...prev, categoryId]
-      );
+    const handleCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+      const selectedOptions = Array.from(event.target.selectedOptions).map(option => parseInt(option.value));
+      setSelectedCategoryIds(selectedOptions);
     };
+  
+    if (isLoading) {
+      return <p>Loading...</p>;
+    }
   
     return (
       <div>
@@ -87,18 +104,14 @@ const CreateCourse: React.FC = () => {
             />
           </div>
           <div>
-            <label>Categories</label>
-            {categories.map((category) => (
-              <div key={category.categoryId}>
-                <input
-                  type="checkbox"
-                  id={`category-${category.categoryId}`}
-                  value={category.categoryId}
-                  onChange={() => handleCategoryChange(category.categoryId)}
-                />
-                <label htmlFor={`category-${category.categoryId}`}>{category.categoryName}</label>
-              </div>
-            ))}
+            <label htmlFor="courseCategories">Categories</label>
+            <select id="courseCategories" multiple onChange={handleCategoryChange}>
+              {categories.map(({ label, value }) => (
+                <option key={value} value={value}>
+                  {label}
+                </option>
+              ))}
+            </select>
           </div>
           <button type="submit">Create Course</button>
           {error && <p>{error}</p>}
