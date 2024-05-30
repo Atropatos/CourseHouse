@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CoursesHouse.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240527184443_Init")]
+    [Migration("20240528114942_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -528,13 +528,13 @@ namespace CoursesHouse.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "0c39391d-ddb1-4c53-83f4-e0588a17cdf1",
+                            Id = "1b01bc40-43af-40e1-9cbd-5222676f7bfc",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "7b4509fd-d716-4c13-bc8c-540d789ebbba",
+                            Id = "34ea0b1a-9677-4728-8fd7-757120a6ef20",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -679,7 +679,7 @@ namespace CoursesHouse.Migrations
                         .HasForeignKey("PurchaseId");
 
                     b.HasOne("CourseHouse.Models.User", "User")
-                        .WithMany()
+                        .WithMany("CreatedCourses")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -739,7 +739,7 @@ namespace CoursesHouse.Migrations
             modelBuilder.Entity("CourseHouse.Models.CreditCard", b =>
                 {
                     b.HasOne("CourseHouse.Models.User", "User")
-                        .WithMany()
+                        .WithMany("UserCreditCards")
                         .HasForeignKey("id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -761,7 +761,7 @@ namespace CoursesHouse.Migrations
             modelBuilder.Entity("CourseHouse.Models.Purchase", b =>
                 {
                     b.HasOne("CourseHouse.Models.Course", "Course")
-                        .WithMany()
+                        .WithMany("Purchases")
                         .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -773,7 +773,7 @@ namespace CoursesHouse.Migrations
                         .IsRequired();
 
                     b.HasOne("CourseHouse.Models.User", "User")
-                        .WithMany()
+                        .WithMany("UserPurchases")
                         .HasForeignKey("id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -859,6 +859,8 @@ namespace CoursesHouse.Migrations
                     b.Navigation("EnrolledUsers");
 
                     b.Navigation("Grades");
+
+                    b.Navigation("Purchases");
                 });
 
             modelBuilder.Entity("CourseHouse.Models.CourseView", b =>
@@ -869,6 +871,15 @@ namespace CoursesHouse.Migrations
             modelBuilder.Entity("CourseHouse.Models.Purchase", b =>
                 {
                     b.Navigation("PurachasedCourses");
+                });
+
+            modelBuilder.Entity("CourseHouse.Models.User", b =>
+                {
+                    b.Navigation("CreatedCourses");
+
+                    b.Navigation("UserCreditCards");
+
+                    b.Navigation("UserPurchases");
                 });
 #pragma warning restore 612, 618
         }

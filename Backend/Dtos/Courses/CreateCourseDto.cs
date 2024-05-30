@@ -1,4 +1,4 @@
-﻿namespace CoursesHouse.Dtos.Course
+﻿namespace CoursesHouse.Dtos.Courses
 {
     public class CreateCourseDto
     {

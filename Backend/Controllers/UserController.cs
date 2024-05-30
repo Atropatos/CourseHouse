@@ -1,9 +1,16 @@
-/*using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CourseHouse.Data;
 using CourseHouse.Models;
 using CoursesHouse.Interfaces;
-
+using Microsoft.AspNetCore.Authorization;
+using System.Threading.Tasks;
+using Backend.Dtos.UserDtos;
+using System.Security.Claims;
+using Backend.Mappers;
+using Backend.Dtos;
+using api.Extensions;
+using Microsoft.AspNetCore.Identity;
 
 namespace CourseHouse.Controllers
 {
@@ -11,73 +18,94 @@ namespace CourseHouse.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
         private readonly IUserRepository _userRepo;
-        public UserController(ApplicationDbContext context, IUserRepository userRepo)
+        private readonly UserManager<User> _userManager;
+        public UserController(IUserRepository userRepo, UserManager<User> userManager)
         {
-            _context = context;
             _userRepo = userRepo;
+            _userManager = userManager;
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> GetAllUsers()
         {
             var users = await _userRepo.GetAllAsync();
+            var usersWithRoles = new List<UserDto>();
 
-            return Ok(users);
+            foreach (var user in users)
+            {
+                var roles = await _userRepo.GetUserRolesAsync(user.Id);
+                var userDto = user.ToUserDto();
+                userDto.Roles = roles.ToList();
+                usersWithRoles.Add(userDto);
+            }
+
+            return Ok(usersWithRoles);
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetUserById([FromRoute] int id)
+        [Authorize]
+        public async Task<IActionResult> GetUserById([FromRoute] string id)
         {
-
             var user = await _userRepo.GetByIdAsync(id);
             if (user == null)
                 return NotFound();
-            return Ok(user);
+            var userRole = await _userRepo.GetUserRolesAsync(user.Id);
+            return Ok(new { user, userRole });
         }
 
-        [HttpPost]
-        public async Task<IActionResult> CreateUser([FromBody] User newUser)
+        [HttpPut("{id}")]
+        [Authorize]
+        public async Task<IActionResult> UpdateUser([FromRoute] string id, [FromBody] UserUpdateDto updatedUserDto)
         {
-            var roleExists = _context.role!.Any(r => r.RoleId == newUser.RoleId);
-            if (!roleExists)
-                return BadRequest("Provided role does not exits!");
-
-            await _userRepo.CreateAsync(newUser);
-
-            return CreatedAtAction(nameof(GetUserById), new { Id = newUser.UserId }, newUser);
-        }
-
-        [HttpPut]
-        [Route("{id}")]
-        public async Task<IActionResult> UpdateUser([FromRoute] int id, [FromBody] User updatedUser)
-        {
-
-            var user = await _userRepo.UpdateAsync(id,updatedUser);
+            var username = User.GetUsername();
+            var user = await _userManager.FindByNameAsync(username);
             if (user == null)
-                return NotFound(updatedUser.UserId);
+            {
+                return NotFound();
+            }
+            if (user.Id != id)
+            {
+                return Forbid();
+            }
 
-           
-            return Ok(user);
+            var updatedUser = updatedUserDto.ToUserFromUserUpdatedDto();
+
+            var result = await _userRepo.UpdateAsync(id, updatedUser);
+            if (result == null)
+                return NotFound();
+
+            return Ok(result);
         }
 
-        [HttpDelete]
-        [Route("{id}")]
-        public async Task<IActionResult> DeleteUser([FromRoute] int id)
+        [HttpDelete("{id}")]
+        [Authorize]
+        public async Task<IActionResult> DeleteUser([FromRoute] string id)
         {
-
-            var user = await _context.user!.FirstOrDefaultAsync(x => x.UserId == id);
+            var user = await _userRepo.DeleteAsync(id);
             if (user == null)
                 return NotFound(id);
 
-            _context.user?.Remove(user);
-            await _context.SaveChangesAsync();
-
             return NoContent();
+        }
+        [HttpPut("{id}/password")]
+        [Authorize]
+        public async Task<IActionResult> UpdatePassword(string id, [FromBody] PasswordUpdateDto passwordUpdateDto)
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (userId != id)
+            {
+                return Forbid("Bad user!");
+            }
+
+            var result = await _userRepo.UpdatePasswordAsyncWithValidation(id, passwordUpdateDto.CurrentPassword, passwordUpdateDto.NewPassword);
+            if (result)
+            {
+                return Ok();
+            }
+
+            return BadRequest("Password update failed");
         }
     }
 }
-
-
-*/

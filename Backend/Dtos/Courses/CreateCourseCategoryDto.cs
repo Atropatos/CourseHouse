@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Backend.Dtos.Course
+namespace Backend.Dtos.Courses
 {
     public class CreateCourseCategoryDto
     {

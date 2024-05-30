@@ -413,8 +413,8 @@ namespace CoursesHouse.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "0c39391d-ddb1-4c53-83f4-e0588a17cdf1", null, "Admin", "ADMIN" },
-                    { "7b4509fd-d716-4c13-bc8c-540d789ebbba", null, "User", "USER" }
+                    { "1b01bc40-43af-40e1-9cbd-5222676f7bfc", null, "Admin", "ADMIN" },
+                    { "34ea0b1a-9677-4728-8fd7-757120a6ef20", null, "User", "USER" }
                 });
 
             migrationBuilder.InsertData(

@@ -1,6 +1,6 @@
 ﻿using Backend.Models.CourseModels;
 using CourseHouse.Models;
-using CoursesHouse.Dtos.Course;
+using CoursesHouse.Dtos.Courses;
 using CoursesHouse.Dtos.Courses;
 using CoursesHouse.Dtos.CourseViews;
 using CoursesHouse.Interfaces;
