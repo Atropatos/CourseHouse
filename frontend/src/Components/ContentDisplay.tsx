@@ -9,7 +9,7 @@ interface ContentDisplayProps {
 
 const ContentDisplay: React.FC<ContentDisplayProps> = ({ content }) => {
   switch (content.contentType) {
-    case ContentType.Text:
+    case ContentType.Text:  
       return (
         <div>
           <h4>tytuł contentu: {content.title}</h4>

@@ -7,6 +7,8 @@ import LoginPage from "../Pages/LoginPage/LoginPage";
 import RegisterPage from "../Pages/RegisterPage/RegisterPage";
 import CourseDetail from "../Components/Course/CourseDetail";
 import CreateCourse from "../Components/CreateCourse";
+import CourseViewDetails from "../Components/CourseViewDetails";
+import AddContent from "../Components/AddContent";
 
 
 
@@ -21,8 +23,9 @@ export const router = createBrowserRouter([
             {path: "login", element: <LoginPage/>},
             {path: "register", element: <RegisterPage/>},
             {path: "search", element: <SearchPage/>},
-            {path: "company/:ticker", element: <CompanyPage/>}
-            
+            {path: "company/:ticker", element: <CompanyPage/>},
+            {path: "courseView/:viewId", element: <CourseViewDetails/>},
+            { path: "courseView/:viewId/addContent", element: <AddContent/>}
         ],
     },
 ]);
