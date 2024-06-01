@@ -54,6 +54,7 @@ const CourseDetail: React.FC = () => {
 
   if (!course) {
     return <div>No course found</div>;
+    
   }
 
   const handleBackClick = () => {

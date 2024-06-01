@@ -15,6 +15,7 @@ export interface Course {
 }
 
 export interface CourseCategory {
+  courseCategoryId: any;
   categoryId: number;
   categoryName: string;
   courseCategoryMappings: CourseCategoryMapping[];

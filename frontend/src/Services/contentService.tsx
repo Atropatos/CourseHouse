@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Content } from "../Models/Content/Content";
 
-const api = "http://localhost:5010/api/";
+const api = "http:://localhost:5010/api/";
 
 export const postContent = async (content: Omit<Content, "contentId">): Promise<Content> => {
     try {

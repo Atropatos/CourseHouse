@@ -54,15 +54,13 @@ const CourseList: React.FC = () => {
     setSearchTerm(event.target.value);
   };
 
+
   // Filter courses based on selected category IDs and search term
   const filteredCourses = courses.filter(course =>
     (selectedCategoryIds.length === 0 || course.courseCategories.some(category => selectedCategoryIds.includes(category.categoryId))) &&
     course.courseName.toLowerCase().includes(searchTerm.toLowerCase())
   );
-  // Filter courses based on selected category IDs
-  // const filteredCourses = selectedCategoryIds.length > 0 
-  //   ? courses.filter(course => course.courseCategories.some(category => selectedCategoryIds.includes(category.categoryId)))
-  //   : courses;
+
 
   if (loading) {
     return <div>Loading...</div>;
@@ -83,7 +81,7 @@ const CourseList: React.FC = () => {
         ))}
       </select>
 
-
+     
 
       <label htmlFor="courseSearch">Szukaj:</label>
       <input
