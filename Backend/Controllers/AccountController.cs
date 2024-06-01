@@ -1,6 +1,7 @@
 ﻿using CourseHouse.Models;
 using CoursesHouse.Dtos.Account;
 using CoursesHouse.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -97,6 +98,29 @@ namespace CoursesHouse.Controllers
                 return StatusCode(500, e);
             }
         }
+        [Authorize]
+        [HttpGet("roles")]
+        public async Task<IActionResult> GetUserRoles()
+        {
+            try
+            {
+                var user = await _userManager.GetUserAsync(User);
+                if (user == null)
+                {
+                    {
+                        return Unauthorized("User not found");
+                    }
+                }
+
+                var roles = await _userManager.GetRolesAsync(user);
+                return Ok(roles);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+
 
     }
 }
