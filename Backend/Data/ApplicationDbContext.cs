@@ -81,6 +81,11 @@ namespace CourseHouse.Data
                 {
                     Name="User",
                     NormalizedName="USER"
+                },
+                new IdentityRole
+                {
+                    Name="ContentCreator",
+                    NormalizedName="CONTENTCREATOR"
                 }
             };
 

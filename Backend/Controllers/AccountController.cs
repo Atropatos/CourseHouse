@@ -68,7 +68,10 @@ namespace CoursesHouse.Controllers
 
                 if (createdUser.Succeeded)
                 {
-                    var roleResult = await _userManager.AddToRoleAsync(user, "User");
+                    var role = registerDto.Role ?? "User"; // Default to "User" if no role is provided
+                   
+                    var roleResult = await _userManager.AddToRoleAsync(user, role);
+                    var roles = _userManager.GetRolesAsync(user);
                     if (roleResult.Succeeded)
                     {
                         return Ok(
@@ -94,5 +97,6 @@ namespace CoursesHouse.Controllers
                 return StatusCode(500, e);
             }
         }
+
     }
 }
