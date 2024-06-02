@@ -525,15 +525,21 @@ namespace CoursesHouse.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "0c39391d-ddb1-4c53-83f4-e0588a17cdf1",
+                            Id = "9bd959a4-0353-4d8a-8821-fb2c1d02302c",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "7b4509fd-d716-4c13-bc8c-540d789ebbba",
+                            Id = "d05acd4e-18a9-4607-b8d0-636ffd0425d3",
                             Name = "User",
                             NormalizedName = "USER"
+                        },
+                        new
+                        {
+                            Id = "eb420f77-5781-40d8-b970-07519d2b77f8",
+                            Name = "ContentCreator",
+                            NormalizedName = "CONTENTCREATOR"
                         });
                 });
 
