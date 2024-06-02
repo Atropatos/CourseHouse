@@ -10,7 +10,8 @@ import { useAuth } from '../Context/useAuth';
 
 const CourseViewDetails: React.FC = () => {
     const {viewId} = useParams<{viewId:string}>();
-    const [courseView,setCourseView] = useState<CourseView | null>(null);const [selectedContent, setSelectedContent] = useState<Content | null>(null);
+    const [courseView,setCourseView] = useState<CourseView | null>(null);
+   //const [selectedContent, setSelectedContent] = useState<Content | null>(null);
     const navigate = useNavigate();
     const {roles,fetchUserRoles} = useAuth();
     useEffect( () => {
@@ -42,12 +43,26 @@ const CourseViewDetails: React.FC = () => {
     const NavigateToAddContent = async () => {
       navigate(`/courseView/${courseView?.viewId}/addContent`)
     }
-  return (
-    <div>
-<div key={courseView?.viewId}>
-          <h3>Lekcja{courseView?.courseViewOrder}</h3>
+
+    const NavigateToUpdateContent = (contentId:number) => {
+      navigate(`/updateContent/${contentId}`);
+    }
+
+    //{ path: "updateContent/:contentId", element: <UpdateContent/>}
+    return (
+      <div>
+        <div key={courseView?.viewId}>
+          <h3>Lekcja {courseView?.courseViewOrder}</h3>
           {courseView?.content.map((content: Content) => (
-            <ContentDisplay key={content.contentId} content={content} />
+            <div key={content.contentId}>
+              <h2
+                onClick={() => NavigateToUpdateContent(content.contentId)}
+                style={{ cursor: 'pointer', textDecoration: 'underline', color: 'blue' }}
+              >
+                {content.title}
+              </h2>
+              <p>{content.text}</p>
+            </div>
           ))}
         </div>
 

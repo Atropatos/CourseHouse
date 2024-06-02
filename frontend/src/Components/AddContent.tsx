@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { postContent } from '../Services/contentService';
 import { ContentType } from '../Models/Content/ContentType';
 import { Content } from '../Models/Content/Content';
@@ -10,7 +10,7 @@ const AddContent: React.FC = () => {
     const [contentBody, setContentBody] = useState('');
     const [contentUrl, setContentUrl] = useState('');
     const [contentType, setContentType] = useState(ContentType.Text); // Default to Text
-   
+   const navigate = useNavigate();
 
     const handleAddContent = async () => {
        
@@ -31,6 +31,7 @@ const AddContent: React.FC = () => {
         try {
             const result = await postContent(content);
             console.log('Content added successfully', result);
+            navigate(`/courseView/${viewId}`);
             
         } catch (error) {
            
