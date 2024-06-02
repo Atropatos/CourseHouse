@@ -5,13 +5,14 @@ import { CourseView } from '../Models/Course/CourseView';
 import ContentDisplay from './ContentDisplay';
 import { Content } from '../Models/Content/Content';
 import { log } from 'console';
+import { useAuth } from '../Context/useAuth';
 
 
 const CourseViewDetails: React.FC = () => {
     const {viewId} = useParams<{viewId:string}>();
     const [courseView,setCourseView] = useState<CourseView | null>(null);const [selectedContent, setSelectedContent] = useState<Content | null>(null);
     const navigate = useNavigate();
-
+    const {roles,fetchUserRoles} = useAuth();
     useEffect( () => {
         const fetchCourseView = async() => {
             if(viewId) {
@@ -49,8 +50,14 @@ const CourseViewDetails: React.FC = () => {
             <ContentDisplay key={content.contentId} content={content} />
           ))}
         </div>
-        <button onClick= {NavigateToAddContent}>Dodaj Content</button>
-     <button onClick={(handleDelete)}>Usun lekcje</button>
+
+          {roles?.includes("ContentCreator")
+          && (<div>
+             <button onClick= {NavigateToAddContent}>Dodaj Content</button>
+            <button onClick={(handleDelete)}>Usun lekcje</button>
+            </div>
+          )}
+   
     </div>
   )
 }

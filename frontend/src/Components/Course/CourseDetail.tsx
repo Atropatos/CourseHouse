@@ -8,6 +8,7 @@ import { getCourseById } from '../../Services/courseService';
 import ContentDisplay from '../ContentDisplay';
 import { useNavigate, useParams } from 'react-router-dom';
 import { postCourseView } from '../../Services/courseViewService';
+import { useAuth } from '../../Context/useAuth';
 
 
 
@@ -18,6 +19,7 @@ const CourseDetail: React.FC = () => {
   const [course, setCourse] = useState<Course | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const {roles,fetchUserRoles} = useAuth();
   const navigate = useNavigate();
   useEffect(() => {
     const fetchCourse = async () => {
@@ -103,8 +105,10 @@ const CourseDetail: React.FC = () => {
           ))}
         </div>
       ))}
-
-      <button onClick={handleCreateCourseView}>Utworz nowa lekcje </button>
+      {roles?.includes("ContentCreator") && (
+ <button onClick={handleCreateCourseView}>Utworz nowa lekcje </button>
+      )}
+     
     </div>
   );
 };

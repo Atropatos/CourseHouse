@@ -44,7 +44,7 @@ const UserDashboard = () => {
 };
 
 const ContentCreatorDashboard = () => {
-  return <div><CreateCourse/></div>;
+  return <div><CourseList/></div>;
 }
 
 export default HomePage;

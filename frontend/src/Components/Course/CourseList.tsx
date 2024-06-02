@@ -1,10 +1,11 @@
 // src/components/CourseList.tsx
 import React, { useEffect, useState } from 'react';
 
-import { getCategories, getCourses } from '../../Services/courseService';
+import { getCategories, getCourses, getCoursesByUser } from '../../Services/courseService';
 import { Course } from '../../Models/Course';
 import CourseDetail from './CourseDetail';
 import { useNavigate } from 'react-router';
+import { useAuth } from '../../Context/useAuth';
 
 
 interface MappedCategory {
@@ -19,19 +20,32 @@ const CourseList: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [searchTerm,setSearchTerm] = useState<string>('');
+  const {roles,fetchUserRoles} = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const fetchedCourses = await getCourses();
+        let fetchedCourses;
+        if(roles?.includes("ContentCreator")) {
+          fetchedCourses = await getCoursesByUser();
+        } else {
+          fetchedCourses = await getCourses();
+        }
         setCourses(fetchedCourses);
+      
+
+        
+        
         const fetchedCategories = await getCategories();
         const formattedCategories = fetchedCategories.map((category: any) => ({
           label: category.courseCategoryName,
           value: category.courseCategoryId,
         }));
         setCategories(formattedCategories);
+
+        await fetchUserRoles();
+
       } catch (err) {
         setError('Error fetching courses');
       } finally {
@@ -53,6 +67,10 @@ const CourseList: React.FC = () => {
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
   };
+
+  const redirectToCreateCourse = () => {
+    navigate(`/course/create`);
+  }
 
 
   // Filter courses based on selected category IDs and search term
@@ -111,6 +129,13 @@ const CourseList: React.FC = () => {
           </li>
         ))}
       </ul>
+
+      {roles?.includes("ContentCreator") && (
+        <button onClick={redirectToCreateCourse}>Create Course</button>
+      )}
+
+        
+      
     </div>
   );
 };

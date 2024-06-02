@@ -15,6 +15,17 @@ export const getCourses = async (): Promise<Course[]> => {
   }
 };
 
+export const getCoursesByUser = async(): Promise<Course[]> => {
+  try {
+    const response = await axios.get<Course[]>(api + 'course/user-courses');
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    handleError(error);
+    return [];
+  }
+}
+
 export const getCourseById = async (courseId: number): Promise<Course> => {
   try {
     const response = await axios.get<Course>(`${api}course/${courseId}`);

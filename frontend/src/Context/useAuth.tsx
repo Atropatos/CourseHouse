@@ -60,7 +60,7 @@ export const UserProvider = ({ children }: Props) => {
           setUser(userObj!);
           fetchUserRoles();
           toast.success("Login Success!");
-          navigate("/search");
+          navigate("/");
         }
       })
       .catch((e) => toast.warning("Server error occured"));
@@ -80,7 +80,7 @@ export const UserProvider = ({ children }: Props) => {
           setUser(userObj!);
           fetchUserRoles();
           toast.success("Login Success!");
-          navigate("/search");
+          navigate("/");
         }
       })
       .catch((e) => toast.warning("Server error occured"));

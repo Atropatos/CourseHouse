@@ -1,5 +1,6 @@
 ﻿using System.Data.Common;
 using System.Linq;
+using System.Linq.Expressions;
 using api.Extensions;
 using Backend.Interfaces;
 using Backend.Models.CourseModels;
@@ -47,6 +48,34 @@ namespace CoursesHouse.Controllers
             var coursesDto = courses.Select(s => s.ToCourseDto());
 
             return Ok(coursesDto);
+        }
+
+        [HttpGet("user-courses")]
+        [Authorize]
+        
+        public async Task<IActionResult> GetCoursesByUser()
+        {
+            try
+            {
+                var username = User.GetUsername();
+                var user = await _userManager.FindByNameAsync(username);
+
+                if (user == null)
+                {
+                    return Unauthorized();
+                }
+
+                var courses = await _courseRepo.GetAllAsync();
+
+                var userCourses = courses.Where(c => c.UserId == user.Id).ToList();
+
+                var coursesDto = userCourses.Select(s => s.ToCourseDto());
+                return Ok(coursesDto);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
         }
 
         [HttpGet("{id}")]
