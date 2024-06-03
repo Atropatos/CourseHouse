@@ -100,12 +100,16 @@ builder.Services.AddAuthentication(options =>
             )
     };
 });
-
+builder.Services.AddHttpClient("ApiClient", client =>
+{
+    client.BaseAddress = new Uri("https://localhost:7099"); // Change to your API base address
+});
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IContentRepository, ContentRepository>();
 builder.Services.AddScoped<ICourseRepository, CourseRepository>();
 builder.Services.AddScoped<ICourseCategoryRepository, CourseCategoryRepository>();
 builder.Services.AddScoped<IUserTestAnswers, UserTestAnswersRepository>();
+
 //builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 builder.Services.AddScoped<ICourseViewRepository, CourseViewRepository>();
@@ -113,8 +117,8 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    //app.UseDeveloperExceptionPage();
-    app.UseExceptionHandler("/Error");
+    app.UseDeveloperExceptionPage();
+    //app.UseExceptionHandler("/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
 
     app.UseSwagger();

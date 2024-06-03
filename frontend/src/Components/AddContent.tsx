@@ -64,14 +64,14 @@ const AddContent: React.FC = () => {
                 </label>
             </div>
             <div>
-                <label>
+                {/* <label>
                     URL: 
                     <input
                         type="text"
                         value={contentUrl}
                         onChange={(e) => setContentUrl(e.target.value)}
                     />
-                </label>
+                </label> */}
             </div>
             <div>
                 <label>
