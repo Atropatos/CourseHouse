@@ -1,7 +1,7 @@
 // src/components/ContentDisplay.tsx
 import React from 'react';
-import { Content } from '../Models/Content/Content';
-import { ContentType } from '../Models/Content/ContentType';
+import { Content } from '../../../Models/Content/Content';
+import { ContentType } from '../../../Models/Content/ContentType';
 
 interface ContentDisplayProps {
   content: Content;

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { getCategories, getCourseById, updateCourse } from '../Services/courseService';
-import { CourseCategory } from '../Models/Course';
+import { getCategories, getCourseById, updateCourse } from '../../../Services/courseService';
+import { CourseCategory } from '../../../Models/Course';
 
 interface MappedCategory {
   label: string;

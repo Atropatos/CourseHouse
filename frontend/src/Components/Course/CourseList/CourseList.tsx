@@ -1,13 +1,10 @@
-// src/components/CourseList.tsx
 import React, { useEffect, useState } from 'react';
-
-import { getCategories, getCourses, getCoursesByUser } from '../../Services/courseService';
-import { Course } from '../../Models/Course';
-import CourseDetail from './CourseDetail';
+import { getCategories, getCourses, getCoursesByUser } from '../../../Services/courseService';
+import { Course } from '../../../Models/Course';
+import CourseDetail from '../CourseDetail/CourseDetail';
 import { useNavigate } from 'react-router';
-import { useAuth } from '../../Context/useAuth';
-import './/CourseList.css';
-
+import { useAuth } from '../../../Context/useAuth';
+import './CourseList.css';
 
 interface MappedCategory {
   label: string;
@@ -20,24 +17,21 @@ const CourseList: React.FC = () => {
   const [selectedCategoryIds, setSelectedCategoryIds] = useState<number[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const [searchTerm,setSearchTerm] = useState<string>('');
-  const {roles,fetchUserRoles} = useAuth();
+  const [searchTerm, setSearchTerm] = useState<string>('');
+  const { roles, fetchUserRoles } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchCourses = async () => {
       try {
         let fetchedCourses;
-        if(roles?.includes("ContentCreator")) {
+        if (roles?.includes("ContentCreator")) {
           fetchedCourses = await getCoursesByUser();
         } else {
           fetchedCourses = await getCourses();
         }
         setCourses(fetchedCourses);
-      
 
-        
-        
         const fetchedCategories = await getCategories();
         const formattedCategories = fetchedCategories.map((category: any) => ({
           label: category.courseCategoryName,
@@ -73,13 +67,11 @@ const CourseList: React.FC = () => {
     navigate(`/course/create`);
   }
 
-
   // Filter courses based on selected category IDs and search term
   const filteredCourses = courses.filter(course =>
     (selectedCategoryIds.length === 0 || course.courseCategories.some(category => selectedCategoryIds.includes(category.categoryId))) &&
     course.courseName.toLowerCase().includes(searchTerm.toLowerCase())
   );
-
 
   if (loading) {
     return <div>Loading...</div>;
@@ -90,7 +82,7 @@ const CourseList: React.FC = () => {
   }
 
   return (
-    <div>
+    <div className="container">
       <label htmlFor="courseCategories">Kategorie:</label>
       <select id="courseCategories" multiple onChange={handleCategoryChange}>
         {categories.map(({ label, value }) => (
@@ -100,8 +92,6 @@ const CourseList: React.FC = () => {
         ))}
       </select>
 
-     
-
       <label htmlFor="courseSearch">Szukaj:</label>
       <input
         type="text"
@@ -110,15 +100,13 @@ const CourseList: React.FC = () => {
         onChange={handleSearchChange}
         placeholder="Szukaj po nazwie kursu"
       />
-      
+
       <h1>Lista z kursami:</h1>
-      <p>-------------------------</p>
       <ul>
         {filteredCourses.map((course) => (
           <li key={course.courseId}>
             <h2
               onClick={() => handleCourseClick(course.courseId)}
-              style={{ cursor: 'pointer' }}
               className="course-name"
             >
               Nazwa kursu: {course.courseName}
@@ -126,7 +114,6 @@ const CourseList: React.FC = () => {
             <p>Opis kursu: {course.courseDescription}</p>
             <p>Cena: {course.coursePrice.toFixed(2)} PLN</p>
             <p>Kategoria: {course.courseCategories.map(category => category.categoryName).join(', ')}</p>
-            <p>-------------------------</p>
           </li>
         ))}
       </ul>
@@ -134,9 +121,6 @@ const CourseList: React.FC = () => {
       {roles?.includes("ContentCreator") && (
         <button className="green-button" onClick={redirectToCreateCourse}>Stworz Kurs</button>
       )}
-
-        
-      
     </div>
   );
 };

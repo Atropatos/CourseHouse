@@ -1,9 +1,9 @@
 // src/components/UpdateContent.tsx
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { deleteContent, getContent, updateContent } from '../Services/contentService';
-import { Content } from '../Models/Content/Content';
-import { ContentType } from '../Models/Content/ContentType';
+import { deleteContent, getContent, updateContent } from '../../../Services/contentService';
+import { Content } from '../../../Models/Content/Content';
+import { ContentType } from '../../../Models/Content/ContentType';
 
 const UpdateContent: React.FC = () => {
   const { contentId } = useParams<{ contentId: string }>();

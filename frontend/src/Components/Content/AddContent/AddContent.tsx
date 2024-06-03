@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { postContent } from '../Services/contentService';
-import { ContentType } from '../Models/Content/ContentType';
-import { Content } from '../Models/Content/Content';
+import { postContent } from '../../../Services/contentService';
+import { ContentType } from '../../../Models/Content/ContentType';
+import { Content } from '../../../Models/Content/Content';
 
 const AddContent: React.FC = () => {
     const { viewId } = useParams<{ viewId: string }>();

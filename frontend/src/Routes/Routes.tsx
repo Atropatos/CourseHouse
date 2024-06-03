@@ -5,12 +5,12 @@ import SearchPage from "../Pages/SearchPage/SearchPage";
 
 import LoginPage from "../Pages/LoginPage/LoginPage";
 import RegisterPage from "../Pages/RegisterPage/RegisterPage";
-import CourseDetail from "../Components/Course/CourseDetail";
-import CreateCourse from "../Components/CreateCourse";
-import CourseViewDetails from "../Components/CourseViewDetails";
-import AddContent from "../Components/AddContent";
-import UpdateContent from "../Components/UpdateContent";
-import UpdateCourse from "../Components/UpdateCourse";
+import CourseDetail from "../Components/Course/CourseDetail/CourseDetail";
+import CreateCourse from "../Components/Course/CreateCourse/CreateCourse";
+import CourseViewDetails from "../Components/CourseView/CourseViewDetails";
+import AddContent from "../Components/Content/AddContent/AddContent";
+import UpdateContent from "../Components/Content/UpdateContent/UpdateContent";
+import UpdateCourse from "../Components/Course/UpdateCourse/UpdateCourse";
 
 
 

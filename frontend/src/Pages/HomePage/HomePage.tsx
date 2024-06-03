@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import CourseList from '../../Components/Course/CourseList';
+import CourseList from '../../Components/Course/CourseList/CourseList';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../Context/useAuth';
-import CreateCourse from '../../Components/CreateCourse';
+import CreateCourse from '../../Components/Course/CreateCourse/CreateCourse';
 
 interface Props {}
 

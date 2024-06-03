@@ -10,7 +10,7 @@ import HomePage from './Pages/HomePage/HomePage';
 import SearchPage from './Pages/SearchPage/SearchPage';
 import { Outlet } from 'react-router';
 import Navbar from './Components/Navbar/Navbar';
-import CourseList from './Components/Course/CourseList';
+import CourseList from './Components/Course/CourseList/CourseList';
 function App() {
 
 return (
