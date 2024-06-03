@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore;
 using Backend.Interfaces;
 using CourseHouse.Data;
 using CourseHouse.Models;
-using CoursesHouse.Dtos.Course;
+using CoursesHouse.Dtos.Courses;
 using CoursesHouse.Interfaces;
 using CoursesHouse.Mappers;
 using Backend.Mappers;
-using Backend.Dtos.Course;
+using Backend.Dtos.Courses;
 using api.Extensions;
 using Backend.Models.CourseModels;
 

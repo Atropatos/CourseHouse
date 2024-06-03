@@ -111,6 +111,10 @@ builder.Services.AddScoped<ICourseCategoryRepository, CourseCategoryRepository>(
 builder.Services.AddScoped<IUserTestAnswers, UserTestAnswersRepository>();
 
 //builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<ICommentRepository, CommentRepository>();
+builder.Services.AddScoped<IGradeRepository, GradeRepository>();
+
 
 builder.Services.AddScoped<ICourseViewRepository, CourseViewRepository>();
 var app = builder.Build();

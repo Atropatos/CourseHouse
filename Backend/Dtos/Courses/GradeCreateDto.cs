@@ -5,8 +5,9 @@ using System.Threading.Tasks;
 
 namespace Backend.Dtos.Courses
 {
-    public class CreateCourseCategoryDto
+    public class GradeCreateDto
     {
-        public string CourseCategoryName { get; set; }
+        public int CourseId { get; set; }
+        public decimal Grade { get; set; }
     }
 }

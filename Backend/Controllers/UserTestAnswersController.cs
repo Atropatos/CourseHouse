@@ -8,7 +8,7 @@ using Backend.Models.CourseModels;
 using Backend.Repository;
 using CourseHouse.Data;
 using CourseHouse.Models;
-using CoursesHouse.Dtos.Course;
+using CoursesHouse.Dtos.Courses;
 using CoursesHouse.Interfaces;
 using CoursesHouse.Mappers;
 using Google.Protobuf;

@@ -37,6 +37,7 @@ namespace CourseHouse.Data
         {
             base.OnModelCreating(builder);
 
+            // Defining CourseCategoryMapping relationships
             builder.Entity<CourseCategoryMapping>()
                 .HasKey(ccm => new { ccm.CourseId, ccm.CategoryId });
 
@@ -50,6 +51,7 @@ namespace CourseHouse.Data
                 .WithMany(cc => cc.CourseCategoryMappings)
                 .HasForeignKey(ccm => ccm.CategoryId);
 
+            // Defining Course relationships
             builder.Entity<Course>()
                 .HasMany(c => c.CourseViews)
                 .WithOne(cv => cv.Course)
@@ -57,18 +59,70 @@ namespace CourseHouse.Data
 
             builder.Entity<Course>()
                 .HasMany(c => c.Grades)
-                .WithOne(cv => cv.Course)
-                .HasForeignKey(cv => cv.CourseId);
+                .WithOne(cg => cg.Course)
+                .HasForeignKey(cg => cg.CourseId);
 
             builder.Entity<Course>()
                 .HasMany(c => c.Comments)
-                .WithOne(cv => cv.Course)
-                .HasForeignKey(cv => cv.CourseId);
+                .WithOne(cc => cc.Course)
+                .HasForeignKey(cc => cc.CourseId);
 
-            builder.Entity<CourseView>()
-                .HasMany(c => c.Content)
-                .WithOne(cv => cv.CourseView)
-                .HasForeignKey(cv => cv.CourseViewId);
+            builder.Entity<Course>()
+                .HasMany(c => c.Purchases)
+                .WithOne(p => p.Course)
+                .HasForeignKey(p => p.CourseId);
+
+            // Defining Purchase relationships
+            builder.Entity<Purchase>()
+                .HasOne(p => p.User)
+                .WithMany(u => u.UserPurchases)
+                .HasForeignKey(p => p.id);
+
+            builder.Entity<Purchase>()
+                .HasOne(p => p.CereditCard)
+                .WithMany()
+                .HasForeignKey(p => p.CreditCardId);
+
+            // Defining User relationships
+            builder.Entity<User>()
+                .HasMany(u => u.UserCreditCards)
+                .WithOne(cc => cc.User)
+                .HasForeignKey(cc => cc.id);
+
+            builder.Entity<User>()
+            .HasMany(u => u.CreatedCourses)
+            .WithOne(c => c.User)
+            .HasForeignKey(c => c.UserId);
+
+            // Defining CreditCard relationships
+            builder.Entity<CreditCard>()
+                .HasOne(cc => cc.User)
+                .WithMany(u => u.UserCreditCards)
+                .HasForeignKey(cc => cc.id);
+
+            // Configure Course-CourseComment relationship
+            builder.Entity<CourseComment>()
+                .HasOne(cc => cc.Course)
+                .WithMany(c => c.Comments)
+                .HasForeignKey(cc => cc.CourseId);
+
+            // Configure User-CourseComment relationship
+            builder.Entity<CourseComment>()
+                .HasOne(cc => cc.Author)
+                .WithMany(u => u.Comments)
+                .HasForeignKey(cc => cc.AuthorId);
+
+            // Defining CourseGrade relationships
+            builder.Entity<CourseGrade>()
+                .HasOne(cc => cc.Course)
+                .WithMany(c => c.Grades)
+                .HasForeignKey(cc => cc.CourseId);
+
+            builder.Entity<CourseGrade>()
+                .HasOne(cc => cc.Author)
+                .WithMany(u => u.Grades)
+                .HasForeignKey(cc => cc.AuthorId);
+
 
             List<IdentityRole> roles = new List<IdentityRole>
             {

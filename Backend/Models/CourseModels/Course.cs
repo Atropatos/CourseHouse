@@ -28,5 +28,6 @@ namespace CourseHouse.Models
         public List<CourseComment> Comments { get; set; } = new List<CourseComment>();
         public List<CourseGrade> Grades { get; set; } = new List<CourseGrade>();
         public List<CourseView> CourseViews { get; set; } = new List<CourseView>();
+        public List<Purchase> Purchases { get; set; } = new List<Purchase>();
     }
 }

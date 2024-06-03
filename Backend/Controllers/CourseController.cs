@@ -7,7 +7,7 @@ using Backend.Models.CourseModels;
 using Backend.Repository;
 using CourseHouse.Data;
 using CourseHouse.Models;
-using CoursesHouse.Dtos.Course;
+using CoursesHouse.Dtos.Courses;
 using CoursesHouse.Interfaces;
 using CoursesHouse.Mappers;
 using Microsoft.AspNetCore.Authorization;
@@ -109,8 +109,12 @@ namespace CoursesHouse.Controllers
             var course = courseDto.ToCourseFromCreate();
             if (course == null)
             {
-                return BadRequest("Stock does not exist!");
+                return BadRequest("Course does not exist!");
             }
+
+            // var userCourses = await _context.Users!.Include(u => u.CreatedCourses).FirstOrDefaultAsync(u => u.Id == user.Id);
+            // user.CreatedCourses.Add(course);
+
 
             course.UserId = user.Id;
             await _courseRepo.CreateAsync(course);

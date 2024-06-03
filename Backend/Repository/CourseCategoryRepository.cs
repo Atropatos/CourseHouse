@@ -4,7 +4,7 @@ using Backend.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Backend.Dtos.Course;
+using Backend.Dtos.Courses;
 
 namespace Backend.Repository
 {

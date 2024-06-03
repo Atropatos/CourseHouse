@@ -5,8 +5,9 @@ using System.Threading.Tasks;
 
 namespace Backend.Dtos.Courses
 {
-    public class CreateCourseCategoryDto
+    public class CommentCreateDto
     {
-        public string CourseCategoryName { get; set; }
+        public int CourseId { get; set; }
+        public string CommentContent { get; set; } = string.Empty;
     }
 }

@@ -5,12 +5,14 @@ namespace CoursesHouse.Interfaces
     public interface IUserRepository
     {
         Task<List<User>> GetAllAsync();
-        Task<User?> GetByIdAsync(int id);
+        Task<User?> GetByIdAsync(string id);
 
         Task<User> CreateAsync(User user);
 
-        Task<User?> UpdateAsync(int id, User user);
+        Task<User?> UpdateAsync(string id, User user);
 
-        Task<User?> DeleteAsync(int id);
+        Task<User?> DeleteAsync(string id);
+        Task<bool> UpdatePasswordAsyncWithValidation(string id, string currentPassword, string newPassword);
+        Task<List<string>> GetUserRolesAsync(string userId);
     }
 }
