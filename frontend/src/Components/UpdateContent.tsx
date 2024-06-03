@@ -1,7 +1,7 @@
 // src/components/UpdateContent.tsx
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { getContent, updateContent } from '../Services/contentService';
+import { deleteContent, getContent, updateContent } from '../Services/contentService';
 import { Content } from '../Models/Content/Content';
 import { ContentType } from '../Models/Content/ContentType';
 
@@ -47,12 +47,23 @@ const UpdateContent: React.FC = () => {
     }
   };
 
+  const handleDeleteContent = async() => {
+    try {
+      var contentIdToDelete = Number(contentId);
+      await deleteContent(contentIdToDelete);
+      navigate(-1);
+    }
+    catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <div>
-      <h1>Update Content</h1>
+      <h1>Edytuj zawartość</h1>
       <div>
         <label>
-          Title:
+          Tytuł:
           <input
             type="text"
             value={contentTitle}
@@ -62,7 +73,7 @@ const UpdateContent: React.FC = () => {
       </div>
       <div>
         <label>
-          Body:
+          Treść:
           <textarea
             value={contentBody}
             onChange={(e) => setContentBody(e.target.value)}
@@ -81,19 +92,20 @@ const UpdateContent: React.FC = () => {
       </div>
       <div>
         <label>
-          Content Type:
+          Kategoria:
           <select
             value={contentType}
             onChange={(e) => setContentType(Number(e.target.value))}
           >
-            <option value={ContentType.Text}>Text</option>
-            <option value={ContentType.Picture}>Picture</option>
+            <option value={ContentType.Text}>Tekst</option>
+            <option value={ContentType.Picture}>Obraz</option>
             <option value={ContentType.Video}>Video</option>
-            <option value={ContentType.TestAnswer}>Test Answer</option>
+            <option value={ContentType.TestAnswer}>Test</option>
           </select>
         </label>
       </div>
-      <button onClick={handleUpdateContent}>Update Content</button>
+      <button onClick={handleUpdateContent}>Zatwierdź</button>
+      <button onClick={handleDeleteContent}>Usuń zawartość</button>
     </div>
   );
 };

@@ -46,7 +46,7 @@ const AddContent: React.FC = () => {
             
             <div>
                 <label>
-                    Tytu:
+                    Tytuł:
                     <input
                         type="text"
                         value={contentTitle}
@@ -56,7 +56,7 @@ const AddContent: React.FC = () => {
             </div>
             <div>
                 <label>
-                    Tresc:
+                    Treść:
                     <textarea
                         value={contentBody}
                         onChange={(e) => setContentBody(e.target.value)}

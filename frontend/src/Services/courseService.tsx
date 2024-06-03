@@ -48,14 +48,24 @@ export const createCourse = async (course: Omit<Course, 'courseId' | 'createdBy'
     throw error;
   }
 };
-// export const addCourse = async (course: Course) => {
-//   try {
-//     const response = await axios.post<Course>(api + 'course');
-//     return response.data;
-//   } catch (error) {
-//     handleError(error);
-//   }
-// };
+
+export const updateCourse = async (course: Omit<Course, 'createdBy' | 'courseCategories' | 'enrolledUsers' | 'comments' | 'grades' | 'courseViews'>): Promise<Course> => {
+  try {
+    const response = await axios.put<Course>(`${api}course/${course.courseId}`,course);
+    return response.data;
+  }
+  catch (error) {
+    throw error;
+  }
+}
+
+export const deleteCourse = async(courseId:number) => {
+  try {
+    const response = await axios.delete(`${api}course/${courseId}`);
+  } catch(error) {
+    handleError(error);
+  }
+}
 
 export const getCategories = async(): Promise<CourseCategory[]> => {
     try {

@@ -24,6 +24,8 @@ export const getContent = async(contentId:number): Promise<Content> => {
     
 }
 
+
+
     
 export const updateContent = async (content:Content): Promise<Content> => {
     try {
@@ -35,3 +37,10 @@ export const updateContent = async (content:Content): Promise<Content> => {
 }
 
 
+export const deleteContent = async(contentId:number) => {
+    try {
+        const response = await axios.delete(`${api}content/${contentId}`);
+    } catch(error) {
+        throw new Error("Error while deleting content");
+    }
+}

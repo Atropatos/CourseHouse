@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { Course } from '../../Models/Course';
 import { CourseView } from '../../Models/Course/CourseView';
 import { Content } from '../../Models/Content/Content';
-import { getCourseById } from '../../Services/courseService';
+import { deleteCourse, getCourseById } from '../../Services/courseService';
 import ContentDisplay from '../ContentDisplay';
 import { useNavigate, useParams } from 'react-router-dom';
 import { postCourseView } from '../../Services/courseViewService';
@@ -67,6 +67,19 @@ const CourseDetail: React.FC = () => {
     navigate(`/courseView/${viewId}`);
   }
 
+  const redirectToUpdateCourse = () => {
+    navigate(`/updateCourse/${course.courseId}`);
+  }
+
+  const handleDeleteCourse = async() => {
+    try {
+      await deleteCourse(course.courseId);
+      navigate(-1);
+    } catch (error) {
+      console.log(error);
+
+    }
+  }
   const handleCreateCourseView = async() => {
     if (courseId) {
       const courseIdNumber = Number(courseId);
@@ -99,15 +112,21 @@ const CourseDetail: React.FC = () => {
       <h2>Widok kursu:</h2>
       {course.courseViews.map((view) => (
         <div key={view.viewId}>
-          <h3 onClick = {() => handleCourseViewChange(view.viewId)}>Lekcja {view.courseViewOrder}</h3>
+          <h3 onClick = {() => handleCourseViewChange(view.viewId)} style = {{cursor:"pointer"}}>Lekcja {view.courseViewOrder}</h3>
           {view.content.map((content: Content) => (
             <ContentDisplay key={content.contentId} content={content} />
           ))}
         </div>
       ))}
       {roles?.includes("ContentCreator") && (
- <button onClick={handleCreateCourseView}>Utworz nowa lekcje </button>
-      )}
+        <div>
+           <button onClick={handleCreateCourseView}>Utworz nowa lekcje </button>
+     <button onClick = {redirectToUpdateCourse} >Edytuj kurs</button>
+     <button onClick = {handleDeleteCourse}>Usuń kurs</button>
+          </div>
+
+     
+     )}
      
     </div>
   );

@@ -36,7 +36,7 @@ const CourseViewDetails: React.FC = () => {
         console.log(courseView?.courseId);
         const viewIdNumber = Number(viewId);
         await deleteCourseView(viewIdNumber);
-        navigate(`/`);
+        navigate(-1);
       }
     }
     
@@ -68,7 +68,7 @@ const CourseViewDetails: React.FC = () => {
 
           {roles?.includes("ContentCreator")
           && (<div>
-             <button onClick= {NavigateToAddContent}>Dodaj Content</button>
+             <button onClick= {NavigateToAddContent}>Dodaj zawartość lekcji</button>
             <button onClick={(handleDelete)}>Usun lekcje</button>
             </div>
           )}

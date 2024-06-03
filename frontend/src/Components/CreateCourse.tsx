@@ -72,10 +72,10 @@ interface MappedCategory {
   
     return (
       <div>
-        <h1>Create Course</h1>
+        <h1>Tworzenie kursu</h1>
         <form onSubmit={handleSubmit}>
           <div>
-            <label htmlFor="courseName">Course Name</label>
+            <label htmlFor="courseName">Nazwa kursu:</label>
             <input
               type="text"
               id="courseName"
@@ -85,7 +85,7 @@ interface MappedCategory {
             />
           </div>
           <div>
-            <label htmlFor="coursePrice">Course Price</label>
+            <label htmlFor="coursePrice">Cena kursu:</label>
             <input
               type="number"
               id="coursePrice"
@@ -95,7 +95,7 @@ interface MappedCategory {
             />
           </div>
           <div>
-            <label htmlFor="courseDescription">Course Description</label>
+            <label htmlFor="courseDescription">Opis kursu:</label>
             <textarea
               id="courseDescription"
               value={courseDescription}
@@ -104,7 +104,7 @@ interface MappedCategory {
             />
           </div>
           <div>
-            <label htmlFor="courseCategories">Categories</label>
+            <label htmlFor="courseCategories">Kategorie:</label>
             <select id="courseCategories" multiple onChange={handleCategoryChange}>
               {categories.map(({ label, value }) => (
                 <option key={value} value={value}>
@@ -113,7 +113,7 @@ interface MappedCategory {
               ))}
             </select>
           </div>
-          <button type="submit">Create Course</button>
+          <button type="submit">Stwórz kurs</button>
           {error && <p>{error}</p>}
         </form>
       </div>

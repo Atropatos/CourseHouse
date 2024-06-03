@@ -6,6 +6,7 @@ import { Course } from '../../Models/Course';
 import CourseDetail from './CourseDetail';
 import { useNavigate } from 'react-router';
 import { useAuth } from '../../Context/useAuth';
+import './/CourseList.css';
 
 
 interface MappedCategory {
@@ -131,7 +132,7 @@ const CourseList: React.FC = () => {
       </ul>
 
       {roles?.includes("ContentCreator") && (
-        <button onClick={redirectToCreateCourse}>Create Course</button>
+        <button className="green-button" onClick={redirectToCreateCourse}>Stworz Kurs</button>
       )}
 
         
