@@ -102,7 +102,7 @@ builder.Services.AddAuthentication(options =>
 });
 builder.Services.AddHttpClient("ApiClient", client =>
 {
-    client.BaseAddress = new Uri("https://localhost:7099"); // Change to your API base address
+    client.BaseAddress = new Uri("https://localhost:5010"); // Change to your API base address
 });
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IContentRepository, ContentRepository>();

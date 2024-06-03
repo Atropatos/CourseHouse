@@ -7,6 +7,8 @@ import { Content } from '../../../Models/Content/Content';
 import ContentDisplay from '../../Content/ContentDisplay/ContentDisplay';
 import { useAuth } from '../../../Context/useAuth';
 import './CourseDetail.css';
+import { postComment, getComments } from '../../../Services/commentService';
+import { Comment } from '../../../Models/Comment';
 
 const CourseDetail: React.FC = () => {
   const { courseId } = useParams<{ courseId: string }>();
@@ -15,6 +17,8 @@ const CourseDetail: React.FC = () => {
   const [course, setCourse] = useState<Course | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [commentContent, setCommentContent] = useState<string>(''); // Use `commentContent` to avoid conflict
+  const [comments, setComments] = useState<Comment[]>([]);
   const { roles, fetchUserRoles } = useAuth();
   const navigate = useNavigate();
 
@@ -26,6 +30,8 @@ const CourseDetail: React.FC = () => {
           try {
             const data = await getCourseById(courseIdNumber);
             setCourse(data);
+            const commentsData = await getComments(courseIdNumber);
+            setComments(commentsData);
           } catch (err) {
             setError('Error fetching course details');
           } finally {
@@ -94,6 +100,22 @@ const CourseDetail: React.FC = () => {
     }
   };
 
+  const handleAddComment = async () => {
+    const courseIdNumber = Number(courseId);
+    if (!isNaN(courseIdNumber) && commentContent.trim()) {
+      try {
+        await postComment(courseIdNumber, commentContent);
+        const updatedComments = await getComments(courseIdNumber);
+        setComments(updatedComments);
+        setCommentContent(''); // Clear the textarea after successful post
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      setError('Comment content cannot be empty');
+    }
+  };
+
   return (
     <div className="container">
       <button className="back-button" onClick={handleBackClick}>Powrot do Listy z kursami</button>
@@ -121,6 +143,29 @@ const CourseDetail: React.FC = () => {
           <button className="red-button" onClick={handleDeleteCourse}>Usuń kurs</button>
         </div>
       )}
+      {roles?.includes("User") && (
+        <>
+            <label htmlFor="komentarz">Dodaj Komentarz: </label>
+      <textarea 
+        id="komentarz" 
+        value={commentContent} 
+        onChange={(e) => setCommentContent(e.target.value)} 
+      />
+      <button className="green-button" onClick={handleAddComment}>Dodaj komentarz</button>
+
+        </>
+
+      )}
+  
+      <h2>Komentarze:</h2>
+  
+      <div className="comments">
+        {comments.map((comment) => (
+          <div key={comment.commentId} className="comment">
+            <p>{comment.authorName}: {comment.commentContent}</p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

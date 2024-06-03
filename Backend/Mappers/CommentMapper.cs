@@ -13,6 +13,7 @@ namespace Backend.Mappers
         {
             return new CommentDto
             {
+                CommmentId = comment.Id,
                 CourseName = comment.Course.CourseName,
                 AuthorName = comment.Author.UserName,
                 CommentContent = comment.CommentContent
