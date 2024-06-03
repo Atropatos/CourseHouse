@@ -1,4 +1,5 @@
-﻿using CourseHouse.Models;
+﻿using Backend.Dtos.Contents;
+using CourseHouse.Models;
 using CoursesHouse.Dtos.Contents;
 
 namespace CoursesHouse.Mappers
@@ -6,9 +7,9 @@ namespace CoursesHouse.Mappers
     public static class ContentMapper
     {
 
-        public static Content ToContentDto(this Content content)
+        public static ContentDto ToContentDto(this Content content)
         {
-            return new Content
+            return new ContentDto
             {
                 ContentId = content.ContentId,
                 Order = content.Order,

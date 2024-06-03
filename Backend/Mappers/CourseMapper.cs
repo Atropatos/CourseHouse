@@ -1,4 +1,5 @@
-﻿using Backend.Models.CourseModels;
+﻿using Backend.Mappers;
+using Backend.Models.CourseModels;
 using CourseHouse.Models;
 using CoursesHouse.Dtos.Courses;
 using CoursesHouse.Dtos.Courses;
@@ -23,41 +24,10 @@ namespace CoursesHouse.Mappers
                     CategoryId = mapping.CourseCategory.CategoryId,
                     CategoryName = mapping.CourseCategory.CategoryName
                 }).ToList(),
-                EnrolledUsers = courseModel.EnrolledUsers.Select(user => new User
-                {
-                    Id = user.Id,
-                    UserName = user.UserName,
-                    Email = user.Email
-                }).ToList(),
-                Comments = courseModel.Comments.Select(comment => new CourseComment
-                {
-                    Id = comment.Id,
-                    CommentContent = comment.CommentContent,
-                    Author = comment.Author
-                }).ToList(),
-                Grades = courseModel.Grades.Select(grade => new CourseGrade
-                {
-                    Id = grade.Id,
-                    Grade = grade.Grade,
-                    Author = grade.Author
-                }).ToList(),
-                CourseViews = courseModel.CourseViews.Select(view => new CourseView
-                {
-                    ViewId = view.ViewId,
-                    CourseViewOrder = view.CourseViewOrder,
-                    CourseId = view.CourseId,
-                    Content = view.Content.Select(content => new Content
-                    {
-                        ContentId = content.ContentId,
-                        Order = content.Order,
-                        CourseViewId = content.CourseViewId,
-                        Title = content.Title,
-                        Text = content.Text,
-                        ContentUrl = content.ContentUrl,
-                        Correct = content.Correct,
-                        ContentType = content.ContentType
-                    }).ToList(),
-                }).ToList()
+                EnrolledUsers = courseModel.EnrolledUsers.Select(a => a.ToUserDto()).ToList(),
+                Comments = courseModel.Comments.Select(a => a.ToCommentDto()).ToList(),
+                Grades = courseModel.Grades.Select(a => a.ToGradeDto()).ToList(),
+                CourseViews = courseModel.CourseViews.Select(a => a.ToCourseViewDto()).ToList()
             };
         }
 

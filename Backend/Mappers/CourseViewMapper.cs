@@ -11,22 +11,14 @@ namespace CoursesHouse.Mappers
         public static CourseViewDto ToCourseViewDto(this CourseView courseView)
         {
             var temp = courseView.Course.ToCourseDto();
-            temp.CourseViews = new List<CourseView>();
+            temp.CourseViews = new List<CourseViewDto>();
+
+
             return new CourseViewDto
             {
                 ViewId = courseView.ViewId,
                 CourseDto = temp,
-                Content = courseView.Content.Select(content => new ContentDto
-                {
-                    ContentId = content.ContentId,
-                    Order = content.Order,
-                    CourseViewId = content.CourseViewId,
-                    Title = content.Title,
-                    Text = content.Text,
-                    ContentUrl = content.ContentUrl,
-                    Correct = content.Correct,
-                    ContentType = content.ContentType
-                }).ToList(),
+                Content = courseView.Content.Select(a => a.ToContentDto()).ToList(),
                 CourseViewOrder = courseView.CourseViewOrder
             };
         }

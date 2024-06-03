@@ -11,7 +11,8 @@ namespace Backend.Interfaces
         Task<List<CourseGrade>> GetAllAsync();
         Task<CourseGrade> GetByIdAsync(int id);
         Task<CourseGrade> DeleteAsync(int id);
-        Task<CourseGrade> UpdateAsync(int id, CourseGrade updatedGrade);
+        Task<CourseGrade> UpdateAsync(int id, decimal updatedGrade);
         Task<CourseGrade> CreateAsync(CourseGrade grade);
+        Task<List<CourseGrade>> GetAllFromCourseAsync(int courseId);
     }
 }
