@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CoursesHouse.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240528114942_Init")]
-    partial class Init
+    [Migration("20240603092458_Init-01")]
+    partial class Init01
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -258,9 +258,13 @@ namespace CoursesHouse.Migrations
 
             modelBuilder.Entity("CourseHouse.Models.CourseComment", b =>
                 {
-                    b.Property<int>("CourseCommentId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    b.Property<string>("AuthorId")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("CommentContent")
                         .IsRequired()
@@ -270,24 +274,24 @@ namespace CoursesHouse.Migrations
                     b.Property<int>("CourseId")
                         .HasColumnType("int");
 
-                    b.Property<string>("id")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
+                    b.HasKey("Id");
 
-                    b.HasKey("CourseCommentId");
+                    b.HasIndex("AuthorId");
 
                     b.HasIndex("CourseId");
-
-                    b.HasIndex("id");
 
                     b.ToTable("CourseComments");
                 });
 
             modelBuilder.Entity("CourseHouse.Models.CourseGrade", b =>
                 {
-                    b.Property<int>("CourseGradeId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    b.Property<string>("AuthorId")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
 
                     b.Property<int>("CourseId")
                         .HasColumnType("int");
@@ -295,15 +299,11 @@ namespace CoursesHouse.Migrations
                     b.Property<decimal>("Grade")
                         .HasColumnType("decimal(2,2)");
 
-                    b.Property<string>("id")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
+                    b.HasKey("Id");
 
-                    b.HasKey("CourseGradeId");
+                    b.HasIndex("AuthorId");
 
                     b.HasIndex("CourseId");
-
-                    b.HasIndex("id");
 
                     b.ToTable("CourseGrades");
                 });
@@ -528,13 +528,13 @@ namespace CoursesHouse.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "1b01bc40-43af-40e1-9cbd-5222676f7bfc",
+                            Id = "0383d143-3191-4ae5-96d5-cc672685552a",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "34ea0b1a-9677-4728-8fd7-757120a6ef20",
+                            Id = "7007f0e9-c6d8-4aaa-981d-4f195c9c50eb",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -689,15 +689,15 @@ namespace CoursesHouse.Migrations
 
             modelBuilder.Entity("CourseHouse.Models.CourseComment", b =>
                 {
-                    b.HasOne("CourseHouse.Models.Course", "Course")
+                    b.HasOne("CourseHouse.Models.User", "Author")
                         .WithMany("Comments")
-                        .HasForeignKey("CourseId")
+                        .HasForeignKey("AuthorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CourseHouse.Models.User", "Author")
-                        .WithMany()
-                        .HasForeignKey("id")
+                    b.HasOne("CourseHouse.Models.Course", "Course")
+                        .WithMany("Comments")
+                        .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -708,15 +708,15 @@ namespace CoursesHouse.Migrations
 
             modelBuilder.Entity("CourseHouse.Models.CourseGrade", b =>
                 {
-                    b.HasOne("CourseHouse.Models.Course", "Course")
+                    b.HasOne("CourseHouse.Models.User", "Author")
                         .WithMany("Grades")
-                        .HasForeignKey("CourseId")
+                        .HasForeignKey("AuthorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CourseHouse.Models.User", "Author")
-                        .WithMany()
-                        .HasForeignKey("id")
+                    b.HasOne("CourseHouse.Models.Course", "Course")
+                        .WithMany("Grades")
+                        .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -875,7 +875,11 @@ namespace CoursesHouse.Migrations
 
             modelBuilder.Entity("CourseHouse.Models.User", b =>
                 {
+                    b.Navigation("Comments");
+
                     b.Navigation("CreatedCourses");
+
+                    b.Navigation("Grades");
 
                     b.Navigation("UserCreditCards");
 

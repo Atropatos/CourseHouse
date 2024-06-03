@@ -100,7 +100,28 @@ namespace CourseHouse.Data
                 .WithMany(u => u.UserCreditCards)
                 .HasForeignKey(cc => cc.id);
 
+            // Configure Course-CourseComment relationship
+            builder.Entity<CourseComment>()
+                .HasOne(cc => cc.Course)
+                .WithMany(c => c.Comments)
+                .HasForeignKey(cc => cc.CourseId);
 
+            // Configure User-CourseComment relationship
+            builder.Entity<CourseComment>()
+                .HasOne(cc => cc.Author)
+                .WithMany(u => u.Comments)
+                .HasForeignKey(cc => cc.AuthorId);
+
+            // Defining CourseGrade relationships
+            builder.Entity<CourseGrade>()
+                .HasOne(cc => cc.Course)
+                .WithMany(c => c.Grades)
+                .HasForeignKey(cc => cc.CourseId);
+
+            builder.Entity<CourseGrade>()
+                .HasOne(cc => cc.Author)
+                .WithMany(u => u.Grades)
+                .HasForeignKey(cc => cc.AuthorId);
 
 
             List<IdentityRole> roles = new List<IdentityRole>

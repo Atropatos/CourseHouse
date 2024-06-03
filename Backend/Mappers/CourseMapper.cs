@@ -31,13 +31,13 @@ namespace CoursesHouse.Mappers
                 }).ToList(),
                 Comments = courseModel.Comments.Select(comment => new CourseComment
                 {
-                    CourseCommentId = comment.CourseCommentId,
+                    Id = comment.Id,
                     CommentContent = comment.CommentContent,
                     Author = comment.Author
                 }).ToList(),
                 Grades = courseModel.Grades.Select(grade => new CourseGrade
                 {
-                    CourseGradeId = grade.CourseGradeId,
+                    Id = grade.Id,
                     Grade = grade.Grade,
                     Author = grade.Author
                 }).ToList(),

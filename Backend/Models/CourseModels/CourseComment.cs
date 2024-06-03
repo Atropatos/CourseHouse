@@ -8,14 +8,14 @@ namespace CourseHouse.Models
     public class CourseComment
     {
         [Key]
-        public int CourseCommentId { get; set; }
+        public int Id { get; set; }
 
         [ForeignKey("Course")]
         public int CourseId { get; set; }
         public Course Course { get; set; }
 
         [ForeignKey("Author")]
-        public string id { get; set; }
+        public string AuthorId { get; set; }
         public User Author { get; set; }
 
         [StringLength(450, MinimumLength = 1, ErrorMessage = "Comment must be between 1 and 450 characters.")]

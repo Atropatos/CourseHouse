@@ -9,7 +9,7 @@ using MySql.EntityFrameworkCore.Metadata;
 namespace CoursesHouse.Migrations
 {
     /// <inheritdoc />
-    public partial class Init : Migration
+    public partial class Init01 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -287,18 +287,18 @@ namespace CoursesHouse.Migrations
                 name: "CourseComments",
                 columns: table => new
                 {
-                    CourseCommentId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     CourseId = table.Column<int>(type: "int", nullable: false),
-                    id = table.Column<string>(type: "varchar(255)", nullable: false),
+                    AuthorId = table.Column<string>(type: "varchar(255)", nullable: false),
                     CommentContent = table.Column<string>(type: "varchar(450)", maxLength: 450, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CourseComments", x => x.CourseCommentId);
+                    table.PrimaryKey("PK_CourseComments", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CourseComments_AspNetUsers_id",
-                        column: x => x.id,
+                        name: "FK_CourseComments_AspNetUsers_AuthorId",
+                        column: x => x.AuthorId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -309,18 +309,18 @@ namespace CoursesHouse.Migrations
                 name: "CourseGrades",
                 columns: table => new
                 {
-                    CourseGradeId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     CourseId = table.Column<int>(type: "int", nullable: false),
-                    id = table.Column<string>(type: "varchar(255)", nullable: false),
+                    AuthorId = table.Column<string>(type: "varchar(255)", nullable: false),
                     Grade = table.Column<decimal>(type: "decimal(2,2)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CourseGrades", x => x.CourseGradeId);
+                    table.PrimaryKey("PK_CourseGrades", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CourseGrades_AspNetUsers_id",
-                        column: x => x.id,
+                        name: "FK_CourseGrades_AspNetUsers_AuthorId",
+                        column: x => x.AuthorId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -413,8 +413,8 @@ namespace CoursesHouse.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "1b01bc40-43af-40e1-9cbd-5222676f7bfc", null, "Admin", "ADMIN" },
-                    { "34ea0b1a-9677-4728-8fd7-757120a6ef20", null, "User", "USER" }
+                    { "0383d143-3191-4ae5-96d5-cc672685552a", null, "Admin", "ADMIN" },
+                    { "7007f0e9-c6d8-4aaa-981d-4f195c9c50eb", null, "User", "USER" }
                 });
 
             migrationBuilder.InsertData(
@@ -498,24 +498,24 @@ namespace CoursesHouse.Migrations
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_CourseComments_AuthorId",
+                table: "CourseComments",
+                column: "AuthorId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_CourseComments_CourseId",
                 table: "CourseComments",
                 column: "CourseId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CourseComments_id",
-                table: "CourseComments",
-                column: "id");
+                name: "IX_CourseGrades_AuthorId",
+                table: "CourseGrades",
+                column: "AuthorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_CourseGrades_CourseId",
                 table: "CourseGrades",
                 column: "CourseId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CourseGrades_id",
-                table: "CourseGrades",
-                column: "id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Courses_PurchaseId",
