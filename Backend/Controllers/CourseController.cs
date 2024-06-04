@@ -154,7 +154,7 @@ namespace CoursesHouse.Controllers
             {
                 return NotFound("Course does not exist");
             }
-            return Ok(course);
+            return NoContent();
         }
     }
 

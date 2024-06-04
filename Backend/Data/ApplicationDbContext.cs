@@ -67,38 +67,15 @@ namespace CourseHouse.Data
                 .WithOne(cc => cc.Course)
                 .HasForeignKey(cc => cc.CourseId);
 
-            builder.Entity<Course>()
-                .HasMany(c => c.Purchases)
-                .WithOne(p => p.Course)
-                .HasForeignKey(p => p.CourseId);
 
-            // Defining Purchase relationships
-            builder.Entity<Purchase>()
-                .HasOne(p => p.User)
-                .WithMany(u => u.UserPurchases)
-                .HasForeignKey(p => p.id);
 
-            builder.Entity<Purchase>()
-                .HasOne(p => p.CereditCard)
-                .WithMany()
-                .HasForeignKey(p => p.CreditCardId);
 
-            // Defining User relationships
-            builder.Entity<User>()
-                .HasMany(u => u.UserCreditCards)
-                .WithOne(cc => cc.User)
-                .HasForeignKey(cc => cc.id);
 
             builder.Entity<User>()
             .HasMany(u => u.CreatedCourses)
             .WithOne(c => c.User)
             .HasForeignKey(c => c.UserId);
 
-            // Defining CreditCard relationships
-            builder.Entity<CreditCard>()
-                .HasOne(cc => cc.User)
-                .WithMany(u => u.UserCreditCards)
-                .HasForeignKey(cc => cc.id);
 
             // Configure Course-CourseComment relationship
             builder.Entity<CourseComment>()

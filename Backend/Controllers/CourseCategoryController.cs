@@ -118,7 +118,7 @@ namespace Backend.Controllers
                 return NotFound("Category does not exist");
             }
 
-            return Ok(category);
+            return NoContent();
         }
     }
 }

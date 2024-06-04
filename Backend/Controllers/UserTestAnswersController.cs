@@ -183,7 +183,7 @@ namespace Backend.Controllers
             {
                 return NotFound("UserTestAnswer does not exist");
             }
-            return Ok(userTestAnswer);
+            return NoContent();
         }
     }
 }

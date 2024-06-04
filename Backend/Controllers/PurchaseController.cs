@@ -1,92 +1,125 @@
-/*using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using CourseHouse.Data;
+using Microsoft.AspNetCore.Mvc;
+using Backend.Dtos.Purchases;
+using Backend.Interfaces;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Backend.Mappers;
 using CourseHouse.Models;
+using Microsoft.AspNetCore.Identity;
+using api.Extensions;
+using CoursesHouse.Interfaces;
 
-*//*
-DO ZROBIENIA
-dodac wszytkie purchase danego uzytkownika
-dodawanie nowego zakupu
-wczytanie danego zakupu wraz z szeczgolami
-
-
-*//*
-
-namespace CourseHouse.Controllers
+namespace Backend.Controllers
 {
     [Route("api/purchase")]
     [ApiController]
+    [Authorize]
     public class PurchaseController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
-        public PurchaseController(ApplicationDbContext context)
+        private readonly IPurchaseRepository _purchaseRepository;
+        private readonly UserManager<User> _userManager;
+        private readonly ICourseRepository _courseRepository;
+
+        public PurchaseController(IPurchaseRepository purchaseRepository, UserManager<User> userManager, ICourseRepository courseRepository)
         {
-            _context = context;
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> GetAllUsers()
-        {
-            var users = await _context.user?.ToListAsync()!;
-
-            return Ok(users);
-        }
-
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetUserById([FromRoute] int id)
-        {
-
-            var user = await _context.user!.FindAsync(id);
-            if (user == null)
-                return NotFound();
-            return Ok(user);
+            _purchaseRepository = purchaseRepository;
+            _userManager = userManager;
+            _courseRepository = courseRepository;
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateUser([FromBody] User newUser)
+        public async Task<IActionResult> Create([FromBody] CreatePurchaseDto purchaseDto)
         {
-            var roleExists = _context.role!.Any(r => r.RoleId == newUser.RoleId);
-            if (!roleExists)
-                return BadRequest("Provided role does not exits!");
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var userName = User.GetUsername();
+            var user = await _userManager.FindByNameAsync(userName);
 
-            await _context.user!.AddAsync(newUser);
-            await _context.SaveChangesAsync();
+            var course = await _courseRepository.GetByIdAsync(purchaseDto.CourseId);
+            if (course == null)
+            {
+                return BadRequest("Course not found.");
+            }
 
-            return CreatedAtAction(nameof(GetUserById), new { Id = newUser.UserId }, newUser);
+            var purchase = purchaseDto.ToPurchaseFromCreateDto();
+            purchase.UserId = user.Id;
+            purchase.Spend = course.CoursePrice;
+            var createdPurchase = await _purchaseRepository.CreateAsync(purchase);
+
+            return CreatedAtAction(nameof(GetById), new { id = createdPurchase.PurchaseId }, createdPurchase);
         }
 
-        [HttpPut]
-        [Route("{id}")]
-        public async Task<IActionResult> UpdateUser([FromRoute] int id, [FromBody] User updatedUser)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
         {
-
-            var user = await _context.user!.FirstOrDefaultAsync(x => x.UserId == id);
-            if (user == null)
-                return NotFound(updatedUser.UserId);
-
-            user.Name = updatedUser.Name;
-            user.LastName = updatedUser.LastName;
-            user.Email = updatedUser.Email;
-            user.RoleId = updatedUser.RoleId;
-
-            await _context.SaveChangesAsync();
-            return Ok(user);
+            var purchase = await _purchaseRepository.GetByIdAsync(id);
+            if (purchase == null)
+            {
+                return NotFound();
+            }
+            return Ok(purchase.ToPurchaseDto());
         }
 
-        [HttpDelete]
-        [Route("{id}")]
-        public async Task<IActionResult> DeleteUser([FromRoute] int id)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(int id, [FromBody] CreatePurchaseDto updatedPurchase)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-            var user = await _context.user!.FirstOrDefaultAsync(x => x.UserId == id);
-            if (user == null)
-                return NotFound(id);
+            var existingPurchase = await _purchaseRepository.GetByIdAsync(id);
+            if (existingPurchase == null)
+            {
+                return NotFound();
+            }
 
-            _context.user?.Remove(user);
-            await _context.SaveChangesAsync();
+            var course = await _courseRepository.GetByIdAsync(updatedPurchase.CourseId);
+            if (course == null)
+            {
+                return BadRequest("Course not found.");
+            }
+
+            var updatedPurchaseEntity = await _purchaseRepository.UpdateAsync(id, updatedPurchase);
+            if (updatedPurchaseEntity == null)
+            {
+                return BadRequest("Failed to update purchase.");
+            }
+
+            return Ok(updatedPurchaseEntity.ToPurchaseDto());
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var deletedPurchase = await _purchaseRepository.DeleteAsync(id);
+            if (deletedPurchase == null)
+            {
+                return NotFound();
+            }
 
             return NoContent();
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            var purchases = await _purchaseRepository.GetAllAsync();
+            var dto = purchases.Select(x => x.ToPurchaseDto()).ToList();
+            return Ok(dto);
+        }
+
+        [HttpGet("/api/user/purchases")]
+        public async Task<IActionResult> GetUserPurchases()
+        {
+            var userName = User.GetUsername();
+            var user = await _userManager.FindByNameAsync(userName);
+
+            var purchases = await _purchaseRepository.GetByUserIdAsync(user.Id);
+            var dto = purchases.Select(x => x.ToPurchaseDto()).ToList();
+            return Ok(dto);
+        }
     }
 }
-*/

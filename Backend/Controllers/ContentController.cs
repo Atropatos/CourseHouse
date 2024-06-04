@@ -104,7 +104,7 @@ namespace CoursesHouse.Controllers
             {
                 return NotFound();
             }
-            return Ok(deletedContent);
+            return NoContent();
         }
 
         [HttpPut("swap-order")]

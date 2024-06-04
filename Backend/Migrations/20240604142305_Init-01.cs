@@ -47,6 +47,21 @@ namespace CoursesHouse.Migrations
                 .Annotation("MySQL:Charset", "utf8mb4");
 
             migrationBuilder.CreateTable(
+                name: "LastVisited",
+                columns: table => new
+                {
+                    LastVisitedId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    UserId = table.Column<string>(type: "longtext", nullable: false),
+                    LastVisitedCourse = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LastVisited", x => x.LastVisitedId);
+                })
+                .Annotation("MySQL:Charset", "utf8mb4");
+
+            migrationBuilder.CreateTable(
                 name: "Roles",
                 columns: table => new
                 {
@@ -199,68 +214,49 @@ namespace CoursesHouse.Migrations
                 .Annotation("MySQL:Charset", "utf8mb4");
 
             migrationBuilder.CreateTable(
+                name: "Courses",
+                columns: table => new
+                {
+                    CourseId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    CourseName = table.Column<string>(type: "longtext", nullable: false),
+                    CoursePrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    CourseDescription = table.Column<string>(type: "longtext", nullable: false),
+                    UserId = table.Column<string>(type: "varchar(255)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Courses", x => x.CourseId);
+                    table.ForeignKey(
+                        name: "FK_Courses_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySQL:Charset", "utf8mb4");
+
+            migrationBuilder.CreateTable(
                 name: "CreditCards",
                 columns: table => new
                 {
                     CreditCardId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     CreditCardNumber = table.Column<string>(type: "longtext", nullable: false),
-                    ExpirationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    ExpirationDate = table.Column<string>(type: "longtext", nullable: false),
                     Cvv = table.Column<string>(type: "longtext", nullable: false),
                     HolderName = table.Column<string>(type: "longtext", nullable: false),
-                    id = table.Column<string>(type: "varchar(255)", nullable: false)
+                    UserId = table.Column<string>(type: "varchar(255)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_CreditCards", x => x.CreditCardId);
                     table.ForeignKey(
-                        name: "FK_CreditCards_AspNetUsers_id",
-                        column: x => x.id,
+                        name: "FK_CreditCards_AspNetUsers_UserId",
+                        column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySQL:Charset", "utf8mb4");
-
-            migrationBuilder.CreateTable(
-                name: "LastVisited",
-                columns: table => new
-                {
-                    LastVisitedId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    id = table.Column<string>(type: "varchar(255)", nullable: false),
-                    LastVisitedCourses = table.Column<string>(type: "longtext", nullable: false),
-                    LastVisitedTime = table.Column<DateTime>(type: "datetime(6)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_LastVisited", x => x.LastVisitedId);
-                    table.ForeignKey(
-                        name: "FK_LastVisited_AspNetUsers_id",
-                        column: x => x.id,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySQL:Charset", "utf8mb4");
-
-            migrationBuilder.CreateTable(
-                name: "Contents",
-                columns: table => new
-                {
-                    ContentId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    Order = table.Column<int>(type: "int", nullable: false),
-                    CourseViewId = table.Column<int>(type: "int", nullable: false),
-                    Title = table.Column<string>(type: "longtext", nullable: false),
-                    Text = table.Column<string>(type: "longtext", nullable: false),
-                    ContentUrl = table.Column<string>(type: "longtext", nullable: false),
-                    Correct = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    ContentType = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Contents", x => x.ContentId);
                 })
                 .Annotation("MySQL:Charset", "utf8mb4");
 
@@ -279,6 +275,12 @@ namespace CoursesHouse.Migrations
                         column: x => x.CategoryId,
                         principalTable: "CourseCategories",
                         principalColumn: "CategoryId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CourseCategoryMapping_Courses_CourseId",
+                        column: x => x.CourseId,
+                        principalTable: "Courses",
+                        principalColumn: "CourseId",
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySQL:Charset", "utf8mb4");
@@ -302,6 +304,12 @@ namespace CoursesHouse.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CourseComments_Courses_CourseId",
+                        column: x => x.CourseId,
+                        principalTable: "Courses",
+                        principalColumn: "CourseId",
+                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySQL:Charset", "utf8mb4");
 
@@ -313,7 +321,7 @@ namespace CoursesHouse.Migrations
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     CourseId = table.Column<int>(type: "int", nullable: false),
                     AuthorId = table.Column<string>(type: "varchar(255)", nullable: false),
-                    Grade = table.Column<decimal>(type: "decimal(2,2)", nullable: false)
+                    Grade = table.Column<decimal>(type: "decimal(4,2)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -324,29 +332,11 @@ namespace CoursesHouse.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySQL:Charset", "utf8mb4");
-
-            migrationBuilder.CreateTable(
-                name: "Courses",
-                columns: table => new
-                {
-                    CourseId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    CourseName = table.Column<string>(type: "longtext", nullable: false),
-                    CoursePrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    CourseDescription = table.Column<string>(type: "longtext", nullable: false),
-                    UserId = table.Column<string>(type: "varchar(255)", nullable: false),
-                    PurchaseId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Courses", x => x.CourseId);
                     table.ForeignKey(
-                        name: "FK_Courses_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
+                        name: "FK_CourseGrades_Courses_CourseId",
+                        column: x => x.CourseId,
+                        principalTable: "Courses",
+                        principalColumn: "CourseId",
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySQL:Charset", "utf8mb4");
@@ -379,17 +369,17 @@ namespace CoursesHouse.Migrations
                     PurchaseId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     CourseId = table.Column<int>(type: "int", nullable: false),
-                    id = table.Column<string>(type: "varchar(255)", nullable: false),
+                    UserId = table.Column<string>(type: "varchar(255)", nullable: false),
                     CreditCardId = table.Column<int>(type: "int", nullable: false),
                     PurchasedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    TotalSpend = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                    Spend = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Purchases", x => x.PurchaseId);
                     table.ForeignKey(
-                        name: "FK_Purchases_AspNetUsers_id",
-                        column: x => x.id,
+                        name: "FK_Purchases_AspNetUsers_UserId",
+                        column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -399,11 +389,31 @@ namespace CoursesHouse.Migrations
                         principalTable: "Courses",
                         principalColumn: "CourseId",
                         onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySQL:Charset", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "Contents",
+                columns: table => new
+                {
+                    ContentId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    Order = table.Column<int>(type: "int", nullable: false),
+                    CourseViewId = table.Column<int>(type: "int", nullable: false),
+                    Title = table.Column<string>(type: "longtext", nullable: false),
+                    Text = table.Column<string>(type: "longtext", nullable: false),
+                    ContentUrl = table.Column<string>(type: "longtext", nullable: false),
+                    Correct = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    ContentType = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Contents", x => x.ContentId);
                     table.ForeignKey(
-                        name: "FK_Purchases_CreditCards_CreditCardId",
-                        column: x => x.CreditCardId,
-                        principalTable: "CreditCards",
-                        principalColumn: "CreditCardId",
+                        name: "FK_Contents_CourseViews_CourseViewId",
+                        column: x => x.CourseViewId,
+                        principalTable: "CourseViews",
+                        principalColumn: "ViewId",
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySQL:Charset", "utf8mb4");
@@ -413,8 +423,8 @@ namespace CoursesHouse.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "0383d143-3191-4ae5-96d5-cc672685552a", null, "Admin", "ADMIN" },
-                    { "7007f0e9-c6d8-4aaa-981d-4f195c9c50eb", null, "User", "USER" }
+                    { "157b46e2-6561-4756-806d-1fd6de5c2a78", null, "Admin", "ADMIN" },
+                    { "2db0452a-622e-4866-b30d-1cfb711b00e9", null, "User", "USER" }
                 });
 
             migrationBuilder.InsertData(
@@ -518,11 +528,6 @@ namespace CoursesHouse.Migrations
                 column: "CourseId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Courses_PurchaseId",
-                table: "Courses",
-                column: "PurchaseId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Courses_UserId",
                 table: "Courses",
                 column: "UserId");
@@ -533,14 +538,9 @@ namespace CoursesHouse.Migrations
                 column: "CourseId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CreditCards_id",
+                name: "IX_CreditCards_UserId",
                 table: "CreditCards",
-                column: "id");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_LastVisited_id",
-                table: "LastVisited",
-                column: "id");
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Purchases_CourseId",
@@ -548,14 +548,9 @@ namespace CoursesHouse.Migrations
                 column: "CourseId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Purchases_CreditCardId",
+                name: "IX_Purchases_UserId",
                 table: "Purchases",
-                column: "CreditCardId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Purchases_id",
-                table: "Purchases",
-                column: "id");
+                column: "UserId");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_AspNetUserClaims_AspNetUsers_UserId",
@@ -587,45 +582,6 @@ namespace CoursesHouse.Migrations
                 column: "CourseId",
                 principalTable: "Courses",
                 principalColumn: "CourseId");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Contents_CourseViews_CourseViewId",
-                table: "Contents",
-                column: "CourseViewId",
-                principalTable: "CourseViews",
-                principalColumn: "ViewId",
-                onDelete: ReferentialAction.Cascade);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_CourseCategoryMapping_Courses_CourseId",
-                table: "CourseCategoryMapping",
-                column: "CourseId",
-                principalTable: "Courses",
-                principalColumn: "CourseId",
-                onDelete: ReferentialAction.Cascade);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_CourseComments_Courses_CourseId",
-                table: "CourseComments",
-                column: "CourseId",
-                principalTable: "Courses",
-                principalColumn: "CourseId",
-                onDelete: ReferentialAction.Cascade);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_CourseGrades_Courses_CourseId",
-                table: "CourseGrades",
-                column: "CourseId",
-                principalTable: "Courses",
-                principalColumn: "CourseId",
-                onDelete: ReferentialAction.Cascade);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Courses_Purchases_PurchaseId",
-                table: "Courses",
-                column: "PurchaseId",
-                principalTable: "Purchases",
-                principalColumn: "PurchaseId");
         }
 
         /// <inheritdoc />
@@ -634,18 +590,6 @@ namespace CoursesHouse.Migrations
             migrationBuilder.DropForeignKey(
                 name: "FK_Courses_AspNetUsers_UserId",
                 table: "Courses");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_CreditCards_AspNetUsers_id",
-                table: "CreditCards");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_Purchases_AspNetUsers_id",
-                table: "Purchases");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_Purchases_Courses_CourseId",
-                table: "Purchases");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
@@ -675,7 +619,13 @@ namespace CoursesHouse.Migrations
                 name: "CourseGrades");
 
             migrationBuilder.DropTable(
+                name: "CreditCards");
+
+            migrationBuilder.DropTable(
                 name: "LastVisited");
+
+            migrationBuilder.DropTable(
+                name: "Purchases");
 
             migrationBuilder.DropTable(
                 name: "Roles");
@@ -697,12 +647,6 @@ namespace CoursesHouse.Migrations
 
             migrationBuilder.DropTable(
                 name: "Courses");
-
-            migrationBuilder.DropTable(
-                name: "Purchases");
-
-            migrationBuilder.DropTable(
-                name: "CreditCards");
         }
     }
 }
