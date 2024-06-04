@@ -21,20 +21,28 @@ namespace CoursesHouse.Repository
 
         public async Task<List<User>> GetAllAsync()
         {
-            return await _context.Users!
+            var users = await _context.Users!
                 .Include(a => a.UserPurchases)
                 .Include(a => a.UserCreditCards)
                 .Include(a => a.CreatedCourses)
+                .Include(a => a.Comments)
+                .Include(a => a.Grades)
                 .ToListAsync();
+
+            return users;
         }
 
         public async Task<User?> GetByIdAsync(string id)
         {
-            return await _context.Users!
+            var user = await _context.Users!
                 .Include(a => a.UserPurchases)
                 .Include(a => a.UserCreditCards)
                 .Include(a => a.CreatedCourses)
+                .Include(a => a.Comments)
+                .Include(a => a.Grades)
                 .FirstOrDefaultAsync(x => x.Id == id);
+
+            return user;
         }
 
         public async Task<User> CreateAsync(User user)
@@ -113,8 +121,8 @@ namespace CoursesHouse.Repository
             {
                 return null;
             }
-
-            return (List<string>)await _userManager.GetRolesAsync(user);
+            var roles = await _userManager.GetRolesAsync(user);
+            return roles.ToList();
         }
     }
 }

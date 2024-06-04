@@ -27,7 +27,7 @@ namespace CourseHouse.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+        //[Authorize]
         public async Task<IActionResult> GetAllUsers()
         {
             var users = await _userRepo.GetAllAsync();
@@ -37,7 +37,7 @@ namespace CourseHouse.Controllers
             {
                 var roles = await _userRepo.GetUserRolesAsync(user.Id);
                 var userDto = user.ToUserDto();
-                userDto.Roles = roles.ToList();
+                userDto.Roles = roles; // No need to call ToList() again, it's already a List<string>
                 usersWithRoles.Add(userDto);
             }
 
@@ -52,7 +52,10 @@ namespace CourseHouse.Controllers
             if (user == null)
                 return NotFound();
             var userRole = await _userRepo.GetUserRolesAsync(user.Id);
-            return Ok(new { user, userRole });
+            var userDto = user.ToUserDto();
+            userDto.Roles = userRole.ToList();
+
+            return Ok(userDto);
         }
 
         [HttpPut("{id}")]

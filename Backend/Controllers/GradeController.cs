@@ -34,7 +34,7 @@ namespace Backend.Controllers
         public async Task<IActionResult> GetAll()
         {
             var grades = await _gradeRepo.GetAllAsync();
-            if (grades == null)
+            if (grades.Count() == 0)
             {
                 return NotFound();
             }
