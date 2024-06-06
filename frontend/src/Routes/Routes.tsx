@@ -11,6 +11,7 @@ import CourseViewDetails from "../Components/CourseView/CourseViewDetails";
 import AddContent from "../Components/Content/AddContent/AddContent";
 import UpdateContent from "../Components/Content/UpdateContent/UpdateContent";
 import UpdateCourse from "../Components/Course/UpdateCourse/UpdateCourse";
+import ChangePassword from "../Components/User/ChangePassword";
 
 
 
@@ -29,7 +30,8 @@ export const router = createBrowserRouter([
             {path: "search", element: <SearchPage/>},
             {path: "courseView/:viewId", element: <CourseViewDetails/>},
             { path: "courseView/:viewId/addContent", element: <AddContent/>},
-        { path: "updateContent/:contentId", element: <UpdateContent/>}
+        { path: "updateContent/:contentId", element: <UpdateContent/>},
+        { path: "change-password", element: <ChangePassword/>}
         ]
     }
 ]);

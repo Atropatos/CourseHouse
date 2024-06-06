@@ -34,3 +34,4 @@ export const registerAPI = async (
     handleError(error);
   }
 };
+

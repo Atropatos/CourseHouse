@@ -4,7 +4,6 @@ import { deleteCourseView, getCourseViewById } from '../../Services/courseViewSe
 import { CourseView } from '../../Models/Course/CourseView';
 import { Content } from '../../Models/Content/Content';
 import { useAuth } from '../../Context/useAuth';
-import './CourseViewDetails.css';
 
 const CourseViewDetails: React.FC = () => {
   const { viewId } = useParams<{ viewId: string }>();
@@ -40,14 +39,14 @@ const CourseViewDetails: React.FC = () => {
   };
 
   return (
-    <div className="container">
+    <div className="container mx-auto p-4">
       <div key={courseView?.viewId}>
-        <h3>Lekcja {courseView?.courseViewOrder}</h3>
+        <h3 className="text-xl font-bold mb-4">Lekcja {courseView?.courseViewOrder}</h3>
         {courseView?.content.map((content: Content) => (
-          <div key={content.contentId} className="content-item">
+          <div key={content.contentId} className="content-item mb-4 p-4 border rounded shadow">
             <h2
               onClick={() => NavigateToUpdateContent(content.contentId)}
-              className="content-title"
+              className="content-title text-lg font-semibold cursor-pointer text-blue-500"
             >
               {content.title}
             </h2>
@@ -57,9 +56,19 @@ const CourseViewDetails: React.FC = () => {
       </div>
 
       {roles?.includes("ContentCreator") && (
-        <div className="button-container">
-          <button className="add-content-button" onClick={NavigateToAddContent}>Dodaj zawartość lekcji</button>
-          <button className="delete-button" onClick={handleDelete}>Usuń lekcję</button>
+        <div className="flex space-x-4 mt-4">
+          <button
+            className="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600"
+            onClick={NavigateToAddContent}
+          >
+            Dodaj zawartość lekcji
+          </button>
+          <button
+            className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600"
+            onClick={handleDelete}
+          >
+            Usuń lekcję
+          </button>
         </div>
       )}
     </div>

@@ -1,4 +1,3 @@
-// src/components/UpdateContent.tsx
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { deleteContent, getContent, updateContent } from '../../../Services/contentService';
@@ -47,55 +46,58 @@ const UpdateContent: React.FC = () => {
     }
   };
 
-  const handleDeleteContent = async() => {
+  const handleDeleteContent = async () => {
     try {
-      var contentIdToDelete = Number(contentId);
+      const contentIdToDelete = Number(contentId);
       await deleteContent(contentIdToDelete);
       navigate(-1);
-    }
-    catch (error) {
+    } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   return (
-    <div>
-      <h1>Edytuj zawartość</h1>
-      <div>
-        <label>
+    <div className="container mx-auto p-4">
+      <h1 className="text-2xl font-bold mb-4">Edytuj zawartość</h1>
+      <div className="mb-4">
+        <label className="block text-gray-700 text-sm font-bold mb-2">
           Tytuł:
           <input
             type="text"
             value={contentTitle}
             onChange={(e) => setContentTitle(e.target.value)}
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
         </label>
       </div>
-      <div>
-        <label>
+      <div className="mb-4">
+        <label className="block text-gray-700 text-sm font-bold mb-2">
           Treść:
           <textarea
             value={contentBody}
             onChange={(e) => setContentBody(e.target.value)}
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
         </label>
       </div>
-      <div>
-        {/* <label>
+      <div className="mb-4">
+        {/* <label className="block text-gray-700 text-sm font-bold mb-2">
           URL:
           <input
             type="text"
             value={contentUrl}
             onChange={(e) => setContentUrl(e.target.value)}
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
         </label> */}
       </div>
-      <div>
-        <label>
+      <div className="mb-4">
+        <label className="block text-gray-700 text-sm font-bold mb-2">
           Kategoria:
           <select
             value={contentType}
             onChange={(e) => setContentType(Number(e.target.value))}
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           >
             <option value={ContentType.Text}>Tekst</option>
             <option value={ContentType.Picture}>Obraz</option>
@@ -104,8 +106,20 @@ const UpdateContent: React.FC = () => {
           </select>
         </label>
       </div>
-      <button onClick={handleUpdateContent}>Zatwierdź</button>
-      <button onClick={handleDeleteContent}>Usuń zawartość</button>
+      <div className="flex space-x-4">
+        <button
+          onClick={handleUpdateContent}
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        >
+          Zatwierdź
+        </button>
+        <button
+          onClick={handleDeleteContent}
+          className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        >
+          Usuń zawartość
+        </button>
+      </div>
     </div>
   );
 };

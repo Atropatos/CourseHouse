@@ -48,7 +48,7 @@ namespace Backend.Controllers
             var comments = await _commentRepo.GetAllFromCourseAsync(courseId);
             if (comments.Count() == 0)
             {
-                return NotFound();
+                return Ok(new List<CommentDto>());
             }
             var commentDto = comments.Select(c => c.ToCommentDto());
             return Ok(commentDto);

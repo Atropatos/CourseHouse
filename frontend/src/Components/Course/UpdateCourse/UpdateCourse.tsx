@@ -34,7 +34,12 @@ const UpdateCourse: React.FC = () => {
           setCourseName(fetchedCourse.courseName);
           setCoursePrice(fetchedCourse.coursePrice.toString());
           setCourseDescription(fetchedCourse.courseDescription);
+          // setCategories(fetchedCourse.courseCategories.map((category: CourseCategory) => ({
+          //   label: category.categoryName,
+          //   value: category.courseCategoryId,
+          // })));
           setSelectedCategoryIds(fetchedCourse.courseCategories.map((cat: CourseCategory) => cat.courseCategoryId));
+          
         }
       } catch (err) {
         setError('Error fetching data');
@@ -76,41 +81,50 @@ const UpdateCourse: React.FC = () => {
   }
 
   return (
-    <div>
-      <h1>Edytuj kurs</h1>
-      <form onSubmit={handleSubmit}>
+    <div className="max-w-2xl mx-auto p-4">
+      <h1 className="text-2xl font-bold mb-4">Edytuj kurs</h1>
+      <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label htmlFor="courseName">Nazwa kursu</label>
+          <label htmlFor="courseName" className="block text-gray-700">Nazwa kursu</label>
           <input
             type="text"
             id="courseName"
             value={courseName}
             onChange={(e) => setCourseName(e.target.value)}
             required
+            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
           />
         </div>
         <div>
-          <label htmlFor="coursePrice">Cena kursu</label>
+          <label htmlFor="coursePrice" className="block text-gray-700">Cena kursu</label>
           <input
             type="number"
             id="coursePrice"
             value={coursePrice}
             onChange={(e) => setCoursePrice(e.target.value)}
             required
+            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
           />
         </div>
         <div>
-          <label htmlFor="courseDescription">Opis kursu</label>
+          <label htmlFor="courseDescription" className="block text-gray-700">Opis kursu</label>
           <textarea
             id="courseDescription"
             value={courseDescription}
             onChange={(e) => setCourseDescription(e.target.value)}
             required
+            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
           />
         </div>
         <div>
-          <label htmlFor="courseCategories">Kategorie</label>
-          <select id="courseCategories" multiple onChange={handleCategoryChange} value={selectedCategoryIds.map(String)}>
+          <label htmlFor="courseCategories" className="block text-gray-700">Kategorie</label>
+          <select
+            id="courseCategories"
+            multiple
+            onChange={handleCategoryChange}
+            value={selectedCategoryIds.map(String)}
+            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+          >
             {categories.map(({ label, value }) => (
               <option key={value} value={value}>
                 {label}
@@ -118,8 +132,13 @@ const UpdateCourse: React.FC = () => {
             ))}
           </select>
         </div>
-        <button type="submit">Zatwierdź</button>
-        {error && <p>{error}</p>}
+        <button
+          type="submit"
+          className="w-full py-2 px-4 bg-blue-500 hover:bg-blue-700 text-white font-bold rounded focus:outline-none focus:shadow-outline"
+        >
+          Zatwierdź
+        </button>
+        {error && <p className="text-red-500">{error}</p>}
       </form>
     </div>
   );

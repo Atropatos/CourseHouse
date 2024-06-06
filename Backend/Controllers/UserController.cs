@@ -11,6 +11,8 @@ using Backend.Mappers;
 using Backend.Dtos;
 using api.Extensions;
 using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
+using CoursesHouse.Dtos.UserDtos;
 
 namespace CourseHouse.Controllers
 {
@@ -107,5 +109,34 @@ namespace CourseHouse.Controllers
 
             return BadRequest("Password update failed");
         }
+
+        [HttpPost("change-password")]
+        public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordDto changePasswordDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var user = await _userManager.FindByIdAsync(userId);
+
+            if (user == null)
+            {
+                return NotFound("User not found");
+            }
+
+            var result = await _userManager.ChangePasswordAsync(user, changePasswordDto.CurrentPassword, changePasswordDto.NewPassword);
+
+            if (!result.Succeeded)
+            {
+                return BadRequest(result.Errors);
+            }
+
+            return Ok("Password changed successfully");
+        }
     }
+
+  
 }
+

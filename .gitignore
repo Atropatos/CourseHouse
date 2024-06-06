@@ -508,3 +508,6 @@ npm-debug.log
 
 # Vim temporary swap files
 /Backend/*.swp
+
+
+/Backend/.vs/
