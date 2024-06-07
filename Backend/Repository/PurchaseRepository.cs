@@ -22,6 +22,7 @@ namespace Backend.Repository
         public async Task<Purchase> CreateAsync(Purchase purchase)
         {
             _context.purchase!.Add(purchase);
+            _context.course!.Find(purchase.CourseId)!.EnrolledUsers.Add(_context.user!.Find(purchase.UserId)!);
             await _context.SaveChangesAsync();
             return purchase;
         }
