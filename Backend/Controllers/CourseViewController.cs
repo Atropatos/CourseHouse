@@ -74,7 +74,7 @@ namespace CoursesHouse.Controllers
             var courseView = courseViewDto.ToCourseFromCreate();
             courseView.CourseViewOrder = maxOrder + 1;
             var createdCourseView = await _courseViewRepo.CreateAsync(courseView);
-            return CreatedAtAction(nameof(GetById), new { id = createdCourseView.ViewId }, createdCourseView.ToCourseViewDto());
+            return CreatedAtAction(nameof(GetById), new { id = createdCourseView.ViewId }, createdCourseView.ToSimpleCourseViewDto());
         }
 
         [HttpPut("{id}")]

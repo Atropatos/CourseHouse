@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CoursesHouse.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240604142305_Init-01")]
-    partial class Init01
+    [Migration("20240607154946_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -516,13 +516,13 @@ namespace CoursesHouse.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "157b46e2-6561-4756-806d-1fd6de5c2a78",
+                            Id = "1e7edc61-2cfa-4385-a051-b8a5be376a07",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "2db0452a-622e-4866-b30d-1cfb711b00e9",
+                            Id = "6d023282-2de2-457d-9c17-b2c15dbf391a",
                             Name = "User",
                             NormalizedName = "USER"
                         });

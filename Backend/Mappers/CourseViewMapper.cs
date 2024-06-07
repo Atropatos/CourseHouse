@@ -1,5 +1,6 @@
 ﻿
 using Backend.Dtos.Contents;
+using Backend.Dtos.CourseViews;
 using CourseHouse.Models;
 using CoursesHouse.Dtos.Courses;
 using CoursesHouse.Dtos.CourseViews;
@@ -10,14 +11,10 @@ namespace CoursesHouse.Mappers
 
         public static CourseViewDto ToCourseViewDto(this CourseView courseView)
         {
-            var temp = courseView.Course.ToCourseDto();
-            temp.CourseViews = new List<CourseViewDto>();
-
-
             return new CourseViewDto
             {
                 ViewId = courseView.ViewId,
-                CourseDto = temp,
+                SimpleCourseDto = courseView.Course.ToSimpleCourseDto(),
                 Content = courseView.Content.Select(a => a.ToContentDto()).ToList(),
                 CourseViewOrder = courseView.CourseViewOrder
             };
@@ -28,6 +25,16 @@ namespace CoursesHouse.Mappers
             return new CourseView
             {
                 CourseId = courseDto.CourseId,
+            };
+        }
+
+        public static SimpleCourseViewDto ToSimpleCourseViewDto(this CourseView courseView)
+        {
+            return new SimpleCourseViewDto
+            {
+                ViewId = courseView.ViewId,
+                CourseDto = courseView.Course.ToSimpleCourseDto(),
+                CourseViewOrder = courseView.CourseViewOrder
             };
         }
     }

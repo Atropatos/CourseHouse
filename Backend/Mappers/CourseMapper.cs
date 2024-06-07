@@ -1,7 +1,7 @@
-﻿using Backend.Mappers;
+﻿using Backend.Dtos.Courses;
+using Backend.Mappers;
 using Backend.Models.CourseModels;
 using CourseHouse.Models;
-using CoursesHouse.Dtos.Courses;
 using CoursesHouse.Dtos.Courses;
 using CoursesHouse.Dtos.CourseViews;
 using CoursesHouse.Interfaces;
@@ -38,6 +38,17 @@ namespace CoursesHouse.Mappers
                 CourseName = courseDto.CourseName,
                 CoursePrice = courseDto.CoursePrice,
                 CourseDescription = courseDto.CourseDescription,
+            };
+        }
+
+        public static SimpleCourseDto ToSimpleCourseDto(this Course courseModel)
+        {
+            return new SimpleCourseDto
+            {
+                CourseId = courseModel.CourseId,
+                CourseName = courseModel.CourseName,
+                CoursePrice = courseModel.CoursePrice,
+                CourseDescription = courseModel.CourseDescription
             };
         }
     }

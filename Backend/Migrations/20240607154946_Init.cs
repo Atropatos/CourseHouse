@@ -9,7 +9,7 @@ using MySql.EntityFrameworkCore.Metadata;
 namespace CoursesHouse.Migrations
 {
     /// <inheritdoc />
-    public partial class Init01 : Migration
+    public partial class Init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -423,8 +423,8 @@ namespace CoursesHouse.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "157b46e2-6561-4756-806d-1fd6de5c2a78", null, "Admin", "ADMIN" },
-                    { "2db0452a-622e-4866-b30d-1cfb711b00e9", null, "User", "USER" }
+                    { "1e7edc61-2cfa-4385-a051-b8a5be376a07", null, "Admin", "ADMIN" },
+                    { "6d023282-2de2-457d-9c17-b2c15dbf391a", null, "User", "USER" }
                 });
 
             migrationBuilder.InsertData(
