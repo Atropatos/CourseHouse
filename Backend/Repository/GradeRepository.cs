@@ -19,12 +19,12 @@ namespace Backend.Repository
 
         public async Task<List<CourseGrade>> GetAllAsync()
         {
-            return await _context.courseGrade!.ToListAsync();
+            return await _context.courseGrade!.Include(a => a.Course).Include(a => a.Author).ToListAsync();
         }
 
         public async Task<CourseGrade> GetByIdAsync(int id)
         {
-            return await _context.courseGrade!.FindAsync(id);
+            return await _context.courseGrade!.Include(a => a.Course).Include(a => a.Author).FirstOrDefaultAsync(a => a.Id == id);
         }
 
         public async Task<CourseGrade> CreateAsync(CourseGrade grade)
@@ -34,7 +34,7 @@ namespace Backend.Repository
             return grade;
         }
 
-        public async Task<CourseGrade> UpdateAsync(int id, CourseGrade updatedGrade)
+        public async Task<CourseGrade> UpdateAsync(int id, decimal updatedGrade)
         {
             var existingGrade = await _context.courseGrade!.FindAsync(id);
 
@@ -43,7 +43,7 @@ namespace Backend.Repository
                 return null;
             }
 
-            existingGrade.Grade = updatedGrade.Grade;
+            existingGrade.Grade = updatedGrade;
 
             await _context.SaveChangesAsync();
             return existingGrade;
@@ -61,6 +61,11 @@ namespace Backend.Repository
             await _context.SaveChangesAsync();
 
             return grade;
+        }
+        public async Task<List<CourseGrade>> GetAllFromCourseAsync(int courseId)
+        {
+            var grades = await _context.courseGrade!.Include(c => c.Course).Include(c => c.Author).Where(c => c.CourseId == courseId).ToListAsync();
+            return grades;
         }
     }
 }

@@ -18,7 +18,7 @@ namespace CourseHouse.Models
         public string AuthorId { get; set; }
         public User Author { get; set; }
 
-        [Column(TypeName = "decimal(2,2)")]
+        [Column(TypeName = "decimal(4,2)")]
         [Range(0.0, 10.0, ErrorMessage = "Grade must be between 0.0 to 10.0")]
         public decimal Grade { get; set; }
     }

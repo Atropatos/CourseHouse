@@ -74,8 +74,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddIdentity<User, IdentityRole>(options =>
 {
     options.Password.RequireDigit = true;
-})
-    .AddEntityFrameworkStores<ApplicationDbContext>();
+}).AddEntityFrameworkStores<ApplicationDbContext>();
 
 
 builder.Services.AddAuthentication(options =>
@@ -114,6 +113,9 @@ builder.Services.AddScoped<IUserTestAnswers, UserTestAnswersRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ICommentRepository, CommentRepository>();
 builder.Services.AddScoped<IGradeRepository, GradeRepository>();
+builder.Services.AddScoped<ILastVisitedRepository, LastVisitedRepository>();
+builder.Services.AddScoped<ICreditCardRepository, CreditCardRepository>();
+builder.Services.AddScoped<IPurchaseRepository, PurchaseRepository>();
 
 
 builder.Services.AddScoped<ICourseViewRepository, CourseViewRepository>();

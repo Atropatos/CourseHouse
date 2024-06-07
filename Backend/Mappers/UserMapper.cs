@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Backend.Dtos;
 using Backend.Dtos.UserDtos;
 using CourseHouse.Models;
+using CoursesHouse.Mappers;
 
 namespace Backend.Mappers
 {
@@ -17,8 +18,12 @@ namespace Backend.Mappers
                 Id = user.Id,
                 UserName = user.UserName,
                 Emial = user.Email,
+                Roles = new List<string>(),
                 UserPurchases = user.UserPurchases,
                 UserCreditCards = user.UserCreditCards,
+                CreatedCourses = user.CreatedCourses.Select(a => a.ToCourseDto()).ToList(),
+                Comments = user.Comments.Select(a => a.ToCommentDto()).ToList(),
+                Grades = user.Grades.Select(a => a.ToGradeDto()).ToList()
             };
         }
 
@@ -29,8 +34,6 @@ namespace Backend.Mappers
                 Id = userDto.Id,
                 UserName = userDto.UserName,
                 Email = userDto.Emial,
-                UserPurchases = userDto.UserPurchases,
-                UserCreditCards = userDto.UserCreditCards,
             };
         }
 

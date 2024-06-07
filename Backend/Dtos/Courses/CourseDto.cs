@@ -2,6 +2,9 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using Backend.Models.CourseModels;
+using Backend.Dtos.Courses;
+using CoursesHouse.Dtos.CourseViews;
+using Backend.Dtos;
 
 namespace CoursesHouse.Dtos.Courses
 {
@@ -15,9 +18,9 @@ namespace CoursesHouse.Dtos.Courses
 
         public List<CourseCategory> CourseCategories { get; set; } = new List<CourseCategory>();
 
-        public List<User> EnrolledUsers { get; set; } = new List<User>();
-        public List<CourseComment> Comments { get; set; } = new List<CourseComment>();
-        public List<CourseGrade> Grades { get; set; } = new List<CourseGrade>();
-        public List<CourseView> CourseViews { get; set; } = new List<CourseView>();
+        public List<UserDto> EnrolledUsers { get; set; } = new List<UserDto>();
+        public List<CommentDto> Comments { get; set; } = new List<CommentDto>();
+        public List<GradeDto> Grades { get; set; } = new List<GradeDto>();
+        public List<CourseViewDto> CourseViews { get; set; } = new List<CourseViewDto>();
     }
 }

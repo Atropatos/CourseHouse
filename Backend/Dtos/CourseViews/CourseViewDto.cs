@@ -1,4 +1,5 @@
 ﻿using Backend.Dtos.Contents;
+using Backend.Dtos.Courses;
 using CourseHouse.Models;
 using CoursesHouse.Dtos.Courses;
 namespace CoursesHouse.Dtos.CourseViews
@@ -7,7 +8,7 @@ namespace CoursesHouse.Dtos.CourseViews
     {
         public int ViewId { get; set; }
 
-        public CourseDto CourseDto { get; set; } = new CourseDto();
+        public SimpleCourseDto SimpleCourseDto { get; set; } = new SimpleCourseDto();
         public int CourseViewOrder { get; set; }
 
         public List<ContentDto> Content { get; set; } = new List<ContentDto>();

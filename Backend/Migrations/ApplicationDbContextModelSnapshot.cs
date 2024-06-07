@@ -237,16 +237,11 @@ namespace CoursesHouse.Migrations
                     b.Property<decimal>("CoursePrice")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int?>("PurchaseId")
-                        .HasColumnType("int");
-
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("varchar(255)");
 
                     b.HasKey("CourseId");
-
-                    b.HasIndex("PurchaseId");
 
                     b.HasIndex("UserId");
 
@@ -290,7 +285,7 @@ namespace CoursesHouse.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("Grade")
-                        .HasColumnType("decimal(2,2)");
+                        .HasColumnType("decimal(4,2)");
 
                     b.Property<string>("id")
                         .IsRequired()
@@ -338,20 +333,21 @@ namespace CoursesHouse.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<DateTime>("ExpirationDate")
-                        .HasColumnType("datetime(6)");
+                    b.Property<string>("ExpirationDate")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<string>("HolderName")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<string>("id")
+                    b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("varchar(255)");
 
                     b.HasKey("CreditCardId");
 
-                    b.HasIndex("id");
+                    b.HasIndex("UserId");
 
                     b.ToTable("CreditCards");
                 });
@@ -362,20 +358,14 @@ namespace CoursesHouse.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("LastVisitedCourses")
+                    b.Property<int>("LastVisitedCourse")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<DateTime>("LastVisitedTime")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("id")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
-
                     b.HasKey("LastVisitedId");
-
-                    b.HasIndex("id");
 
                     b.ToTable("LastVisited");
                 });
@@ -395,10 +385,10 @@ namespace CoursesHouse.Migrations
                     b.Property<DateTime>("PurchasedOn")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<decimal>("TotalSpend")
+                    b.Property<decimal>("Spend")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("id")
+                    b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("varchar(255)");
 
@@ -406,9 +396,7 @@ namespace CoursesHouse.Migrations
 
                     b.HasIndex("CourseId");
 
-                    b.HasIndex("CreditCardId");
-
-                    b.HasIndex("id");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Purchases");
                 });
@@ -525,13 +513,21 @@ namespace CoursesHouse.Migrations
                     b.HasData(
                         new
                         {
+<<<<<<< HEAD
                             Id = "9bd959a4-0353-4d8a-8821-fb2c1d02302c",
+=======
+                            Id = "1e7edc61-2cfa-4385-a051-b8a5be376a07",
+>>>>>>> EmanuelDev
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
+<<<<<<< HEAD
                             Id = "d05acd4e-18a9-4607-b8d0-636ffd0425d3",
+=======
+                            Id = "6d023282-2de2-457d-9c17-b2c15dbf391a",
+>>>>>>> EmanuelDev
                             Name = "User",
                             NormalizedName = "USER"
                         },
@@ -677,10 +673,6 @@ namespace CoursesHouse.Migrations
 
             modelBuilder.Entity("CourseHouse.Models.Course", b =>
                 {
-                    b.HasOne("CourseHouse.Models.Purchase", null)
-                        .WithMany("PurachasedCourses")
-                        .HasForeignKey("PurchaseId");
-
                     b.HasOne("CourseHouse.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
@@ -741,34 +733,33 @@ namespace CoursesHouse.Migrations
 
             modelBuilder.Entity("CourseHouse.Models.CreditCard", b =>
                 {
+<<<<<<< HEAD
                     b.HasOne("CourseHouse.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("id")
+=======
+                    b.HasOne("CourseHouse.Models.User", null)
+                        .WithMany("UserCreditCards")
+                        .HasForeignKey("UserId")
+>>>>>>> EmanuelDev
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("CourseHouse.Models.LastVisited", b =>
-                {
-                    b.HasOne("CourseHouse.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("CourseHouse.Models.Purchase", b =>
                 {
+<<<<<<< HEAD
                     b.HasOne("CourseHouse.Models.Course", "Course")
                         .WithMany()
+=======
+                    b.HasOne("CourseHouse.Models.Course", null)
+                        .WithMany("Purchases")
+>>>>>>> EmanuelDev
                         .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+<<<<<<< HEAD
                     b.HasOne("CourseHouse.Models.CreditCard", "CereditCard")
                         .WithMany()
                         .HasForeignKey("CreditCardId")
@@ -778,14 +769,13 @@ namespace CoursesHouse.Migrations
                     b.HasOne("CourseHouse.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("id")
+=======
+                    b.HasOne("CourseHouse.Models.User", null)
+                        .WithMany("UserPurchases")
+                        .HasForeignKey("UserId")
+>>>>>>> EmanuelDev
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("CereditCard");
-
-                    b.Navigation("Course");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("CourseHouse.Models.User", b =>
@@ -869,9 +859,23 @@ namespace CoursesHouse.Migrations
                     b.Navigation("Content");
                 });
 
+<<<<<<< HEAD
             modelBuilder.Entity("CourseHouse.Models.Purchase", b =>
                 {
                     b.Navigation("PurachasedCourses");
+=======
+            modelBuilder.Entity("CourseHouse.Models.User", b =>
+                {
+                    b.Navigation("Comments");
+
+                    b.Navigation("CreatedCourses");
+
+                    b.Navigation("Grades");
+
+                    b.Navigation("UserCreditCards");
+
+                    b.Navigation("UserPurchases");
+>>>>>>> EmanuelDev
                 });
 #pragma warning restore 612, 618
         }
