@@ -9,11 +9,7 @@ using MySql.EntityFrameworkCore.Metadata;
 namespace CoursesHouse.Migrations
 {
     /// <inheritdoc />
-<<<<<<<< HEAD:Backend/Migrations/20240601191926_IdentityRole.cs
-    public partial class IdentityRole : Migration
-========
     public partial class Init : Migration
->>>>>>>> EmanuelDev:Backend/Migrations/20240607154946_Init.cs
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -293,18 +289,18 @@ namespace CoursesHouse.Migrations
                 name: "CourseComments",
                 columns: table => new
                 {
-                    CourseCommentId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     CourseId = table.Column<int>(type: "int", nullable: false),
-                    id = table.Column<string>(type: "varchar(255)", nullable: false),
+                    AuthorId = table.Column<string>(type: "varchar(255)", nullable: false),
                     CommentContent = table.Column<string>(type: "varchar(450)", maxLength: 450, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CourseComments", x => x.CourseCommentId);
+                    table.PrimaryKey("PK_CourseComments", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CourseComments_AspNetUsers_id",
-                        column: x => x.id,
+                        name: "FK_CourseComments_AspNetUsers_AuthorId",
+                        column: x => x.AuthorId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -321,23 +317,18 @@ namespace CoursesHouse.Migrations
                 name: "CourseGrades",
                 columns: table => new
                 {
-                    CourseGradeId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     CourseId = table.Column<int>(type: "int", nullable: false),
-<<<<<<<< HEAD:Backend/Migrations/20240601191926_IdentityRole.cs
-                    id = table.Column<string>(type: "varchar(255)", nullable: false),
-                    Grade = table.Column<decimal>(type: "decimal(2,2)", nullable: false)
-========
                     AuthorId = table.Column<string>(type: "varchar(255)", nullable: false),
                     Grade = table.Column<decimal>(type: "decimal(4,2)", nullable: false)
->>>>>>>> EmanuelDev:Backend/Migrations/20240607154946_Init.cs
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CourseGrades", x => x.CourseGradeId);
+                    table.PrimaryKey("PK_CourseGrades", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CourseGrades_AspNetUsers_id",
-                        column: x => x.id,
+                        name: "FK_CourseGrades_AspNetUsers_AuthorId",
+                        column: x => x.AuthorId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -432,14 +423,9 @@ namespace CoursesHouse.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-<<<<<<<< HEAD:Backend/Migrations/20240601191926_IdentityRole.cs
-                    { "9bd959a4-0353-4d8a-8821-fb2c1d02302c", null, "Admin", "ADMIN" },
-                    { "d05acd4e-18a9-4607-b8d0-636ffd0425d3", null, "User", "USER" },
-                    { "eb420f77-5781-40d8-b970-07519d2b77f8", null, "ContentCreator", "CONTENTCREATOR" }
-========
-                    { "1e7edc61-2cfa-4385-a051-b8a5be376a07", null, "Admin", "ADMIN" },
-                    { "6d023282-2de2-457d-9c17-b2c15dbf391a", null, "User", "USER" }
->>>>>>>> EmanuelDev:Backend/Migrations/20240607154946_Init.cs
+                    { "5d23c2f7-d919-45a4-b841-73460ab13f1b", null, "User", "USER" },
+                    { "8864f014-3689-477f-8c3c-9cc6ddd75f2c", null, "ContentCreator", "CONTENTCREATOR" },
+                    { "d41b4e0e-62e4-4cca-b7b1-907bd0acfac1", null, "Admin", "ADMIN" }
                 });
 
             migrationBuilder.InsertData(
@@ -523,14 +509,19 @@ namespace CoursesHouse.Migrations
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_CourseComments_AuthorId",
+                table: "CourseComments",
+                column: "AuthorId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_CourseComments_CourseId",
                 table: "CourseComments",
                 column: "CourseId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CourseComments_id",
-                table: "CourseComments",
-                column: "id");
+                name: "IX_CourseGrades_AuthorId",
+                table: "CourseGrades",
+                column: "AuthorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_CourseGrades_CourseId",
@@ -538,19 +529,6 @@ namespace CoursesHouse.Migrations
                 column: "CourseId");
 
             migrationBuilder.CreateIndex(
-<<<<<<<< HEAD:Backend/Migrations/20240601191926_IdentityRole.cs
-                name: "IX_CourseGrades_id",
-                table: "CourseGrades",
-                column: "id");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Courses_PurchaseId",
-                table: "Courses",
-                column: "PurchaseId");
-
-            migrationBuilder.CreateIndex(
-========
->>>>>>>> EmanuelDev:Backend/Migrations/20240607154946_Init.cs
                 name: "IX_Courses_UserId",
                 table: "Courses",
                 column: "UserId");

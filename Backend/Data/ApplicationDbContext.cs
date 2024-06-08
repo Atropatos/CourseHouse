@@ -67,10 +67,6 @@ namespace CourseHouse.Data
                 .WithOne(cc => cc.Course)
                 .HasForeignKey(cc => cc.CourseId);
 
-
-
-
-
             builder.Entity<User>()
             .HasMany(u => u.CreatedCourses)
             .WithOne(c => c.User)

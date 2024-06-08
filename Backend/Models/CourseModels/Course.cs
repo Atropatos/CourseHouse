@@ -22,7 +22,6 @@ namespace CourseHouse.Models
         public string UserId { get; set; }
         public User User { get; set; }
 
-
         public List<CourseCategoryMapping> CourseCategoryMappings { get; set; } = new List<CourseCategoryMapping>();
         public List<User> EnrolledUsers { get; set; } = new List<User>();
         public List<CourseComment> Comments { get; set; } = new List<CourseComment>();

@@ -45,14 +45,14 @@ namespace CoursesHouse.Controllers
 
             var courses = await _courseRepo.GetAllAsync();
 
-            var coursesDto = courses.Select(s => s.ToCourseDto());
+            var coursesDto = courses.Select(s => s.ToSimpleCourseDto());
 
             return Ok(coursesDto);
         }
 
         [HttpGet("user-courses")]
         [Authorize]
-        
+
         public async Task<IActionResult> GetCoursesByUser()
         {
             try

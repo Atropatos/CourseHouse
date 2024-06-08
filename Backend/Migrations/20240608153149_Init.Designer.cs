@@ -11,13 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CoursesHouse.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-<<<<<<<< HEAD:Backend/Migrations/20240601191926_IdentityRole.Designer.cs
-    [Migration("20240601191926_IdentityRole")]
-    partial class IdentityRole
-========
-    [Migration("20240607154946_Init")]
+    [Migration("20240608153149_Init")]
     partial class Init
->>>>>>>> EmanuelDev:Backend/Migrations/20240607154946_Init.Designer.cs
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -258,9 +253,13 @@ namespace CoursesHouse.Migrations
 
             modelBuilder.Entity("CourseHouse.Models.CourseComment", b =>
                 {
-                    b.Property<int>("CourseCommentId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    b.Property<string>("AuthorId")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("CommentContent")
                         .IsRequired()
@@ -270,24 +269,24 @@ namespace CoursesHouse.Migrations
                     b.Property<int>("CourseId")
                         .HasColumnType("int");
 
-                    b.Property<string>("id")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
+                    b.HasKey("Id");
 
-                    b.HasKey("CourseCommentId");
+                    b.HasIndex("AuthorId");
 
                     b.HasIndex("CourseId");
-
-                    b.HasIndex("id");
 
                     b.ToTable("CourseComments");
                 });
 
             modelBuilder.Entity("CourseHouse.Models.CourseGrade", b =>
                 {
-                    b.Property<int>("CourseGradeId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    b.Property<string>("AuthorId")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
 
                     b.Property<int>("CourseId")
                         .HasColumnType("int");
@@ -295,15 +294,11 @@ namespace CoursesHouse.Migrations
                     b.Property<decimal>("Grade")
                         .HasColumnType("decimal(4,2)");
 
-                    b.Property<string>("id")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
+                    b.HasKey("Id");
 
-                    b.HasKey("CourseGradeId");
+                    b.HasIndex("AuthorId");
 
                     b.HasIndex("CourseId");
-
-                    b.HasIndex("id");
 
                     b.ToTable("CourseGrades");
                 });
@@ -521,27 +516,19 @@ namespace CoursesHouse.Migrations
                     b.HasData(
                         new
                         {
-<<<<<<<< HEAD:Backend/Migrations/20240601191926_IdentityRole.Designer.cs
-                            Id = "9bd959a4-0353-4d8a-8821-fb2c1d02302c",
-========
-                            Id = "1e7edc61-2cfa-4385-a051-b8a5be376a07",
->>>>>>>> EmanuelDev:Backend/Migrations/20240607154946_Init.Designer.cs
+                            Id = "d41b4e0e-62e4-4cca-b7b1-907bd0acfac1",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-<<<<<<<< HEAD:Backend/Migrations/20240601191926_IdentityRole.Designer.cs
-                            Id = "d05acd4e-18a9-4607-b8d0-636ffd0425d3",
-========
-                            Id = "6d023282-2de2-457d-9c17-b2c15dbf391a",
->>>>>>>> EmanuelDev:Backend/Migrations/20240607154946_Init.Designer.cs
+                            Id = "5d23c2f7-d919-45a4-b841-73460ab13f1b",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "eb420f77-5781-40d8-b970-07519d2b77f8",
+                            Id = "8864f014-3689-477f-8c3c-9cc6ddd75f2c",
                             Name = "ContentCreator",
                             NormalizedName = "CONTENTCREATOR"
                         });
@@ -682,7 +669,7 @@ namespace CoursesHouse.Migrations
             modelBuilder.Entity("CourseHouse.Models.Course", b =>
                 {
                     b.HasOne("CourseHouse.Models.User", "User")
-                        .WithMany()
+                        .WithMany("CreatedCourses")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -692,15 +679,15 @@ namespace CoursesHouse.Migrations
 
             modelBuilder.Entity("CourseHouse.Models.CourseComment", b =>
                 {
-                    b.HasOne("CourseHouse.Models.Course", "Course")
+                    b.HasOne("CourseHouse.Models.User", "Author")
                         .WithMany("Comments")
-                        .HasForeignKey("CourseId")
+                        .HasForeignKey("AuthorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CourseHouse.Models.User", "Author")
-                        .WithMany()
-                        .HasForeignKey("id")
+                    b.HasOne("CourseHouse.Models.Course", "Course")
+                        .WithMany("Comments")
+                        .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -711,15 +698,15 @@ namespace CoursesHouse.Migrations
 
             modelBuilder.Entity("CourseHouse.Models.CourseGrade", b =>
                 {
-                    b.HasOne("CourseHouse.Models.Course", "Course")
+                    b.HasOne("CourseHouse.Models.User", "Author")
                         .WithMany("Grades")
-                        .HasForeignKey("CourseId")
+                        .HasForeignKey("AuthorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CourseHouse.Models.User", "Author")
-                        .WithMany()
-                        .HasForeignKey("id")
+                    b.HasOne("CourseHouse.Models.Course", "Course")
+                        .WithMany("Grades")
+                        .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -741,47 +728,24 @@ namespace CoursesHouse.Migrations
 
             modelBuilder.Entity("CourseHouse.Models.CreditCard", b =>
                 {
-<<<<<<<< HEAD:Backend/Migrations/20240601191926_IdentityRole.Designer.cs
-                    b.HasOne("CourseHouse.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("id")
-========
                     b.HasOne("CourseHouse.Models.User", null)
                         .WithMany("UserCreditCards")
                         .HasForeignKey("UserId")
->>>>>>>> EmanuelDev:Backend/Migrations/20240607154946_Init.Designer.cs
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
             modelBuilder.Entity("CourseHouse.Models.Purchase", b =>
                 {
-<<<<<<<< HEAD:Backend/Migrations/20240601191926_IdentityRole.Designer.cs
-                    b.HasOne("CourseHouse.Models.Course", "Course")
-                        .WithMany()
-========
                     b.HasOne("CourseHouse.Models.Course", null)
                         .WithMany("Purchases")
->>>>>>>> EmanuelDev:Backend/Migrations/20240607154946_Init.Designer.cs
                         .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-<<<<<<<< HEAD:Backend/Migrations/20240601191926_IdentityRole.Designer.cs
-                    b.HasOne("CourseHouse.Models.CreditCard", "CereditCard")
-                        .WithMany()
-                        .HasForeignKey("CreditCardId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CourseHouse.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("id")
-========
                     b.HasOne("CourseHouse.Models.User", null)
                         .WithMany("UserPurchases")
                         .HasForeignKey("UserId")
->>>>>>>> EmanuelDev:Backend/Migrations/20240607154946_Init.Designer.cs
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -860,6 +824,8 @@ namespace CoursesHouse.Migrations
                     b.Navigation("EnrolledUsers");
 
                     b.Navigation("Grades");
+
+                    b.Navigation("Purchases");
                 });
 
             modelBuilder.Entity("CourseHouse.Models.CourseView", b =>
@@ -867,11 +833,6 @@ namespace CoursesHouse.Migrations
                     b.Navigation("Content");
                 });
 
-<<<<<<<< HEAD:Backend/Migrations/20240601191926_IdentityRole.Designer.cs
-            modelBuilder.Entity("CourseHouse.Models.Purchase", b =>
-                {
-                    b.Navigation("PurachasedCourses");
-========
             modelBuilder.Entity("CourseHouse.Models.User", b =>
                 {
                     b.Navigation("Comments");
@@ -883,7 +844,6 @@ namespace CoursesHouse.Migrations
                     b.Navigation("UserCreditCards");
 
                     b.Navigation("UserPurchases");
->>>>>>>> EmanuelDev:Backend/Migrations/20240607154946_Init.Designer.cs
                 });
 #pragma warning restore 612, 618
         }

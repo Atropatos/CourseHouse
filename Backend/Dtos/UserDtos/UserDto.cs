@@ -16,7 +16,7 @@ namespace Backend.Dtos
         public List<string> Roles { get; set; } = new List<string>();
         public List<Purchase> UserPurchases { get; set; } = new List<Purchase>();
         public List<CreditCard> UserCreditCards { get; set; } = new List<CreditCard>();
-        public List<CourseDto> CreatedCourses { get; set; } = new List<CourseDto>();
+        public List<SimpleCourseDto> CreatedCourses { get; set; } = new List<SimpleCourseDto>();
         public List<CommentDto> Comments { get; set; } = new List<CommentDto>();
         public List<GradeDto> Grades { get; set; } = new List<GradeDto>();
     }

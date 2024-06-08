@@ -1,4 +1,6 @@
-﻿using Backend.Dtos.Courses;
+﻿using Backend.Dtos;
+using Backend.Dtos.Courses;
+using Backend.Dtos.UserDtos;
 using Backend.Mappers;
 using Backend.Models.CourseModels;
 using CourseHouse.Models;
@@ -17,17 +19,18 @@ namespace CoursesHouse.Mappers
                 CourseId = courseModel.CourseId,
                 CourseName = courseModel.CourseName,
                 CoursePrice = courseModel.CoursePrice,
-                CreatedBy = courseModel.User.UserName,
+                CreatedBy = courseModel.User?.UserName ?? "Unknown",
                 CourseDescription = courseModel.CourseDescription,
-                CourseCategories = courseModel.CourseCategoryMappings.Select(mapping => new CourseCategory
-                {
-                    CategoryId = mapping.CourseCategory.CategoryId,
-                    CategoryName = mapping.CourseCategory.CategoryName
-                }).ToList(),
-                EnrolledUsers = courseModel.EnrolledUsers.Select(a => a.ToUserDto()).ToList(),
-                Comments = courseModel.Comments.Select(a => a.ToCommentDto()).ToList(),
-                Grades = courseModel.Grades.Select(a => a.ToGradeDto()).ToList(),
-                CourseViews = courseModel.CourseViews.Select(a => a.ToCourseViewDto()).ToList()
+                CourseCategories = courseModel.CourseCategoryMappings?
+            .Select(mapping => new CourseCategory
+            {
+                CategoryId = mapping.CourseCategory.CategoryId,
+                CategoryName = mapping.CourseCategory.CategoryName
+            }).ToList() ?? new List<CourseCategory>(),
+                EnrolledUsers = courseModel.EnrolledUsers?.Select(a => a.ToSimpleUserDto()).ToList() ?? new List<SimpleUserDto>(),
+                Comments = courseModel.Comments != null ? courseModel.Comments.Select(a => a.ToCommentDto()).ToList() : new List<CommentDto>(),
+                Grades = courseModel.Grades != null ? courseModel.Grades.Select(a => a.ToGradeDto()).ToList() : new List<GradeDto>(),
+                CourseViews = courseModel.CourseViews?.Select(a => a.ToCourseViewDto()).ToList() ?? new List<CourseViewDto>()
             };
         }
 

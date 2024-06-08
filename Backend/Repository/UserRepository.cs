@@ -21,12 +21,15 @@ namespace CoursesHouse.Repository
 
         public async Task<List<User>> GetAllAsync()
         {
+
             var users = await _context.Users!
                 .Include(a => a.UserPurchases)
                 .Include(a => a.UserCreditCards)
                 .Include(a => a.CreatedCourses)
                 .Include(a => a.Comments)
                 .Include(a => a.Grades)
+                .ThenInclude(a => a.Course)
+                .ThenInclude(a => a.User)
                 .ToListAsync();
 
             return users;
@@ -39,7 +42,9 @@ namespace CoursesHouse.Repository
                 .Include(a => a.UserCreditCards)
                 .Include(a => a.CreatedCourses)
                 .Include(a => a.Comments)
+                .ThenInclude(a => a.Course)
                 .Include(a => a.Grades)
+                .ThenInclude(a => a.Course)
                 .FirstOrDefaultAsync(x => x.Id == id);
 
             return user;

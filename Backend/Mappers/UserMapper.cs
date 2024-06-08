@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Backend.Dtos;
+using Backend.Dtos.Courses;
 using Backend.Dtos.UserDtos;
 using CourseHouse.Models;
 using CoursesHouse.Mappers;
@@ -21,9 +22,9 @@ namespace Backend.Mappers
                 Roles = new List<string>(),
                 UserPurchases = user.UserPurchases,
                 UserCreditCards = user.UserCreditCards,
-                CreatedCourses = user.CreatedCourses.Select(a => a.ToCourseDto()).ToList(),
-                Comments = user.Comments.Select(a => a.ToCommentDto()).ToList(),
-                Grades = user.Grades.Select(a => a.ToGradeDto()).ToList()
+                CreatedCourses = user.CreatedCourses != null ? user.CreatedCourses.Select(a => a.ToSimpleCourseDto()).ToList() : new List<SimpleCourseDto>(),
+                Comments = user.Comments != null ? user.Comments.Select(a => a.ToCommentDto()).ToList() : new List<CommentDto>(),
+                Grades = user.Grades != null ? user.Grades.Select(a => a.ToGradeDto()).ToList() : new List<GradeDto>(),
             };
         }
 
@@ -43,6 +44,15 @@ namespace Backend.Mappers
             {
                 UserName = userUpdateDto.UserName,
                 Email = userUpdateDto.Email
+            };
+        }
+        public static SimpleUserDto ToSimpleUserDto(this User user)
+        {
+            return new SimpleUserDto
+            {
+                Id = user.Id,
+                UserName = user.UserName,
+                Emial = user.Email
             };
         }
     }
