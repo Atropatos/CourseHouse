@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using api.Extensions;
 using Backend.Dtos.Courses;
 using Backend.Interfaces;
@@ -12,6 +13,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+
 
 namespace Backend.Controllers
 {
@@ -42,14 +44,15 @@ namespace Backend.Controllers
             return Ok(gradesDto);
         }
 
-        [HttpGet("grade/{courseId}")]
+        [HttpGet("course/{courseId}")]
         public async Task<IActionResult> GetAllFromCourse([FromRoute] int courseId)
         {
             var grades = await _gradeRepo.GetAllFromCourseAsync(courseId);
             if (grades.Count() == 0)
             {
-                return NotFound();
+                return Ok(new List<GradeDto>());
             }
+            
             var gradesDto = grades.Select(c => c.ToGradeDto());
             return Ok(gradesDto);
         }
@@ -67,6 +70,15 @@ namespace Backend.Controllers
             return Ok(grade);
         }
 
+        [HttpGet("course/{courseId}/average")]
+        public async Task<IActionResult> GetAverageGradeForCourse([FromRoute] int courseId)
+        {
+            var averageGrade = await _gradeRepo.GetAverageGradeForCourseAsync(courseId);
+            return Ok(averageGrade);
+        }
+
+
+
         [HttpPost]
         [Authorize]
         public async Task<IActionResult> Create([FromBody] GradeCreateDto gradeCreate)
@@ -82,6 +94,12 @@ namespace Backend.Controllers
                 return Unauthorized();
             }
             var course = await _context.course!.FirstOrDefaultAsync(x => x.CourseId == gradeCreate.CourseId);
+
+            var existingGrade = await _gradeRepo.GetUserGradeForCourseAsync(user.Id, course.CourseId);
+            if( existingGrade != null)
+            {
+                return BadRequest("Dodano juz ocene. Mozna dodawaæ ocenê tylko jednorazowo do konkretnego kursu");
+            }
             if (course == null)
             {
                 return NotFound("Course not found.");

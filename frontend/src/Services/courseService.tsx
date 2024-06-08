@@ -1,7 +1,9 @@
 
 import axios from 'axios';
 import { handleError } from '../Helpers/ErrorHandler';
-import {Course, CourseCategory} from "../Models/Course";
+
+import { Course } from '../Models/Course/Course';
+import { CourseCategory } from '../Models/Course/CourseCategory';
 
 const api = 'http://localhost:5010/api/';
 

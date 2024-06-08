@@ -67,5 +67,25 @@ namespace Backend.Repository
             var grades = await _context.courseGrade!.Include(c => c.Course).Include(c => c.Author).Where(c => c.CourseId == courseId).ToListAsync();
             return grades;
         }
+
+        public async Task<decimal> GetAverageGradeForCourseAsync(int courseId)
+        {
+            var grades = await _context.courseGrade
+                                 .Where(g => g.CourseId == courseId)
+                                 .Select(g => g.Grade)
+                                 .ToListAsync();
+                                 //.AverageAsync(g => g.Grade);
+
+            if(grades.Any()) {
+                return grades.Average();
+            };
+
+            return 0;
+        }
+
+        public async Task<CourseGrade> GetUserGradeForCourseAsync(string userId, int courseId)
+        {
+            return await _context.courseGrade.FirstOrDefaultAsync(g => g.AuthorId == userId && g.CourseId == courseId);
+        }
     }
 }

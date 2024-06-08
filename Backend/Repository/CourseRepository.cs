@@ -36,6 +36,7 @@ namespace CoursesHouse.Repository
             .Include(a => a.Comments)
             .Include(a => a.EnrolledUsers)
             .Include(a => a.Grades)
+            .ThenInclude(g => g.Author)
             .Include(a => a.CourseCategoryMappings)
             .ThenInclude(a => a.CourseCategory)
             .FirstOrDefaultAsync(x => x.CourseId == id);

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getCategories, getCourses, getCoursesByUser } from '../../../Services/courseService';
-import { Course } from '../../../Models/Course';
+import { Course } from '../../../Models/Course/Course';
 import { useNavigate } from 'react-router';
 import { useAuth } from '../../../Context/useAuth';
 

@@ -23,3 +23,4 @@ namespace CourseHouse.Models
         public decimal Grade { get; set; }
     }
 }
+

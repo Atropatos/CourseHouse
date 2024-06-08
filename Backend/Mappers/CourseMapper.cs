@@ -12,6 +12,10 @@ namespace CoursesHouse.Mappers
     {
         public static CourseDto ToCourseDto(this Course courseModel)
         {
+            if (courseModel == null)
+            {
+                throw new ArgumentNullException(nameof(courseModel));
+            }
             return new CourseDto
             {
                 CourseId = courseModel.CourseId,

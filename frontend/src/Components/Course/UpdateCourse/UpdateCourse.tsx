@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getCategories, getCourseById, updateCourse } from '../../../Services/courseService';
-import { CourseCategory } from '../../../Models/Course';
+import { CourseCategory } from '../../../Models/Course/CourseCategory';
 
 interface MappedCategory {
   label: string;
@@ -38,7 +38,7 @@ const UpdateCourse: React.FC = () => {
           //   label: category.categoryName,
           //   value: category.courseCategoryId,
           // })));
-          setSelectedCategoryIds(fetchedCourse.courseCategories.map((cat: CourseCategory) => cat.courseCategoryId));
+          setSelectedCategoryIds(fetchedCourse.courseCategories.map((cat: CourseCategory) => cat.categoryId));
           
         }
       } catch (err) {
