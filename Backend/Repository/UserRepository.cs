@@ -23,13 +23,6 @@ namespace CoursesHouse.Repository
         {
 
             var users = await _context.Users!
-                .Include(a => a.UserPurchases)
-                .Include(a => a.UserCreditCards)
-                .Include(a => a.CreatedCourses)
-                .Include(a => a.Comments)
-                .Include(a => a.Grades)
-                .ThenInclude(a => a.Course)
-                .ThenInclude(a => a.User)
                 .ToListAsync();
 
             return users;

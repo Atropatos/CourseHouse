@@ -9,6 +9,5 @@ namespace Backend.Dtos.Purchases
     {
         public int CourseId { get; set; }
         public int CreditCardId { get; set; }
-        public DateTime PurchasedOn { get; set; } = DateTime.Now;
     }
 }

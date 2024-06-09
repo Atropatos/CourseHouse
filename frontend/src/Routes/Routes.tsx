@@ -12,26 +12,32 @@ import AddContent from "../Components/Content/AddContent/AddContent";
 import UpdateContent from "../Components/Content/UpdateContent/UpdateContent";
 import UpdateCourse from "../Components/Course/UpdateCourse/UpdateCourse";
 import ChangePassword from "../Components/User/ChangePassword";
-
-
+import Purchase from "../Components/Purchase/Purchase";
+import NewCreditCard from "../Components/Purchase/NewCreditCard";
+import PurchaseSuccess from "../Components/Purchase/PurchaseSuccess";
+import PurchaseFail from "../Components/Purchase/PurchaseFail";
 
 export const router = createBrowserRouter([
-    {
-        path: "/",
-        element: <App/>,
-        children: [
-            {path: "", element: <HomePage/>},
-            { path: "course/:courseId", element: <CourseDetail/> },
-            { path: "course/create", element: <CreateCourse/>},
-            { path: "updateCourse/:courseId", element: <UpdateCourse/>},
-            
-            {path: "login", element: <LoginPage/>},
-            {path: "register", element: <RegisterPage/>},
-            {path: "search", element: <SearchPage/>},
-            {path: "courseView/:viewId", element: <CourseViewDetails/>},
-            { path: "courseView/:viewId/addContent", element: <AddContent/>},
-        { path: "updateContent/:contentId", element: <UpdateContent/>},
-        { path: "change-password", element: <ChangePassword/>}
-        ]
-    }
+  {
+    path: "/",
+    element: <App />,
+    children: [
+      { path: "", element: <HomePage /> },
+      { path: "course/:courseId", element: <CourseDetail /> },
+      { path: "course/create", element: <CreateCourse /> },
+      { path: "updateCourse/:courseId", element: <UpdateCourse /> },
+
+      { path: "login", element: <LoginPage /> },
+      { path: "register", element: <RegisterPage /> },
+      { path: "search", element: <SearchPage /> },
+      { path: "courseView/:viewId", element: <CourseViewDetails /> },
+      { path: "courseView/:viewId/addContent", element: <AddContent /> },
+      { path: "updateContent/:contentId", element: <UpdateContent /> },
+      { path: "change-password", element: <ChangePassword /> },
+      { path: "course/buy/:courseId", element: <Purchase /> },
+      { path: "course/addNewCrediCard", element: <NewCreditCard /> },
+      { path: "course/buy/success", element: <PurchaseSuccess /> },
+      { path: "course/buy/fail", element: <PurchaseFail /> },
+    ],
+  },
 ]);

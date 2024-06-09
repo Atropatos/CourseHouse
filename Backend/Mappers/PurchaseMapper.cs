@@ -24,7 +24,6 @@ namespace Backend.Mappers
             {
                 CourseId = createPurchaseDto.CourseId,
                 CreditCardId = createPurchaseDto.CreditCardId,
-                PurchasedOn = createPurchaseDto.PurchasedOn,
             };
         }
     }

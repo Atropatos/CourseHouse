@@ -8,6 +8,8 @@ using CourseHouse.Models;
 using Microsoft.AspNetCore.Identity;
 using api.Extensions;
 using CoursesHouse.Interfaces;
+using Stripe;
+using Stripe.Checkout;
 
 namespace Backend.Controllers
 {
@@ -19,12 +21,14 @@ namespace Backend.Controllers
         private readonly IPurchaseRepository _purchaseRepository;
         private readonly UserManager<User> _userManager;
         private readonly ICourseRepository _courseRepository;
+        private readonly IConfiguration _config;
 
-        public PurchaseController(IPurchaseRepository purchaseRepository, UserManager<User> userManager, ICourseRepository courseRepository)
+        public PurchaseController(IPurchaseRepository purchaseRepository, UserManager<User> userManager, ICourseRepository courseRepository, IConfiguration config)
         {
             _purchaseRepository = purchaseRepository;
             _userManager = userManager;
             _courseRepository = courseRepository;
+            _config = config;
         }
 
         [HttpPost]
@@ -46,6 +50,7 @@ namespace Backend.Controllers
             var purchase = purchaseDto.ToPurchaseFromCreateDto();
             purchase.UserId = user.Id;
             purchase.Spend = course.CoursePrice;
+            purchase.PurchasedOn = System.DateTime.Now;
             var createdPurchase = await _purchaseRepository.CreateAsync(purchase);
 
             return CreatedAtAction(nameof(GetById), new { id = createdPurchase.PurchaseId }, createdPurchase);
@@ -120,6 +125,51 @@ namespace Backend.Controllers
             var purchases = await _purchaseRepository.GetByUserIdAsync(user.Id);
             var dto = purchases.Select(x => x.ToPurchaseDto()).ToList();
             return Ok(dto);
+        }
+
+        [HttpPost("stripePurchase")]
+        public async Task<IActionResult> StripePurchase([FromBody] CreatePurchaseDto purchaseDto)
+        {
+            var privateKey = _config["Stripe:PrivateKey"];
+            StripeConfiguration.ApiKey = privateKey;
+
+            var createdPurchase = await Create(purchaseDto);
+            if (createdPurchase is BadRequestObjectResult)
+            {
+                return BadRequest(new { ErrorMessage = "Failed to create purchase.", CreatedPurchase = createdPurchase });
+            }
+
+            var course = await _courseRepository.GetByIdAsync(purchaseDto.CourseId);
+
+            var options = new SessionCreateOptions
+            {
+                PaymentMethodTypes = new List<string> { "card" },
+                LineItems = new List<SessionLineItemOptions>
+            {
+                new SessionLineItemOptions
+                {
+                    PriceData = new SessionLineItemPriceDataOptions
+                    {
+                        UnitAmount = (long)(course.CoursePrice * 100),
+                        Currency = "pln",
+                        ProductData = new SessionLineItemPriceDataProductDataOptions
+                        {
+                            Name = course.CourseName,
+                            Description = course.CourseDescription,
+                        },
+                    },
+                    Quantity = 1,
+                },
+            },
+                Mode = "payment",
+                SuccessUrl = "http://localhost:3000/course/buy/success",
+                CancelUrl = "http://localhost:3000/course/buy/fail",
+            };
+
+            var service = new SessionService();
+            Session session = service.Create(options);
+
+            return Ok(new { sessionId = session.Id });
         }
     }
 }

@@ -51,7 +51,13 @@ namespace CoursesHouse.Mappers
                 CourseId = courseModel.CourseId,
                 CourseName = courseModel.CourseName,
                 CoursePrice = courseModel.CoursePrice,
-                CourseDescription = courseModel.CourseDescription
+                CourseDescription = courseModel.CourseDescription,
+                CourseCategories = courseModel.CourseCategoryMappings?
+                            .Select(mapping => new CourseCategory
+                            {
+                                CategoryId = mapping.CourseCategory.CategoryId,
+                                CategoryName = mapping.CourseCategory.CategoryName
+                            }).ToList() ?? new List<CourseCategory>()
             };
         }
     }

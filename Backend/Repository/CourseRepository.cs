@@ -16,15 +16,6 @@ namespace CoursesHouse.Repository
         public async Task<List<Course>> GetAllAsync()
         {
             return await _context.course!
-            .Include(a => a.User)
-            .Include(a => a.CourseViews)
-            .ThenInclude(a => a.Content)
-            .Include(a => a.Comments)
-            .ThenInclude(a => a.Author)
-            .Include(a => a.EnrolledUsers)
-            .Include(a => a.Grades)
-                .ThenInclude(a => a.Course)
-                .ThenInclude(a => a.User)
             .Include(a => a.CourseCategoryMappings)
             .ThenInclude(a => a.CourseCategory)
             .ToListAsync();
@@ -40,8 +31,7 @@ namespace CoursesHouse.Repository
             .ThenInclude(a => a.Author)
             .Include(a => a.EnrolledUsers)
             .Include(a => a.Grades)
-                .ThenInclude(a => a.Course)
-                .ThenInclude(a => a.User)
+                .ThenInclude(a => a.Author)
             .Include(a => a.CourseCategoryMappings)
             .ThenInclude(a => a.CourseCategory)
             .FirstOrDefaultAsync(x => x.CourseId == id);
