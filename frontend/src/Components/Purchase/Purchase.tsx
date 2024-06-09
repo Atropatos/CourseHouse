@@ -11,7 +11,7 @@ type Props = {};
 const Purchase = (props: Props) => {
   const { courseId } = useParams<{ courseId: string }>();
   const [userCreditCards, setUserCreditCards] = useState<CreditCard[]>([]);
-  const [selectedCardId, setSelectedCardId] = useState<string | null>(null);
+  const [selectedCardId, setSelectedCardId] = useState<string | null>("1");
   useEffect(() => {
     fetchUserCreditCards();
   }, []);
@@ -19,7 +19,7 @@ const Purchase = (props: Props) => {
   const fetchUserCreditCards = async () => {
     const cards = await getUserCreditCards();
     setUserCreditCards(cards);
-    setSelectedCardId(cards[0].creditCardId);
+    if (cards.length > 0) setSelectedCardId(cards[0].creditCardId);
   };
 
   const handleToggle = (cardId: string) => {
