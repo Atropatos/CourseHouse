@@ -21,16 +21,44 @@ namespace CoursesHouse.Controllers
         private readonly IContentRepository _contentRepo;
         private readonly UserManager<User> _userManager;
         private readonly ICourseViewRepository _courseViewRepository;
+        private readonly IWebHostEnvironment _env;
 
-        public ContentController(ApplicationDbContext context, IContentRepository contentRepository, UserManager<User> userManager, ICourseViewRepository courseViewRepository)
+        public ContentController(ApplicationDbContext context, IContentRepository contentRepository, UserManager<User> userManager, ICourseViewRepository courseViewRepository, IWebHostEnvironment env)
         {
-            _contentRepo = contentRepository;
             _context = context;
+            _contentRepo = contentRepository;
             _userManager = userManager;
             _courseViewRepository = courseViewRepository;
+            _env = env;
         }
 
-        [HttpGet]
+        [HttpPost("upload")]
+        [Authorize]
+        public async Task<IActionResult> UploadImage(IFormFile file)
+        {
+            if (file == null || file.Length == 0)
+                return BadRequest("No file uploaded.");
+
+            var uploadsFolder = Path.Combine(_env.WebRootPath, "uploads");
+            if (!Directory.Exists(uploadsFolder))
+                Directory.CreateDirectory(uploadsFolder);
+
+            var filePath = Path.Combine(uploadsFolder, file.FileName);
+
+            using (var fileStream = new FileStream(filePath, FileMode.Create))
+            {
+                await file.CopyToAsync(fileStream);
+            }
+
+            var fileUrl = $"/uploads/{file.FileName}";
+
+            return Ok(new { Url = fileUrl });
+        }
+
+        // Other endpoints...
+    
+
+    [HttpGet]
         public async Task<IActionResult> GetAll()
         {
             var contents = await _contentRepo.GetAllAsync();
@@ -93,7 +121,7 @@ namespace CoursesHouse.Controllers
             var updatedContentEntity = await _contentRepo.UpdateAsync(id, updatedContent.ToContentFromCreate());
             return Ok(updatedContentEntity);
         }
-
+      
         [HttpDelete("{id}")]
         [Authorize]
         public async Task<IActionResult> Delete(int id)

@@ -119,6 +119,8 @@ builder.Services.AddScoped<IPurchaseRepository, PurchaseRepository>();
 
 
 builder.Services.AddScoped<ICourseViewRepository, CourseViewRepository>();
+
+builder.Services.AddHttpContextAccessor();
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())

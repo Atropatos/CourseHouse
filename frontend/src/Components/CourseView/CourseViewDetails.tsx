@@ -4,6 +4,7 @@ import { deleteCourseView, getCourseViewById } from '../../Services/courseViewSe
 import { CourseView } from '../../Models/Course/CourseView';
 import { Content } from '../../Models/Content/Content';
 import { useAuth } from '../../Context/useAuth';
+import { ContentType } from '../../Models/Content/ContentType';
 
 const CourseViewDetails: React.FC = () => {
   const { viewId } = useParams<{ viewId: string }>();
@@ -38,6 +39,8 @@ const CourseViewDetails: React.FC = () => {
     navigate(`/updateContent/${contentId}`);
   };
 
+
+
   return (
     <div className="container mx-auto p-4">
       <div key={courseView?.viewId}>
@@ -51,6 +54,20 @@ const CourseViewDetails: React.FC = () => {
               {content.title}
             </h2>
             <p>{content.text}</p>
+            {content.contentType === ContentType.Picture && content.contentUrl && (
+              <div className="mt-2">
+                <img src={`http://localhost:5010${content.contentUrl}`} alt={content.title} className="w-full h-auto" style={{ width: '400px', height: '200px', objectFit: 'cover' }} />
+             
+              </div>
+            )}
+            {content.contentType === ContentType.Video && content.contentUrl && (
+              <div className="mt-2">
+                <video controls className="w-full h-auto">
+                  <source src={content.contentUrl} type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+            )}
           </div>
         ))}
       </div>
@@ -73,6 +90,6 @@ const CourseViewDetails: React.FC = () => {
       )}
     </div>
   );
-}
+};
 
 export default CourseViewDetails;
