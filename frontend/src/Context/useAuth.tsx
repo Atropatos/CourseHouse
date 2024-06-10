@@ -10,7 +10,12 @@ import { Role } from "../Models/Role";
 type UserContextType = {
   user: UserProfile | null;
   token: string | null;
-  registerUser: (email: string, username: string, password: string,role:string) => void;
+  registerUser: (
+    email: string,
+    username: string,
+    password: string,
+    role: string
+  ) => void;
   loginUser: (username: string, password: string) => void;
   roles: Role[] | null;
   logout: () => void;
@@ -45,9 +50,9 @@ export const UserProvider = ({ children }: Props) => {
     email: string,
     username: string,
     password: string,
-    role:string
+    role: string
   ) => {
-    await registerAPI(email, username, password,role)
+    await registerAPI(email, username, password, role)
       .then((res) => {
         if (res) {
           localStorage.setItem("token", res?.data.token);
@@ -59,8 +64,9 @@ export const UserProvider = ({ children }: Props) => {
           setToken(res?.data.token!);
           setUser(userObj!);
           fetchUserRoles();
-          toast.success("Login Success!");
           navigate("/");
+          navigate(0);
+          toast.success("Login Success!");
         }
       })
       .catch((e) => toast.warning("Server error occured"));
@@ -81,6 +87,7 @@ export const UserProvider = ({ children }: Props) => {
           fetchUserRoles();
           toast.success("Login Success!");
           navigate("/");
+          navigate(0);
         }
       })
       .catch((e) => toast.warning("Server error occured"));
@@ -100,17 +107,26 @@ export const UserProvider = ({ children }: Props) => {
   const fetchUserRoles = async () => {
     try {
       const api = "http://localhost:5010/api/";
-        const response = await axios.get<Role[]>(`${api}account/roles`);
-        setRoles(response.data);
-        console.log(response.data);
+      const response = await axios.get<Role[]>(`${api}account/roles`);
+      setRoles(response.data);
+      console.log(response.data);
     } catch (error) {
-        console.error('Error fetching roles:', error);
-        setRoles(null);
+      console.error("Error fetching roles:", error);
+      setRoles(null);
     }
-};
+  };
   return (
     <UserContext.Provider
-      value={{ loginUser, user, token, logout, isLoggedIn, registerUser,roles,fetchUserRoles }}
+      value={{
+        loginUser,
+        user,
+        token,
+        logout,
+        isLoggedIn,
+        registerUser,
+        roles,
+        fetchUserRoles,
+      }}
     >
       {isReady ? children : null}
     </UserContext.Provider>

@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
 import {
   getCategories,
+  getCourseById,
   getCourses,
   getCoursesByUser,
-  postLastVisited
+  postLastVisited,
 } from "../../../Services/courseService";
 import { Course } from "../../../Models/Course/Course";
 import { useNavigate } from "react-router";
 import { useAuth } from "../../../Context/useAuth";
 import { Purchase } from "../../../Models/Purchase";
 import { getPurchasedByUser } from "../../../Services/purchaseService";
+import { set } from "react-hook-form";
 
 interface MappedCategory {
   label: string;
@@ -17,6 +19,8 @@ interface MappedCategory {
 }
 
 const CourseList: React.FC = () => {
+  const [coursesToShow, setCoursesToShow] = useState<Course[]>([]);
+  const [userCourses, setUserCourses] = useState<Course[]>([]);
   const [courses, setCourses] = useState<Course[]>([]);
   const [categories, setCategories] = useState<MappedCategory[]>([]);
   const [selectedCategoryIds, setSelectedCategoryIds] = useState<number[]>([]);
@@ -24,14 +28,47 @@ const CourseList: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [sortOrder, setSortOrder] = useState<string>("asc");
-  const [userPurchasedCourses, setUserPurchasedCourses] = useState<Purchase[]>([]);
+  const [userPurchasedCourses, setUserPurchasedCourses] = useState<Purchase[]>(
+    []
+  );
+  const [userCoursesToggle, setUserCoursesToggle] = useState<boolean>(false);
   const { roles, fetchUserRoles } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
     fetchCourses();
     fetchUserPurchase();
+    fetchUserPurchasedCourses();
   }, []);
+
+  const toggleCourses = () => {
+    setUserCoursesToggle(!userCoursesToggle);
+    setOnlyUserCourses();
+  };
+
+  const setOnlyUserCourses = async () => {
+    if (!userCoursesToggle) {
+      setCoursesToShow(userCourses);
+    } else {
+      setCoursesToShow(courses);
+    }
+  };
+
+  const fetchUserPurchasedCourses = async () => {
+    try {
+      let userCourses = await getPurchasedByUser();
+      let coursesPromises = userCourses.map(async (e) => {
+        let courseId = e.courseId;
+        let course = await getCourseById(courseId);
+        return course;
+      });
+
+      let courses = await Promise.all(coursesPromises);
+      setUserCourses(courses);
+    } catch (error) {
+      console.error("Error fetching courses:", error);
+    }
+  };
 
   const fetchCourses = async () => {
     try {
@@ -42,6 +79,7 @@ const CourseList: React.FC = () => {
         fetchedCourses = await getCourses();
       }
       setCourses(fetchedCourses);
+      setCoursesToShow(fetchedCourses);
 
       const fetchedCategories = await getCategories();
       const formattedCategories = fetchedCategories.map((category: any) => ({
@@ -75,7 +113,9 @@ const CourseList: React.FC = () => {
     navigate(`/course/${courseId}`);
   };
 
-  const handleCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleCategoryChange = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
     const selectedOptions = Array.from(event.target.selectedOptions).map(
       (option) => parseInt(option.value)
     );
@@ -86,7 +126,9 @@ const CourseList: React.FC = () => {
     setSearchTerm(event.target.value);
   };
 
-  const handleSortOrderChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleSortOrderChange = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
     setSortOrder(event.target.value);
   };
 
@@ -99,7 +141,7 @@ const CourseList: React.FC = () => {
   };
 
   // Filter and sort courses based on selected category IDs, search term, and sort order
-  const filteredCourses = courses
+  const filteredCourses = coursesToShow
     .filter(
       (course) =>
         (selectedCategoryIds.length === 0 ||
@@ -171,10 +213,22 @@ const CourseList: React.FC = () => {
         <option value="desc">Malejąco</option>
       </select>
 
+      <div className="flex items-center space-x-2">
+        <input
+          type="checkbox"
+          onClick={() => toggleCourses()}
+          className="form-checkbox"
+          id="userCourses"
+        />
+        <label htmlFor="userCourses" className="text-gray-700 font-bold">
+          Pokaż tylko moje kursy
+        </label>
+      </div>
+
       <h1 className="text-2xl font-bold mb-4">Lista z kursami:</h1>
       <ul className="list-disc pl-5 space-y-4">
         {filteredCourses.map((course) => (
-          <li key={course.courseId} className="border p-4 rounded shadow">
+          <p key={course.courseId} className="border p-4 rounded shadow">
             <h2
               onClick={() => handleCourseClick(course.courseId)}
               className="text-xl font-semibold cursor-pointer text-blue-600 hover:underline"
@@ -213,7 +267,7 @@ const CourseList: React.FC = () => {
                 </button>
               </div>
             )}
-          </li>
+          </p>
         ))}
       </ul>
 

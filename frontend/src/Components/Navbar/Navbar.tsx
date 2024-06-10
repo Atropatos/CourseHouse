@@ -23,17 +23,22 @@ const Navbar = (props: Props) => {
   const handleChangePasswordClick = () => {
     setDropdownVisible(!dropdownVisible);
   };
-  
+
   const handleRedirectToCourseHistory = () => {
     setDropdownVisible(!dropdownVisible);
-  }
+  };
+
+  const handleLogout = () => {
+    logout();
+    navigate("/login");
+  };
 
   return (
-    <nav className="relative container w-full mx-auto p-6">
+    <nav className="relative container w-full mx-auto p-6 bg-white-900">
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-20">
           <Link to="/" className="text-2xl font-bold text-darkBlue">
-            <img src={logo} alt="" className="w-16" />
+            <img src={logo} alt="" className="w-32" />
           </Link>
         </div>
         {isLoggedIn() ? (
@@ -73,7 +78,7 @@ const Navbar = (props: Props) => {
               )}
             </div>
             <a
-              onClick={logout}
+              onClick={() => handleLogout()}
               className="px-8 py-3 font-bold rounded text-white bg-lightGreen hover:opacity-70 cursor-pointer"
             >
               Wyloguj się
