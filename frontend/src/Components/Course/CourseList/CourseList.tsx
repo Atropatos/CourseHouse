@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 import {
   getCategories,
   getCourses,
-    getCoursesByUser,
-    postLastVisited
+  getCoursesByUser,
+  postLastVisited
 } from "../../../Services/courseService";
-import { Course } from "../../../Models/Course";
+import { Course } from "../../../Models/Course/Course";
 import { useNavigate } from "react-router";
 import { useAuth } from "../../../Context/useAuth";
 import { Purchase } from "../../../Models/Purchase";
+import { getPurchasedByUser } from "../../../Services/purchaseService";
 
 interface MappedCategory {
   label: string;
@@ -23,9 +24,7 @@ const CourseList: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [sortOrder, setSortOrder] = useState<string>("asc");
-  const [userPurchasedCourses, setUserPurchasedCourses] = useState<Purchase[]>(
-    []
-  );
+  const [userPurchasedCourses, setUserPurchasedCourses] = useState<Purchase[]>([]);
   const { roles, fetchUserRoles } = useAuth();
   const navigate = useNavigate();
 
@@ -51,7 +50,6 @@ const CourseList: React.FC = () => {
       }));
       setCategories(formattedCategories);
 
-
       await fetchUserRoles();
     } catch (err) {
       setError("Error fetching courses");
@@ -59,10 +57,10 @@ const CourseList: React.FC = () => {
       setLoading(false);
     }
   };
+
   const fetchUserPurchase = async () => {
     try {
-      let fetchedUserPurchase;
-      fetchedUserPurchase = await getPurchasedByUser();
+      let fetchedUserPurchase = await getPurchasedByUser();
       setUserPurchasedCourses(fetchedUserPurchase);
       await fetchUserRoles();
     } catch (err) {
@@ -70,15 +68,14 @@ const CourseList: React.FC = () => {
     } finally {
       setLoading(false);
     }
+  };
 
   const handleCourseClick = async (courseId: number) => {
     await postLastVisited(courseId);
     navigate(`/course/${courseId}`);
   };
 
-  const handleCategoryChange = (
-    event: React.ChangeEvent<HTMLSelectElement>
-  ) => {
+  const handleCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedOptions = Array.from(event.target.selectedOptions).map(
       (option) => parseInt(option.value)
     );
@@ -89,9 +86,7 @@ const CourseList: React.FC = () => {
     setSearchTerm(event.target.value);
   };
 
-  const handleSortOrderChange = (
-    event: React.ChangeEvent<HTMLSelectElement>
-  ) => {
+  const handleSortOrderChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSortOrder(event.target.value);
   };
 
