@@ -61,7 +61,6 @@ namespace Backend.Repository
 
             purchase.CourseId = updatedPurchase.CourseId;
             purchase.CreditCardId = updatedPurchase.CreditCardId;
-            purchase.PurchasedOn = updatedPurchase.PurchasedOn;
             purchase.Spend = _context.course!.Find(updatedPurchase.CourseId)!.CoursePrice;
 
             await _context.SaveChangesAsync();

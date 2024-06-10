@@ -32,17 +32,12 @@ namespace CourseHouse.Controllers
         //[Authorize]
         public async Task<IActionResult> GetAllUsers()
         {
-            var users = await _userRepo.GetAllAsync();
-            var usersWithRoles = new List<UserDto>();
-
-            foreach (var user in users)
+            if (!ModelState.IsValid)
             {
-                var roles = await _userRepo.GetUserRolesAsync(user.Id);
-                var userDto = user.ToUserDto();
-                userDto.Roles = roles; // No need to call ToList() again, it's already a List<string>
-                usersWithRoles.Add(userDto);
+                return BadRequest(ModelState);
             }
-
+            var users = await _userRepo.GetAllAsync();
+            var usersWithRoles = users.Select(u => u.ToSimpleUserDto()).ToList();
             return Ok(usersWithRoles);
         }
 
@@ -140,6 +135,6 @@ namespace CourseHouse.Controllers
         }
     }
 
-  
+
 }
 

@@ -15,6 +15,8 @@ using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var stripe = builder.Configuration.GetValue<string>("Stripe:SecretKey");
+
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {

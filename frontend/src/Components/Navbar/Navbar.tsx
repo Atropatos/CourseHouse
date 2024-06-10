@@ -32,7 +32,9 @@ const Navbar = (props: Props) => {
     <nav className="relative container w-full mx-auto p-6">
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-20">
-          <img src={logo} alt="" className="w-16" />
+          <Link to="/" className="text-2xl font-bold text-darkBlue">
+            <img src={logo} alt="" className="w-16" />
+          </Link>
         </div>
         {isLoggedIn() ? (
           <div className="flex items-center space-x-6 text-black">
