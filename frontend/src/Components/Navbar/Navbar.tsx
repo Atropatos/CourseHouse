@@ -21,8 +21,12 @@ const Navbar = (props: Props) => {
   };
 
   const handleChangePasswordClick = () => {
-  
+    setDropdownVisible(!dropdownVisible);
   };
+  
+  const handleRedirectToCourseHistory = () => {
+    setDropdownVisible(!dropdownVisible);
+  }
 
   return (
     <nav className="relative container w-full mx-auto p-6">
@@ -55,6 +59,13 @@ const Navbar = (props: Props) => {
                     onClick={handleChangePasswordClick}
                   >
                     Zmień hasło
+                  </Link>
+                  <Link
+                    to="/course-history"
+                    className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
+                    onClick={handleRedirectToCourseHistory}
+                  >
+                    Historia przegladania
                   </Link>
                 </div>
               )}

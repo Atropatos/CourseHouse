@@ -4,6 +4,7 @@ import { handleError } from '../Helpers/ErrorHandler';
 
 import { Course } from '../Models/Course/Course';
 import { CourseCategory } from '../Models/Course/CourseCategory';
+import { LastVisited } from '../Models/LastVisited';
 
 const api = 'http://localhost:5010/api/';
 
@@ -78,3 +79,24 @@ export const getCategories = async(): Promise<CourseCategory[]> => {
         return[];
     }
 };
+
+
+export const getLastFiveVisitedCourses = async () => {
+  const response = await axios.get(`http://localhost:5010/api/lastFive`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    }
+  });
+  return response.data;
+};
+
+export const postLastVisited = async (lastVisitedCourseId: number) => {
+    try {
+      const response = await axios.post(`http://localhost:5010/api/lastVisited`, { lastVisitedCourseId});
+    return response.data;
+    }
+ catch(error) {
+  handleError(error);
+
+}
+}

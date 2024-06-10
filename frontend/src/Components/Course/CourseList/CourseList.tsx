@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getCategories, getCourses, getCoursesByUser } from '../../../Services/courseService';
+import { getCategories, getCourses, getCoursesByUser, postLastVisited } from '../../../Services/courseService';
 import { Course } from '../../../Models/Course/Course';
 import { useNavigate } from 'react-router';
 import { useAuth } from '../../../Context/useAuth';
@@ -46,9 +46,10 @@ const CourseList: React.FC = () => {
       }
     };
     fetchCourses();
-  }, []);
+  }, []); 
 
-  const handleCourseClick = (courseId: number) => {
+  const handleCourseClick = async (courseId: number) => {
+    await postLastVisited(courseId);
     navigate(`/course/${courseId}`);
   };
 

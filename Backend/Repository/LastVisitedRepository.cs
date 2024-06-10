@@ -21,7 +21,18 @@ namespace Backend.Repository
 
         public async Task<LastVisited> CreateAsync(LastVisited lastVisited)
         {
-            _context.lastVisited!.Add(lastVisited);
+            var existingVisit = await _context.lastVisited.FirstOrDefaultAsync(lv => lv.UserId == lastVisited.UserId && lv.LastVisitedCourse == lastVisited.LastVisitedCourse);
+
+            if(existingVisit != null )
+            {
+                //existingVisit.LastVisitedId = lastVisited.LastVisitedId;
+                _context.lastVisited.Update(existingVisit);
+            }
+            else
+            {
+                _context.lastVisited!.Add(lastVisited);
+            }
+
             await _context.SaveChangesAsync();
             return lastVisited;
         }
