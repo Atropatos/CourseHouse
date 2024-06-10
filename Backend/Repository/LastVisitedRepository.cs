@@ -86,5 +86,9 @@ namespace Backend.Repository
             return lastVisitedItems;
         }
 
+        public async Task<int> GetVisitCountByCourseIdAsync(int courseId)
+        {
+            return await _context.lastVisited!.CountAsync(lv => lv.LastVisitedCourse == courseId);
+        }
     }
 }

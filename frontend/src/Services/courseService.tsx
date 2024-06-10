@@ -118,3 +118,13 @@ export const getLastFiveVisitedCourses = async () => {
     });
     return response.data;
 };
+
+export const getCourseVisitCount = async(courseId:number) => {
+  try {
+    const response = await axios.get(`http://localhost:5010/api/lastVisited/courseVisitCount/${courseId}`);
+    return response.data;
+  }
+  catch(error) {
+    handleError(error);
+  }
+}

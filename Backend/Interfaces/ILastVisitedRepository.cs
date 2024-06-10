@@ -15,5 +15,6 @@ namespace Backend.Interfaces
         Task<LastVisited> UpdateAsync(int id, CreateLastVisitedDto updatedLastVisited);
         Task<LastVisited> CreateAsync(LastVisited lastVisited);
         Task<List<LastVisited>> GetLastFiveUserVisits(string userId);
+        Task<int> GetVisitCountByCourseIdAsync(int courseId);
     }
 }

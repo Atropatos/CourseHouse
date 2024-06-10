@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { deleteCourse, getCourseById } from '../../../Services/courseService';
+import { deleteCourse, getCourseById, getCourseVisitCount } from '../../../Services/courseService';
 import { getAverageGrade, postGrade } from '../../../Services/courseGradeService';
 import { Course } from '../../../Models/Course/Course';
 import { Comment } from '../../../Models/Comment';
@@ -24,6 +24,7 @@ const CourseDetail: React.FC = () => {
   const navigate = useNavigate();
   const [rating, setRating] = useState<number>(0);
   const [averageRating, setAverageRating] = useState<number>(0);
+  const[courseVisitedNumber, setCourseVisitedNumber] = useState<number>(0);
 
 
   
@@ -49,8 +50,23 @@ const CourseDetail: React.FC = () => {
     }
   }
 
+  const fetchCourseVisitedNumber = async() => {
+    if(courseId) {
+      try {
+        const courseIdNumber = Number(courseId);
+        const visitCounter = await getCourseVisitCount(courseIdNumber);
+        setCourseVisitedNumber(visitCounter);
+      
+      }
+      catch (error) {
+        setError("error fetching coursevisitNumber");
+      }
+    }
+  }
+
   useEffect(() => {
     fetchCourse();
+    fetchCourseVisitedNumber();
   }, [courseId]);
 
   const handleGradeSubmit = async () => {
@@ -147,6 +163,7 @@ const CourseDetail: React.FC = () => {
       <p className="mb-2">Opis kursu: {course.courseDescription}</p>
       <p className="mb-4">Cena: {course.coursePrice.toFixed(2)} PLN</p>
       <p className="mb-4">Średnia ocena: {averageRating > 0 ? averageRating.toFixed(2) : "brak opinii"}</p>
+      {roles?.includes("ContentCreator") && (<p className="mb-4">Popularność: {courseVisitedNumber} odwiedzeń</p>) }
       <h2 className="text-xl font-semibold mb-4">Widok kursu:</h2>
       {course.courseViews.map((view) => (
         <div key={view.viewId} className="mb-4 p-4 border rounded shadow">

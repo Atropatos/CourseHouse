@@ -110,5 +110,12 @@ namespace Backend.Controllers
 
             return Ok(dto);
         }
+        [HttpGet("courseVisitCount/{courseId}")]
+        public async Task<IActionResult> GetVisitCountByCourseId (int courseId)
+        {
+            var visitCount = await _lastVisitedRepository.GetVisitCountByCourseIdAsync(courseId);
+            return Ok(visitCount);
+        }
+
     }
 }
