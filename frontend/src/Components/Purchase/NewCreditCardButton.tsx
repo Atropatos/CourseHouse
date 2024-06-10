@@ -1,12 +1,14 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-type Props = {};
+type Props = {
+  courseId: string | undefined;
+};
 
-const NewCreditCardButton = (props: Props) => {
+const NewCreditCardButton = ({ courseId }: Props) => {
   const navigate = useNavigate();
   const handleNewCardClick = () => {
-    navigate(`/course/addNewCrediCard`);
+    navigate(`/course/addNewCrediCard/${courseId}`);
   };
   return (
     <>

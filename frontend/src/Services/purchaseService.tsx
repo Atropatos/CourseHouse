@@ -60,7 +60,8 @@ export const newCreditCard = async (
   }
 };
 
-const publicKey = process.env.REACT_APP_STRIPE_PUBLIC_KEY || "";
+const publicKey =
+  "pk_test_51PPfPvBUTpA67SLTckGgo6Hcgdtoi7DmXRssMP77NMjSeuWxfAkyGhPMztgVWs6GfjFlVj1PAs2cCy7u0scvcHnZ00GdEoMhW3";
 
 export const newStripePurchase = async (
   courseId: string,

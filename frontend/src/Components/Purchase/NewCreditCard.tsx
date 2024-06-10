@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { newCreditCard } from "../../Services/purchaseService";
 import { CreditCard } from "../../Models/CreditCard";
 
 const NewCreditCard = () => {
   const navigate = useNavigate();
+  const { courseId } = useParams();
   const [formData, setFormData] = useState({
     creditCardNumber: "",
     expirationDate: "",
@@ -30,7 +31,7 @@ const NewCreditCard = () => {
     };
     await newCreditCard(newCard);
     console.log(formData);
-    navigate("/course/buy");
+    navigate(`/course/buy/${courseId}`);
   };
 
   return (

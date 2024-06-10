@@ -116,17 +116,6 @@ namespace CourseHouse.Data
                 }
             };
 
-            builder.Entity<CreditCard>().HasData(
-                new CreditCard
-                {
-                    CreditCardId = 1,
-                    CreditCardNumber = "1111 1111 1111 1111",
-                    ExpirationDate = "2035-12",
-                    Cvv = "111",
-                    HolderName = "John Doe",
-                    UserId = "0"
-                }
-            );
             builder.Entity<CourseCategory>().HasData(
                 new CourseCategory
                 {

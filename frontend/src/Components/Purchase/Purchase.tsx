@@ -33,7 +33,7 @@ const Purchase = (props: Props) => {
     <>
       <h1>Credit Cards! {selectedCardId}</h1>
       <h1>COURSE ID! {courseId}</h1>
-      <NewCreditCardButton />
+      <NewCreditCardButton courseId={courseId} />
       <div className="flex flex-wrap">
         {userCreditCards.map((card, index) => {
           return (

@@ -36,10 +36,10 @@ export const router = createBrowserRouter([
       { path: "updateContent/:contentId", element: <UpdateContent /> },
       { path: "change-password", element: <ChangePassword /> },
       { path: "course/buy/:courseId", element: <Purchase /> },
-      { path: "course/addNewCrediCard", element: <NewCreditCard /> },
+      { path: "course/addNewCrediCard/:courseId", element: <NewCreditCard /> },
       { path: "course/buy/success", element: <PurchaseSuccess /> },
-        { path: "course/buy/fail", element: <PurchaseFail /> },
-        { path: "course-history", element: <CourseHistory /> }
+      { path: "course/buy/fail", element: <PurchaseFail /> },
+      { path: "course-history", element: <CourseHistory /> },
     ],
   },
 ]);
