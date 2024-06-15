@@ -73,5 +73,10 @@ namespace CoursesHouse.Repository
             await _context.SaveChangesAsync();
             return existingCourse;
         }
+
+        public Task<List<Course>> GetAllUserCourses(string userId)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

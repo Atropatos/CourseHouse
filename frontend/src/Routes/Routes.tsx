@@ -17,6 +17,8 @@ import NewCreditCard from "../Components/Purchase/NewCreditCard";
 import PurchaseSuccess from "../Components/Purchase/PurchaseSuccess";
 import PurchaseFail from "../Components/Purchase/PurchaseFail";
 import CourseHistory from "../Components/Course/CourseHistory/CourseHistory";
+import Profile from "../Components/Course/Profile/Profile";
+import ErrorPage from "../Pages/ErrorPage";
 
 export const router = createBrowserRouter([
   {
@@ -40,6 +42,8 @@ export const router = createBrowserRouter([
       { path: "course/buy/success", element: <PurchaseSuccess /> },
       { path: "course/buy/fail", element: <PurchaseFail /> },
       { path: "course-history", element: <CourseHistory /> },
+      { path: "profile", element: <Profile /> },
+      { path: "*", element: <ErrorPage /> },
     ],
   },
 ]);
