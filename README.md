@@ -12,6 +12,7 @@ BACKEND
 * MySQL Database
 
 DEMO: https://youtu.be/HU5QzKLJ5LI
+
 <a href="https://youtu.be/HU5QzKLJ5LI" target="_blank">
   <img width="500" alt="Course House App Demo" src="https://github.com/emek-k/Projekt-dotnet/assets/48961771/591908ef-ecfb-4855-9015-f9bb8308fb4c">
 </a>
