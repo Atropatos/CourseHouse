@@ -10,7 +10,9 @@ BACKEND
 * Identity framework
 * JWT
 * MySQL Database 
-
+<a href="[https://youtu.be/8k5zfJVQMeg](https://youtu.be/HU5QzKLJ5LI)" target="_blank">
+  <img width="1255" alt="Course House App Demo" src="[https://github.com/emek-k/Js-Filmweb/assets/48961771/2ab9724e-df1d-4c50-9b7f-c792b7ebc59e](https://github.com/emek-k/Projekt-dotnet/assets/48961771/0668f8da-1b00-4e9a-8183-1471caea7310)">
+</a>
 ### Funkcjonalności 
 1. Logowanie i rejestracja - użytkownika ma możliwość zalogowania na swoje konto użytkownika i założenia konta zwykłego lub business
 2. Ocena kursów - widoczna średnia pod każdym kursem, zalogowany użytkownik który zakupił dany kurs może dodać jego ocenę
