@@ -1,46 +1,53 @@
 <table border="0">
   <tr>
-    <td colspan="6">
-        <h1>COURSE HOUSE</h1>
-      <p>Prosta aplikacja do tworzenia, zarządzania i sprzedawania kursów internetowych.</p>
+    <td colspan="2">
+      <h1>COURSE HOUSE</h1>
+      <p>
+        Prosta aplikacja do tworzenia, zarządzania i sprzedawania kursów
+        internetowych.
+      </p>
     </td>
   </tr>
   <tr>
-    <td colspan="3">
-        <h4>Frontend</h4>
+    <td>
+      <h4>Frontend</h4>
     </td>
-    <td colspan="3">
-        <h4>Backend</h4>
-    </td>
-  </tr>
-   <tr>
-    <td colspan="3">
-        <ul>
-          <li>React</li>
-          <li>Tailwind</li>
-          <li>TypeScript</li>
-        </ul>
-    </td>
-    <td colspan="3">
-        <ul>
-          <li>Dotnet core</li>
-          <li>Entity framework</li>
-          <li>Identity framework</li>
-          <li>JWT</li>
-          <li>MySql database</li>
-        </ul>
+    <td>
+      <h4>Backend</h4>
     </td>
   </tr>
   <tr>
-    <td colspan="6" align="center">
+    <td>
+      <ul>
+        <li>React</li>
+        <li>Tailwind</li>
+        <li>TypeScript</li>
+      </ul>
+    </td>
+    <td>
+      <ul>
+        <li>Dotnet core</li>
+        <li>Entity framework</li>
+        <li>Identity framework</li>
+        <li>JWT</li>
+        <li>MySql database</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" align="center">
       <h2>Prezentacja aplikacji</h2>
       <a href="https://youtu.be/HU5QzKLJ5LI" target="_blank">
-        <img width="500" src="https://github.com/emek-k/Projekt-dotnet/assets/48961771/591908ef-ecfb-4855-9015-f9bb8308fb4c">
+        <img
+          width="500"
+          src="https://github.com/emek-k/Projekt-dotnet/assets/48961771/591908ef-ecfb-4855-9015-f9bb8308fb4c"
+        />
       </a>
       <p>DEMO: https://youtu.be/HU5QzKLJ5LI</p>
     </td>
   </tr>
 </table>
+
 
 <table border="0">
   <tr>
