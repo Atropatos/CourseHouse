@@ -1,10 +1,10 @@
 # COURSE HOUSE
 Prosta aplikacja do sprzedawania kursów. 
-FRONTEND 
+## FRONTEND 
 * React
 * Tailwind
 * TypeScript
-BACKEND
+## BACKEND
 * Dotnet core 
 * Entity framework
 * Identity framework
