@@ -1,80 +1,15 @@
-# Projekt-dotnet
-Projekt na przedmiot dotnet
-
-Komunikacja powinna być zaabezpieczona systemem uwieżytelniania użytkowników.
-
-### Ogólny schemat strony
-Home page 
-          - logo 
-          - zaloguj 
-          - moje kursy (zakupione kursy / stworzone kursy)
-          - profil
-          - polecane kursy 
-          - filtrowanie 
-          - wyszukiwanie 
-
-Profil (zwykły) 
-          - szczegóły profilu
-          - możliwość zmiany danych profilu
-          - panel z statystykami
-          - historia transakcji
-          - ostatnio odwiedzone
-          
-Profil (business) 
-          - szczegóły profilu
-          - możliwość zmiany danych profilu
-          - panel z statystykami business
-          - ostatnio odwiedzone
-          - tworzenie nowego kursu
-          - dostęp do multimediów (pokateryzowane po nazwach stworzonych kursów)
-          
-Moje kursy (zwykły)
-          - zakupione kursy
-          - wyszukiwanie
-          - filtrowanie
-          
-Moje kursy (business)
-          - stworzone kursy
-          - wyszukiwanie
-          - filtrowanie        
-          - edytowanie kursów
-          
-Tworzenie kursu (business)
-          - Ilość lekcji
-          - Tytuł 
-          - Opis 
-          - Demo
-          
-Tworzenie lekcji (business)
-          - Tytuł
-          - Treść
-          - Multimedia
-          
-Tworzenie quizu (business)
-          - Tytuł
-          - Opis 
-          - Pytania 
-          - Określenie minimalnego progu 
-Wgranie certyfikatu ukończenia kursu (business)
-
-Otworzenie kursu (zwykły)
-          - Tytuł 
-          - Treść
-          - Demo 
-          
-Dostęp lekcji (zwykły, po zakupie)
-          - Możliwe do wyboru konkretne lekcje z kursu
-          - Przeglądanie materiałów
-          - Przejście do quizu
-          
-Rozwiązanie quizu (zwykły)
-          - Pytanie 
-          - Odpowiedz radio 1 z wielu 
-          - Zdanie lub powtórzenie testu
-          
-Ukończenie wszystkich lekcji odblokowuje certyfikat zdania kursu (zwykły)
-
-### COURSE HOUSE
+# COURSE HOUSE
+Prosta aplikacja do sprzedawania kursów. 
+FRONTEND 
+* React
+* Tailwind
+* TypeScript
+BACKEND
+* Dotnet core 
+* Entity framework
+* Identity framework
+* JWT
+* MySQL Database 
 
 ### Funkcjonalności 
 1. Logowanie i rejestracja - użytkownika ma możliwość zalogowania na swoje konto użytkownika i założenia konta zwykłego lub business
@@ -92,8 +27,5 @@ Ukończenie wszystkich lekcji odblokowuje certyfikat zdania kursu (zwykły)
 13. Tworzenie, edycja, usuwanie - trestów dla każdej lekcji kursu
 14. Historia płatności wraz z szczegółami transakcji - historia zakupów w profilu użytkownika 
 15. Historia ostatnio odwiedzonych kursów/lekcji - ostatnie w profilu użytkownika
-16. Panel statystyk użytkownika - zrealizowane kursy, ilość rozwiązanych quizów, uzyskane certyfikaty - panel z informacjami pojawiający się w profilu użytkonika jako element główny
-17. Zakupione kursy - wyświetlanie zakupionych kursów. Zakładka w menu głównym.
-18. Filtrowanie zakupionych kursów
-19. Eksport uzyskanych certyfikatów - odblokowuje się po przejściu danego kursu.
-20. Zaawansowane szczegóły kursów - dostęp dla twóry kursu. Umożliwia pogląd zaawansowanych statystyk oraz inne zaawansowane opcje np. wyłączenie komentarzy.
+16. Zakupione kursy - wyświetlanie zakupionych kursów. Zakładka w menu głównym.
+17. Zaawansowane szczegóły kursów - dostęp dla twóry kursu. Umożliwia pogląd zaawansowanych statystyk oraz inne zaawansowane opcje np. wyłączenie komentarzy.
