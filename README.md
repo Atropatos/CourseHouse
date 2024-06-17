@@ -1,10 +1,8 @@
-<table border="0">
+<table border="0" width="100%">
   <tr>
     <td colspan="2">
       <h1>COURSE HOUSE</h1>
-      <p>
-        Prosta aplikacja do tworzenia, zarządzania i sprzedawania kursów
-        internetowych.
+      <p>Course House to aplikacja do tworzenia, zarządzania i sprzedaży kursów internetowych. Umożliwia rejestrację, logowanie, ocenianie i komentowanie kursów, przeglądanie szczegółowych informacji, korzystanie z filtrów i wyszukiwarek, realizowanie płatności oraz dodawanie multimediów do lekcji. Dzięki zaawansowanym narzędziom do zarządzania kursami i analizowania statystyk, Course House wspiera zarówno twórców kursów, jak i ich uczestników, oferując kompleksowe rozwiązanie dla edukacji online.
       </p>
     </td>
   </tr>
