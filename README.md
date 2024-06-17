@@ -47,8 +47,6 @@
     </td>
   </tr>
 </table>
-
-
 <table border="0">
   <tr>
     <td colspan="6" align="left">
