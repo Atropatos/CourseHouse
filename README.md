@@ -35,11 +35,13 @@
     <td colspan="6" align="center">
       <h2>Prezentacja aplikacji</h2>
       <a href="https://youtu.be/HU5QzKLJ5LI" target="_blank">
-        <img width="500" alt="Course House App Demo" src="https://github.com/emek-k/Projekt-dotnet/assets/48961771/591908ef-ecfb-4855-9015-f9bb8308fb4c">
+        <img width="500" src="https://github.com/emek-k/Projekt-dotnet/assets/48961771/591908ef-ecfb-4855-9015-f9bb8308fb4c">
       </a>
       <p>DEMO: https://youtu.be/HU5QzKLJ5LI</p>
     </td>
+  </tr>
 </table>
+
 <table border="0">
   <tr>
     <td colspan="6" align="left">
